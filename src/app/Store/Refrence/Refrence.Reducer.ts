@@ -6,7 +6,10 @@ const _RefrenceReducer = createReducer(
   InitialRefrenceState,
   on(labelaction, (state, action) => {
     console.log(action.labelData, 'logg')
-    return { ...state, labels: action.labelData.labels }
+    return {
+      ...state,
+      labels: action.labelData.data.entities,
+    }
   }),
   on(labelactionerror, (state, action) => {
     console.log(action.error, 'logg')

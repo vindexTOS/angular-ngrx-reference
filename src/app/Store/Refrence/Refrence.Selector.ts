@@ -1,11 +1,11 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store'
-
-const getrefrencedata = createFeatureSelector<any>('refrence')
+import { RefrenceTypes } from './Refrence.State'
+const getrefrencedata = createFeatureSelector<RefrenceTypes>('refrence')
 
 export const getreferencelist = createSelector(getrefrencedata, (state) => {
   console.log(state)
-  console.log(state.labels?.data?.entities)
-  return state.labels?.data?.entities
+  console.log(state.labels)
+  return state.labels
 })
 export const geterror = createSelector(getrefrencedata, (state) => {
   return state.error

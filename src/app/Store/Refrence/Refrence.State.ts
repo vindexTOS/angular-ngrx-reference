@@ -9,7 +9,7 @@ export interface RefrenceTypes {
 export const InitialRefrenceState: RefrenceTypes = {
   channels: [],
   zones: [],
-  labels: { labelData: [] }, // This is the structure where labelData is nested
+  labels: [], // This is the structure where labelData is nested
   languages: [],
   error: '',
 }
