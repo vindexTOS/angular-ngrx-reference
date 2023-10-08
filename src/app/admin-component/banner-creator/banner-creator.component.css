@@ -1,0 +1,41 @@
+.main-section {
+  padding: 9rem;
+  display: flex;
+
+  justify-content: center;
+  flex-direction: column;
+  width: 65%;
+}
+.sec-section {
+  display: flex;
+  flex-direction: column;
+}
+/* Style the group of <div> elements */
+.main-section div {
+  margin-bottom: 10px;
+  display: flex; /* Display them as flex items */
+  align-items: center; /* Vertically center their content */
+  padding: 10px; /* Add padding for spacing */
+  background-color: #ffffff; /* White background color */
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle box shadow */
+}
+
+/* Style the strong (title) elements */
+.main-section div strong {
+  flex-basis: 30%; /* Adjust the width of the title column */
+  font-weight: bold;
+  margin-right: 10px; /* Space between title and content */
+  color: #333; /* Color for titles */
+}
+
+/* Style the content (data) elements */
+.main-section div:not(:last-child) {
+  flex-grow: 1; /* Let the content expand to fill remaining space */
+}
+
+/* Style for displaying active status */
+.main-section .active {
+  color: green; /* Green color for active status */
+  font-weight: bold;
+}

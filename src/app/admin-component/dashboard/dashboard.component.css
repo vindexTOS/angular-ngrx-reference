@@ -1,0 +1,59 @@
+main {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 20px;
+  gap: 20px;
+}
+.show-form {
+  top: 5rem;
+  position: absolute;
+  width: 70%;
+  border-radius: 15px;
+  height: 90px;
+  font-size: 2rem;
+  display: flex;
+
+  color: rgb(132, 132, 132);
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 1px 1px 13px 1px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 1px 1px 13px 1px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 1px 1px 13px 1px rgba(0, 0, 0, 0.75);
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s; /* Specify the transition properties */
+}
+
+.show-form:hover {
+  color: rgb(6, 217, 6);
+  background-color: rgba(133, 255, 63, 0.529);
+}
+section {
+  display: flex;
+  justify-content: space-around;
+
+  border-radius: 15px;
+  background-color: rgb(242, 238, 238);
+  width: 70%;
+  height: 1100px;
+
+  box-shadow: 1px 1px 13px 1px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 1px 1px 13px 1px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 1px 1px 13px 1px rgba(0, 0, 0, 0.75);
+}
+
+mat-icon {
+  position: absolute;
+  left: 2rem;
+  font-size: 48px;
+  height: 100%;
+  width: 49px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}

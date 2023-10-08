@@ -1,0 +1,20 @@
+mat-toolbar {
+  background-color: #ff671b; /* Light Orange Color */
+  color: white; /* Text color */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  background-color: #ff671b; /* Light Orange Color */
+  height: 150px;
+  border-radius: 20px;
+  box-shadow: 5px 9px 7px -5px rgba(0, 0, 0, 0.65);
+  -webkit-box-shadow: 5px 9px 7px -5px rgba(0, 0, 0, 0.65);
+  -moz-box-shadow: 5px 9px 7px -5px rgba(0, 0, 0, 0.65);
+}

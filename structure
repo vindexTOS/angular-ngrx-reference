@@ -1,0 +1,14 @@
+main page : {
+     navbar,
+     header,
+     leftsidebar,
+     rightsidebar,
+     footer,
+}
+
+
+admin pannel :{
+     post page ,
+     pagination filter page,
+     edit page 
+}

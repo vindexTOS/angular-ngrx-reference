@@ -1,0 +1,111 @@
+<div class="form-header">
+  <h1>Create new banner</h1>
+  <mat-icon class="cancel-icon" (click)="closeForm()">close</mat-icon>
+</div>
+<form [formGroup]="exampleForm" (ngSubmit)="onSubmit($event)">
+  <!-- Basic input fields -->
+  <div
+    class="drop-zone"
+    (click)="fileInput.click()"
+    ngxFileDrop
+    (filesChange)="onFileDropped($event)"
+  >
+    <p>Drag and drop your banner here</p>
+    <input
+      type="file"
+      #fileInput
+      hidden
+      (change)="onInputChange($event)"
+      accept="image/*"
+    />
+  </div>
+
+  <mat-form-field [ngClass]="'mat-form-field-with-shadow'">
+    <input matInput placeholder="Name" formControlName="name" />
+  </mat-form-field>
+  <mat-form-field [ngClass]="'mat-form-field-with-shadow'">
+    <mat-select placeholder="Priority" formControlName="priority">
+      <!-- Populate options based on your data -->
+      <mat-option value="internet-bank">ss</mat-option>
+      <!-- Add other options here -->
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Selector for channelId -->
+  <mat-form-field>
+    <mat-select placeholder="Channel" formControlName="channelId">
+      <!-- Populate options based on your data -->
+      <mat-option value="internet-bank">Internet Bank</mat-option>
+      <!-- Add other options here -->
+    </mat-select>
+  </mat-form-field>
+  <!-- Selector for language -->
+  <mat-form-field>
+    <mat-select placeholder="Language" formControlName="language">
+      <!-- Populate options based on your data -->
+      <mat-option value="ka">Kazakh</mat-option>
+      <!-- Add other options here -->
+    </mat-select>
+  </mat-form-field>
+  <!-- Selector for zoneId -->
+  <mat-form-field>
+    <mat-select placeholder="Zone" formControlName="zoneId">
+      <!-- Populate options based on your data -->
+      <mat-option value="dashboard-main">Dashboard Main</mat-option>
+      <!-- Add other options here -->
+    </mat-select>
+  </mat-form-field>
+  <!-- Checkbox for isCorporate -->
+  <!-- <mat-checkbox formControlName="isCorporate">Is Corporate</mat-checkbox> -->
+  <!-- Date pickers using Angular's calendar component -->
+  <mat-form-field>
+    <input
+      matInput
+      [matDatepicker]="startDatePicker"
+      placeholder="Start Date"
+      formControlName="startDate"
+    />
+    <mat-datepicker-toggle
+      matSuffix
+      [for]="startDatePicker"
+    ></mat-datepicker-toggle>
+    <mat-datepicker #startDatePicker></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      matInput
+      [matDatepicker]="endDatePicker"
+      placeholder="End Date"
+      formControlName="endDate"
+    />
+    <mat-datepicker-toggle
+      matSuffix
+      [for]="endDatePicker"
+    ></mat-datepicker-toggle>
+    <mat-datepicker #endDatePicker></mat-datepicker>
+  </mat-form-field>
+  <!-- Checkbox for active -->
+  <mat-checkbox formControlName="active">Active</mat-checkbox>
+  <!-- Textarea for labels (if you want multiple labels) -->
+  <mat-form-field>
+    <textarea matInput placeholder="Labels" formControlName="labels"></textarea>
+  </mat-form-field>
+  <div style="display: flex; width: 100%; justify-content: space-around;">
+    <button
+      style="width: 200px; height: 50px;"
+      mat-raised-button
+      color="warn"
+      type="submit"
+    >
+      Submit
+    </button>
+    <button
+      style="width: 200px; height: 50px;"
+      mat-raised-button
+      color="accent"
+      (click)="onCheck()"
+    >
+      Check Banner
+    </button>
+  </div>
+</form>

@@ -1,0 +1,15 @@
+<main>
+  <div *ngIf="!showBannerForm" class="show-form" (click)="toggleShow()">
+    <h1>Add new banner (+)</h1>
+    <mat-icon *ngIf="showBannerForm">
+      expand_less
+    </mat-icon>
+    <mat-icon *ngIf="!showBannerForm">
+      expand_more
+    </mat-icon>
+  </div>
+  <section *ngIf="showBannerForm">
+    <app-banner-form></app-banner-form>
+    <app-banner-creator></app-banner-creator>
+  </section>
+</main>
