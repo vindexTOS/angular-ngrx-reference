@@ -1,12 +1,33 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store'
 import { RefrenceTypes } from './Refrence.State'
 const getrefrencedata = createFeatureSelector<RefrenceTypes>('refrence')
-
-export const getreferencelist = createSelector(getrefrencedata, (state) => {
-  console.log(state)
-  console.log(state.labels)
-  return state.labels
+// channels
+export const getrefrenceChannelList = createSelector(
+  getrefrencedata,
+  (state) => {
+    return state.channels
+  },
+)
+// zone
+export const getrefrenceZoneList = createSelector(getrefrencedata, (state) => {
+  return state.zones
 })
+
+// label
+export const getreferenceLabelList = createSelector(
+  getrefrencedata,
+  (state) => {
+    return state.labels
+  },
+)
+//language
+export const getrefernceLangaugeList = createSelector(
+  getrefrencedata,
+  (state) => {
+    return state.languages
+  },
+)
+
 export const geterror = createSelector(getrefrencedata, (state) => {
   return state.error
 })

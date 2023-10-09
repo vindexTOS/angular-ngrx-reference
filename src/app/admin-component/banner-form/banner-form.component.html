@@ -26,7 +26,7 @@
   <mat-form-field [ngClass]="'mat-form-field-with-shadow'">
     <mat-select placeholder="Priority" formControlName="priority">
       <!-- Populate options based on your data -->
-      <mat-option value="internet-bank">ss</mat-option>
+      <mat-option></mat-option>
       <!-- Add other options here -->
     </mat-select>
   </mat-form-field>
@@ -35,7 +35,12 @@
   <mat-form-field>
     <mat-select placeholder="Channel" formControlName="channelId">
       <!-- Populate options based on your data -->
-      <mat-option value="internet-bank">Internet Bank</mat-option>
+      <mat-option
+        *ngFor="let channel of refrenceChannels"
+        [value]="channel.key"
+      >
+        {{ channel?.name }}
+      </mat-option>
       <!-- Add other options here -->
     </mat-select>
   </mat-form-field>
@@ -87,8 +92,57 @@
   <!-- Checkbox for active -->
   <mat-checkbox formControlName="active">Active</mat-checkbox>
   <!-- Textarea for labels (if you want multiple labels) -->
+
   <mat-form-field>
-    <textarea matInput placeholder="Labels" formControlName="labels"></textarea>
+    <mat-label>Labels</mat-label>
+    <div
+      style="
+        display: flex;
+        max-height: 500px;
+        max-width: 500px;
+        flex-wrap: wrap;
+        gap: 2px;
+      "
+    >
+      <div
+        *ngFor="let label of selectedLabels"
+        (removed)="remove(label)"
+        style="
+          display: flex;
+          justify-content: space-between;
+
+          align-items: center;
+          background-color: aqua;
+          border-radius: 30px;
+          padding-left: 1rem;
+          padding-right: 1rem;
+        "
+      >
+        {{ label }}
+        <button
+          style="
+            outline: none;
+            border: none;
+            background: none;
+            color: rgb(92, 92, 92);
+            z-index: 1000;
+          "
+        >
+          <mat-icon (click)="remove(label)" style="cursor: pointer;">
+            cancel
+          </mat-icon>
+        </button>
+      </div>
+    </div>
+    <mat-select
+      placeholder="Labels"
+      [formGroup]="bannerForm"
+      (selectionChange)="onLabelSelect($event)"
+    >
+      <mat-option *ngFor="let option of refrenceLabels" [value]="option.key">
+        {{ option?.name }}
+      </mat-option>
+    </mat-select>
   </mat-form-field>
   <div style="display: flex; width: 100%; justify-content: space-around;">
     <button

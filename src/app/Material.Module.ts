@@ -8,6 +8,11 @@ import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatIconModule } from '@angular/material/icon'
+import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips'
+import {
+  MatAutocompleteSelectedEvent,
+  MatAutocompleteModule,
+} from '@angular/material/autocomplete'
 
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatDatepickerModule } from '@angular/material/datepicker'
@@ -16,8 +21,17 @@ import { MatNativeDateModule } from '@angular/material/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 import { NgxFileDropModule } from 'ngx-file-drop'
+import { AsyncPipe, NgFor } from '@angular/common'
 @NgModule({
   exports: [
+    MatChipsModule,
+    FormsModule,
+    MatFormFieldModule,
+    MatChipsModule,
+    MatIconModule,
+    MatAutocompleteModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule,
     MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
