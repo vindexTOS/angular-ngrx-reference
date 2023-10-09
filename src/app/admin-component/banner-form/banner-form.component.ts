@@ -12,7 +12,10 @@ import { Subscription } from 'rxjs'
 import { FormService } from 'src/app/services/form.service'
 import { UiServiceTsService } from 'src/app/services/ui.service.ts.service'
 import { Store } from '@ngrx/store'
-import { getformbanner } from 'src/app/Store/Form-post/Form.Actions'
+import {
+  postbanner,
+  postbannertodb,
+} from 'src/app/Store/Form-post/Form.Actions'
 import {
   channelactionapi,
   labelaction,
@@ -26,12 +29,16 @@ import {
   getrefrenceChannelList,
   getrefrenceZoneList,
 } from 'src/app/Store/Refrence/Refrence.Selector'
+import { refrenceTypes } from 'src/app/Store/Refrence/Refrence.State'
+import { geturlid } from 'src/app/Store/Blob/Blog.selector'
+import { ImageService } from 'src/app/services/image.service'
 @Component({
   selector: 'app-banner-form',
   templateUrl: './banner-form.component.html',
   styleUrls: ['./banner-form.component.css'],
 })
 export class BannerFormComponent implements OnInit, OnDestroy {
+  uploadedImgSrc!: string
   imageSrc: string = ''
   sub: Subscription | any
   showBannerForm = false
@@ -39,17 +46,22 @@ export class BannerFormComponent implements OnInit, OnDestroy {
   exampleForm: FormGroup
   bannerForm: FormGroup
 
-  refrenceChannels: any = []
-  refrenceZones: any[] = []
-  refrenceLabels: any[] = []
-  refrenceLanguage: any[] = []
+  refrenceChannels: refrenceTypes[] = []
+  refrenceZones: refrenceTypes[] = []
+  refrenceLabels: refrenceTypes[] = []
+  refrenceLanguage: refrenceTypes[] = []
   fb: any
   selectedLabels: string[] = []
+
+  priorityNums = Array.from({ length: 21 }, (_, index) => index)
+  imageSrcSubscription: any
+
   constructor(
     private formService: FormService,
     private uiService: UiServiceTsService,
     private formBuilder: FormBuilder,
     private store: Store,
+    private imageService: ImageService,
   ) {
     this.exampleForm = this.formBuilder.group({
       name: this.formBuilder.control(''),
@@ -57,15 +69,11 @@ export class BannerFormComponent implements OnInit, OnDestroy {
       language: this.formBuilder.control(''),
       zoneId: this.formBuilder.control(''),
       priority: this.formBuilder.control(''),
-      fileId: this.formBuilder.control(''),
       isCorporate: this.formBuilder.control(''),
       url: this.formBuilder.control(''),
       startDate: this.formBuilder.control(''),
       endDate: this.formBuilder.control(''),
-      active: this.formBuilder.control(''),
-      labels: this.formBuilder.control(''), // Use a form control array for labels
-      createdAt: this.formBuilder.control(''),
-      modifiedAt: this.formBuilder.control(''),
+      active: this.formBuilder.control(false),
     })
 
     this.sub = this.uiService
@@ -99,14 +107,18 @@ export class BannerFormComponent implements OnInit, OnDestroy {
       this.refrenceLanguage = item
       console.log(this.refrenceLanguage)
     })
+    // img
 
+    this.store.select(geturlid).subscribe((item) => {
+      this.uploadedImgSrc = item
+    })
     this.imageSrc = this.formService.imageSrc
+    this.selectedLabels = this.formService.selectedLabels
   }
 
   //
   onLabelSelect(event: any) {
-    this.selectedLabels.push(event.value)
-    console.log(this.selectedLabels)
+    this.formService.onLabelSelect(event)
   }
 
   remove(label: string) {
@@ -133,10 +145,16 @@ export class BannerFormComponent implements OnInit, OnDestroy {
     this.uiService.toggle()
   }
 
-  onSubmit(event: any) {
-    event.preventDefault()
+  onSubmit() {
+    const data = {
+      ...this.exampleForm.value,
+      labels: this.selectedLabels,
+      fileId: this.uploadedImgSrc,
+    }
+    this.store.dispatch(postbannertodb(data))
+    console.log(data)
   }
   onCheck() {
-    this.store.dispatch(getformbanner({ formData: this.exampleForm.value }))
+    this.store.dispatch(postbannertodb({ formData: this.exampleForm.value }))
   }
 }

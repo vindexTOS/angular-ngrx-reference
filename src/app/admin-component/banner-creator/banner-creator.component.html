@@ -3,7 +3,7 @@
   <ng-container *ngIf="imageSrc">
     <!-- Render the image when imageSrc exists -->
     <img
-      style="width: 300px; height: 200px;"
+      style="width: 450px; height: 200px;"
       #uploadedImage
       class="uploaded-image"
       [src]="imageSrc"
@@ -38,8 +38,26 @@
 
     <!-- Display Channel ID -->
     <div>
-      <strong>Channel ID:</strong>
-      {{ formData?.channelId }}
+      <div
+        style="
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 6px;
+        "
+      >
+        <strong>Channel ID:</strong>
+        <mat-icon *ngIf="formData?.channelId === 'mobile-bank-ios'">
+          phone_iphone
+        </mat-icon>
+        <mat-icon *ngIf="formData?.channelId === 'mobile-bank-android'">
+          phone_android
+        </mat-icon>
+        <mat-icon *ngIf="formData?.channelId === 'internet-bank'">
+          laptop_chromebook
+        </mat-icon>
+        <span>{{ formData?.channelId }}</span>
+      </div>
     </div>
 
     <!-- Display Language -->
@@ -67,7 +85,21 @@
     </div>
     <div>
       <strong>Active</strong>
-      {{ formData?.active }}
+      <span *ngIf="formData?.active">🟢</span>
+      <span *ngIf="!formData?.active">🔴</span>
+    </div>
+    <div
+      style="
+        display: flex;
+        max-height: 500px;
+        max-width: 500px;
+        flex-wrap: wrap;
+        gap: 2px;
+      "
+    >
+      <span class="hash-label" *ngFor="let hash of selectedLabels">
+        #{{ hash }}
+      </span>
     </div>
   </section>
 </section>

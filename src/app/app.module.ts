@@ -24,6 +24,9 @@ import { BannerCreatorComponent } from './admin-component/banner-creator/banner-
 import { FormReducer } from './Store/Form-post/Form.Reducer'
 import { RefrenceReducer } from './Store/Refrence/Refrence.Reducer'
 import { RefrenceEffects } from './Store/Refrence/Refrence.Effects'
+import { BannerListComponent } from './admin-component/banner-list/banner-list.component'
+import { BlobEffects } from './Store/Blob/Blob.effect'
+import { BlobReducer } from './Store/Blob/Blob.reducer'
 
 @NgModule({
   declarations: [
@@ -36,13 +39,18 @@ import { RefrenceEffects } from './Store/Refrence/Refrence.Effects'
     HeroComponent,
     BannerFormComponent,
     BannerCreatorComponent,
+    BannerListComponent,
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     AppRoutingModule,
     StoreModule.forRoot(
-      { formselector: FormReducer, refrence: RefrenceReducer },
+      {
+        formselector: FormReducer,
+        refrence: RefrenceReducer,
+        imagedata: BlobReducer,
+      },
       {},
     ),
 
@@ -51,7 +59,7 @@ import { RefrenceEffects } from './Store/Refrence/Refrence.Effects'
     FormsModule,
     HttpClientModule,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-    EffectsModule.forRoot([RefrenceEffects]),
+    EffectsModule.forRoot([RefrenceEffects, BlobEffects]),
     StoreRouterConnectingModule.forRoot(),
     MatIconModule,
   ],

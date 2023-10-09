@@ -1,5 +1,5 @@
 mat-toolbar {
-  background-color: #ff671b; /* Light Orange Color */
+  background-color: #09af9f;
   color: white; /* Text color */
   display: flex;
   align-items: center;
@@ -11,7 +11,7 @@ footer {
   justify-content: center;
   align-items: center;
   gap: 20px;
-  background-color: #ff671b; /* Light Orange Color */
+  background-color: #09af9f;
   height: 150px;
   border-radius: 20px;
   box-shadow: 5px 9px 7px -5px rgba(0, 0, 0, 0.65);

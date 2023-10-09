@@ -7,7 +7,7 @@ import { UiServiceTsService } from '../../services/ui.service.ts.service'
 })
 export class DashboardComponent {
   sub: PushSubscription | any
-  showBannerForm = true
+  showBannerForm = false
 
   constructor(private uiService: UiServiceTsService) {
     this.sub = this.uiService

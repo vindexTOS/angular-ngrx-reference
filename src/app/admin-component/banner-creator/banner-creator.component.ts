@@ -16,7 +16,13 @@ export class BannerCreatorComponent implements OnInit, OnDestroy {
 
   imageSrc: string = ''
   formData!: any
-  constructor(private imageService: ImageService, private store: Store) {}
+  selectedLabels: string[] = []
+
+  constructor(
+    private imageService: ImageService,
+    private store: Store,
+    private formService: FormService,
+  ) {}
 
   ngOnInit(): void {
     // Subscribe to changes in the exampleForm from FormService
@@ -34,6 +40,8 @@ export class BannerCreatorComponent implements OnInit, OnDestroy {
         this.imageSrc = newImageSrc
       },
     )
+
+    this.selectedLabels = this.formService.selectedLabels
   }
 
   ngOnDestroy(): void {

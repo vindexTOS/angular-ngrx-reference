@@ -2,7 +2,7 @@
   <h1>Create new banner</h1>
   <mat-icon class="cancel-icon" (click)="closeForm()">close</mat-icon>
 </div>
-<form [formGroup]="exampleForm" (ngSubmit)="onSubmit($event)">
+<form [formGroup]="exampleForm">
   <!-- Basic input fields -->
   <div
     class="drop-zone"
@@ -24,9 +24,14 @@
     <input matInput placeholder="Name" formControlName="name" />
   </mat-form-field>
   <mat-form-field [ngClass]="'mat-form-field-with-shadow'">
+    <input matInput placeholder="Web site url" formControlName="url" />
+  </mat-form-field>
+  <mat-form-field [ngClass]="'mat-form-field-with-shadow'">
     <mat-select placeholder="Priority" formControlName="priority">
       <!-- Populate options based on your data -->
-      <mat-option></mat-option>
+      <mat-option *ngFor="let num of priorityNums" [value]="num">
+        {{ num }}
+      </mat-option>
       <!-- Add other options here -->
     </mat-select>
   </mat-form-field>
@@ -48,7 +53,9 @@
   <mat-form-field>
     <mat-select placeholder="Language" formControlName="language">
       <!-- Populate options based on your data -->
-      <mat-option value="ka">Kazakh</mat-option>
+      <mat-option *ngFor="let lan of refrenceLanguage" [value]="lan.key">
+        {{ lan?.name }}
+      </mat-option>
       <!-- Add other options here -->
     </mat-select>
   </mat-form-field>
@@ -56,7 +63,9 @@
   <mat-form-field>
     <mat-select placeholder="Zone" formControlName="zoneId">
       <!-- Populate options based on your data -->
-      <mat-option value="dashboard-main">Dashboard Main</mat-option>
+      <mat-option *ngFor="let zone of refrenceZones" [value]="zone.key">
+        {{ zone?.name }}
+      </mat-option>
       <!-- Add other options here -->
     </mat-select>
   </mat-form-field>
@@ -135,8 +144,8 @@
       </div>
     </div>
     <mat-select
+      [formGroup]="exampleForm"
       placeholder="Labels"
-      [formGroup]="bannerForm"
       (selectionChange)="onLabelSelect($event)"
     >
       <mat-option *ngFor="let option of refrenceLabels" [value]="option.key">
@@ -150,6 +159,7 @@
       mat-raised-button
       color="warn"
       type="submit"
+      (click)="onSubmit()"
     >
       Submit
     </button>

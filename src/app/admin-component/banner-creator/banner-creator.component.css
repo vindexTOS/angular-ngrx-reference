@@ -39,3 +39,10 @@
   color: green; /* Green color for active status */
   font-weight: bold;
 }
+.hash-label {
+  padding-left: 6px;
+  padding-right: 6px;
+  background-color: rgb(206, 202, 202);
+  border-radius: 20px;
+  color: white;
+}

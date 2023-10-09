@@ -1,6 +1,5 @@
 import { createAction, props } from '@ngrx/store'
 //  channesl
-
 export const LOAD_CHANNEL_API = '[load channel api]load channel api'
 export const channelactionapi = createAction(LOAD_CHANNEL_API)
 

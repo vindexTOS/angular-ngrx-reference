@@ -47,7 +47,6 @@ const _RefrenceReducer = createReducer(
   //language
 
   on(languageaction, (state, action) => {
-    console.log(action)
     return { ...state, languages: action.languageData.data.entities }
   }),
   on(languageactionerror, (state, action) => {

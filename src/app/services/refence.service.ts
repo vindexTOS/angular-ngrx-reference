@@ -6,9 +6,6 @@ import { environment } from '../../env'
   providedIn: 'root',
 })
 export class RefenceService {
-  GetAll() {
-    throw new Error('Method not implemented.')
-  }
   baseUrl = environment.apiUrl
 
   constructor(private http: HttpClient) {}

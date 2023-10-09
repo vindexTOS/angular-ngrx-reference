@@ -1,5 +1,16 @@
+export interface refrenceTypes {
+  id: string
+  typeId: string
+  key: string
+  name: string
+  sortIndex: number
+  system: string
+}
+
+export interface refrenceZones {}
+
 export interface RefrenceTypes {
-  channels: any
+  channels: refrenceTypes[]
   zones: any
   labels: any
   languages: any

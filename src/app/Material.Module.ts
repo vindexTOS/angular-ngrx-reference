@@ -13,6 +13,7 @@ import {
   MatAutocompleteSelectedEvent,
   MatAutocompleteModule,
 } from '@angular/material/autocomplete'
+import { MatTableModule } from '@angular/material/table'
 
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatDatepickerModule } from '@angular/material/datepicker'
@@ -25,6 +26,7 @@ import { AsyncPipe, NgFor } from '@angular/common'
 @NgModule({
   exports: [
     MatChipsModule,
+    MatTableModule,
     FormsModule,
     MatFormFieldModule,
     MatChipsModule,

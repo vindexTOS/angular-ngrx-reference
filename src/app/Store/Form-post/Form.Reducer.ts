@@ -1,10 +1,10 @@
 import { createReducer, on } from '@ngrx/store'
 import { initialFormState } from './Form.State'
-import { getformbanner } from './Form.Actions'
+import { postbannertodb } from './Form.Actions'
 
 const _FormReducer = createReducer(
   initialFormState,
-  on(getformbanner, (state, action) => {
+  on(postbannertodb, (state, action) => {
     return { ...state, formData: action.formData }
   }),
 )

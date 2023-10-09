@@ -1,5 +1,9 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { ElementRef, Injectable, ViewChild } from '@angular/core'
 import { BehaviorSubject, Observable } from 'rxjs'
+import { environment } from 'src/env'
+import { fileUpload } from '../Store/Blob/Blob.action'
+import { Store } from '@ngrx/store'
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +12,8 @@ export class ImageService {
   private _imageSrcSubject = new BehaviorSubject<string>('')
   imageSrc$: Observable<string> = this._imageSrcSubject.asObservable()
 
-  constructor() {}
+  constructor(private http: HttpClient, private store: Store) {}
+  baseUrl = environment.apiUrl
 
   @ViewChild('uploadedImage') uploadedImage!: ElementRef
   allowedExtensions = ['jpg', 'jpeg', 'png']
@@ -36,14 +41,25 @@ export class ImageService {
 
   private uploadFile(file: File): void {
     console.log('File uploaded:', file)
+    this.store.dispatch(fileUpload({ file: file }))
 
     const reader = new FileReader()
     reader.onload = () => {
       const result = reader.result as string
-      this._imageSrcSubject.next(result) // Update the subject with the new imageSrc
-      console.log(result)
+      this._imageSrcSubject.next(result)
       this.uploadedImage.nativeElement.style.display = 'block'
     }
     reader.readAsDataURL(file)
+  }
+
+  PostBlob(blob: Blob) {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${environment.apiAuthToken}`,
+    })
+    const formData = new FormData()
+    formData.append('blob', blob, 'multipart/form-data')
+    return this.http.post(`${this.baseUrl}api/v2/blob/upload`, formData, {
+      headers,
+    })
   }
 }
