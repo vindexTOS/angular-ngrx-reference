@@ -1,5 +1,9 @@
 export interface BannerData {
-  data: BannerDataObj[]
+  data: {
+    entities: BannerDataObj[]
+    searchAFter: string[]
+    total: number
+  }
 }
 
 export interface BannerQueryTypes {

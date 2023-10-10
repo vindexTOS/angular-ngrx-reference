@@ -32,7 +32,7 @@ export class BannerEffect {
             console.log(res)
             this.store.dispatch(loadingEnd())
 
-            return getquerydata({ data: res })
+            return getquerydata({ data: res.data })
           }),
           catchError((error) => {
             this.store.dispatch(loadingEnd())

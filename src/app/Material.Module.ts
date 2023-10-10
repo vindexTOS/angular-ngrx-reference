@@ -23,11 +23,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { NgxFileDropModule } from 'ngx-file-drop'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
+import { MatPaginatorModule } from '@angular/material/paginator'
 
 import { AsyncPipe, NgFor } from '@angular/common'
 @NgModule({
   exports: [
     MatChipsModule,
+    MatPaginatorModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
     MatTableModule,

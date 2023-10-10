@@ -10,7 +10,4 @@ export const getquery = createAction(
 )
 
 export const GET_QUERY_DATA = '[Get banner query data]query'
-export const getquerydata = createAction(
-  GET_QUERY_DATA,
-  props<{ data: BannerData }>(),
-)
+export const getquerydata = createAction(GET_QUERY_DATA, props<{ data: any }>())
