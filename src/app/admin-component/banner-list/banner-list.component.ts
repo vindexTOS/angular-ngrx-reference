@@ -197,8 +197,8 @@ export class BannerListComponent implements OnInit {
     'createdAt',
     'modifiedAt',
   ]
-  dataSource: any[] = ELEMENT_DATA
   constructor(private store: Store) {}
+  dataSource: any[] = ELEMENT_DATA
 
   pageLength?: number
   pageIndex: number = 0
@@ -241,15 +241,17 @@ export class BannerListComponent implements OnInit {
 
   onPageChange(event: any) {
     //  { previousPageIndex: 0, pageIndex: 1, pageSize: 10, length: 200 }
-    // console.log(event)
+    console.log(event)
     this.queryObj.pageIndex = event.pageIndex
+    this.queryObj.pageSize = event.pageSize
     this.store.dispatch(getquery({ key: 'all', value: { ...this.queryObj } }))
   }
+
   ngOnInit(): void {
     this.store.dispatch(getquery({ key: 'all', value: { ...this.queryObj } }))
-
     this.store.select(GetBannerData).subscribe((item) => {
       this.dataSource = item.entities
+      this.pageLength = item.total
     })
   }
 }
