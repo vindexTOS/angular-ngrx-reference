@@ -1,11 +1,8 @@
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-
   <!-- Position Column -->
   <ng-container matColumnDef="position">
     <th mat-header-cell *matHeaderCellDef>No.</th>
-    <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+    <td mat-cell *matCellDef="let element; let i = index">{{ i + 1 }}</td>
   </ng-container>
 
   <!-- Name Column -->
@@ -14,18 +11,79 @@
     <td mat-cell *matCellDef="let element">{{ element.name }}</td>
   </ng-container>
 
-  <!-- Weight Column -->
-  <ng-container matColumnDef="weight">
-    <th mat-header-cell *matHeaderCellDef>Weight</th>
-    <td mat-cell *matCellDef="let element">{{ element.weight }}</td>
+  <!-- Zone ID Column -->
+  <ng-container matColumnDef="zoneId">
+    <th mat-header-cell *matHeaderCellDef>Zone ID</th>
+    <td mat-cell *matCellDef="let element">{{ element.zoneId }}</td>
   </ng-container>
 
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="symbol">
-    <th mat-header-cell *matHeaderCellDef>Symbol</th>
-    <td mat-cell *matCellDef="let element">{{ element.symbol }}</td>
+  <!-- Active Column -->
+  <ng-container matColumnDef="active">
+    <th mat-header-cell *matHeaderCellDef>Active</th>
+    <td mat-cell *matCellDef="let element">{{ element.active }}</td>
   </ng-container>
 
+  <!-- Start Date Column -->
+  <ng-container matColumnDef="startDate">
+    <th mat-header-cell *matHeaderCellDef>Start Date</th>
+    <td mat-cell *matCellDef="let element">{{ element.startDate }}</td>
+  </ng-container>
+
+  <!-- End Date Column -->
+  <ng-container matColumnDef="endDate">
+    <th mat-header-cell *matHeaderCellDef>End Date</th>
+    <td mat-cell *matCellDef="let element">{{ element.endDate }}</td>
+  </ng-container>
+
+  <!-- Channel ID Column -->
+  <ng-container matColumnDef="channelId">
+    <th mat-header-cell *matHeaderCellDef>Channel ID</th>
+    <td mat-cell *matCellDef="let element">{{ element.channelId }}</td>
+  </ng-container>
+
+  <!-- Labels Column -->
+  <ng-container matColumnDef="labels">
+    <th mat-header-cell *matHeaderCellDef>Labels</th>
+    <td mat-cell *matCellDef="let element">{{ element.labels.join(', ') }}</td>
+  </ng-container>
+
+  <!-- File ID Column -->
+  <ng-container matColumnDef="fileId">
+    <th mat-header-cell *matHeaderCellDef>File ID</th>
+    <td mat-cell *matCellDef="let element">{{ element.fileId }}</td>
+  </ng-container>
+
+  <!-- URL Column -->
+  <ng-container matColumnDef="url">
+    <th mat-header-cell *matHeaderCellDef>URL</th>
+    <td mat-cell *matCellDef="let element">{{ element.url }}</td>
+  </ng-container>
+
+  <!-- Language Column -->
+  <ng-container matColumnDef="language">
+    <th mat-header-cell *matHeaderCellDef>Language</th>
+    <td mat-cell *matCellDef="let element">{{ element.language }}</td>
+  </ng-container>
+
+  <!-- Priority Column -->
+  <ng-container matColumnDef="priority">
+    <th mat-header-cell *matHeaderCellDef>Priority</th>
+    <td mat-cell *matCellDef="let element">{{ element.priority }}</td>
+  </ng-container>
+
+  <!-- Created At Column -->
+  <ng-container matColumnDef="createdAt">
+    <th mat-header-cell *matHeaderCellDef>Created At</th>
+    <td mat-cell *matCellDef="let element">{{ element.createdAt }}</td>
+  </ng-container>
+
+  <!-- Modified At Column -->
+  <ng-container matColumnDef="modifiedAt">
+    <th mat-header-cell *matHeaderCellDef>Modified At</th>
+    <td mat-cell *matCellDef="let element">{{ element.modifiedAt }}</td>
+  </ng-container>
+
+  <!-- Define the order of columns to display -->
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
 </table>
