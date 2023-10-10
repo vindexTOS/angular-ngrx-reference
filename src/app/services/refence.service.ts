@@ -15,7 +15,7 @@ export class RefenceService {
       Authorization: `Bearer ${environment.apiAuthToken}`,
     })
     return this.http.post(
-      `${this.baseUrl}api/v2/reference-data/find`,
+      `${this.baseUrl}reference-data/find`,
       { typeId: code },
       { headers },
     )

@@ -27,6 +27,11 @@ import { RefrenceEffects } from './Store/Refrence/Refrence.Effects'
 import { BannerListComponent } from './admin-component/banner-list/banner-list.component'
 import { BlobEffects } from './Store/Blob/Blob.effect'
 import { BlobReducer } from './Store/Blob/Blob.reducer'
+import { FormEffect } from './Store/Form-post/Form.Effects'
+import { LoadingComponent } from './client-component/loading/loading.component'
+import { StatusReducer } from './Store/StatusHanndle/Status.reducer';
+import { ErrorComponent } from './client-component/error/error.component';
+import { SuccsessComponent } from './client-component/succsess/succsess.component'
 
 @NgModule({
   declarations: [
@@ -40,6 +45,9 @@ import { BlobReducer } from './Store/Blob/Blob.reducer'
     BannerFormComponent,
     BannerCreatorComponent,
     BannerListComponent,
+    LoadingComponent,
+    ErrorComponent,
+    SuccsessComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,6 +58,7 @@ import { BlobReducer } from './Store/Blob/Blob.reducer'
         formselector: FormReducer,
         refrence: RefrenceReducer,
         imagedata: BlobReducer,
+        statusselector: StatusReducer,
       },
       {},
     ),
@@ -59,7 +68,7 @@ import { BlobReducer } from './Store/Blob/Blob.reducer'
     FormsModule,
     HttpClientModule,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
-    EffectsModule.forRoot([RefrenceEffects, BlobEffects]),
+    EffectsModule.forRoot([RefrenceEffects, BlobEffects, FormEffect]),
     StoreRouterConnectingModule.forRoot(),
     MatIconModule,
   ],

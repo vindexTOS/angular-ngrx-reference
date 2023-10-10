@@ -58,7 +58,7 @@ export class ImageService {
     })
     const formData = new FormData()
     formData.append('blob', blob, 'multipart/form-data')
-    return this.http.post(`${this.baseUrl}api/v2/blob/upload`, formData, {
+    return this.http.post(`${this.baseUrl}blob/upload`, formData, {
       headers,
     })
   }

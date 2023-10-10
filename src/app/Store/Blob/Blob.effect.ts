@@ -17,9 +17,7 @@ export class BlobEffects {
       mergeMap((action) =>
         this.service.PostBlob(action.file).pipe(
           map((res: any) => {
-            console.log('Response:', res)
             const result = fileres({ code: res.data.id, success: 'uploaded' })
-            console.log('Dispatching fileres:', result)
             return result
           }),
           catchError((error) => {

@@ -2,6 +2,9 @@
   <h1>Create new banner</h1>
   <mat-icon class="cancel-icon" (click)="closeForm()">close</mat-icon>
 </div>
+<app-loading *ngIf="formLoading"></app-loading>
+<app-error *ngIf="error" [childData]="error"></app-error>
+<app-succsess *ngIf="succsess" [childData]="succsess"></app-succsess>
 <form [formGroup]="exampleForm">
   <!-- Basic input fields -->
   <div

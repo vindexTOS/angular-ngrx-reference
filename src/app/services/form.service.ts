@@ -69,7 +69,7 @@ export class FormService {
       Authorization: `Bearer ${environment.apiAuthToken}`,
     })
 
-    return this.http.post(`${this.baseUrl}api/v2/banners/save`, data, {
+    return this.http.post(`${this.baseUrl}banners/save`, data, {
       headers,
     })
   }

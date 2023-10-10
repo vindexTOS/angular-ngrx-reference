@@ -10,6 +10,9 @@ export interface FormType {
   endDate: string
   active: boolean
   label: string[]
+  error?: string
+  succsess?: string
+  loading?: boolean
 }
 export interface formData {
   formData: FormType
@@ -26,4 +29,7 @@ export const initialFormState: FormType = {
   endDate: '',
   active: false,
   label: [],
+  error: '',
+  succsess: '',
+  loading: false,
 }
