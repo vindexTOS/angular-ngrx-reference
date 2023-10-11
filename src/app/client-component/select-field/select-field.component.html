@@ -1,0 +1,50 @@
+<mat-form-field style="max-width: 200px;">
+  <mat-label>{{ label }}</mat-label>
+  <div
+    style="
+      display: flex;
+      max-height: 500px;
+      max-width: 200px;
+      flex-wrap: wrap;
+      gap: 2px;
+    "
+  >
+    <div
+      *ngFor="let label of labels"
+      (click)="remove(label)"
+      style="
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: aqua;
+        border-radius: 30px;
+        padding-left: 1rem;
+        padding-right: 1rem;
+      "
+    >
+      {{ label }}
+      <button
+        style="
+          outline: none;
+          border: none;
+          background: none;
+          color: rgb(92, 92, 92);
+          z-index: 1000;
+        "
+      >
+        <mat-icon (click)="remove(label)" style="cursor: pointer;">
+          cancel
+        </mat-icon>
+      </button>
+    </div>
+  </div>
+  <mat-select [formGroup]="exampleForm" placeholder="{{ label }}">
+    <mat-option
+      *ngFor="let option of refrenceLabels"
+      [value]="option"
+      (click)="onLabelSelect(option)"
+    >
+      {{ option }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

@@ -11,7 +11,7 @@ main {
 .show-form {
   width: 160px;
   border-radius: 5px;
-  height: 50px;
+  height: 55px;
   font-size: 1rem;
   display: flex;
 
@@ -22,7 +22,7 @@ main {
   background-color: #1ec9b7;
 
   cursor: pointer;
-  transition: background-color 0.2s, color 0.2s; /* Specify the transition properties */
+  transition: background-color 0.2s, color 0.2s;
 }
 
 .show-form:hover {
@@ -59,4 +59,35 @@ mat-icon {
   width: 91%;
   padding: 20px;
   gap: 20px;
+}
+.filter {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 1px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 1px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 1px 2px 5px 0px rgba(0, 0, 0, 0.75);
+  padding: 50px;
+  max-height: 600px;
+  overflow-y: scroll;
+}
+.table-and-filter {
+  display: flex;
+  gap: 20px;
+}
+.fillter-btn {
+  width: 200px;
+  border-radius: 5px;
+  height: 55px;
+  font-size: 1rem;
+  display: flex;
+  background-color: rgb(255, 153, 0);
+  color: rgb(255, 255, 255);
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
 }

@@ -14,7 +14,7 @@
   <!-- Zone ID Column -->
   <ng-container matColumnDef="zoneId">
     <th mat-header-cell *matHeaderCellDef>Zone ID</th>
-    <td mat-cell *matCellDef="let element">{{ element.zoneId }}</td>
+    <td mat-cell *matCellDef="let element">{{ element?.zoneId }}</td>
   </ng-container>
 
   <!-- Active Column -->
@@ -44,7 +44,9 @@
   <!-- Labels Column -->
   <ng-container matColumnDef="labels">
     <th mat-header-cell *matHeaderCellDef>Labels</th>
-    <td mat-cell *matCellDef="let element">{{ element.labels.join(', ') }}</td>
+    <td mat-cell *matCellDef="let element">
+      {{ element?.labels && element?.labels.join(', ') }}
+    </td>
   </ng-container>
 
   <!-- File ID Column -->

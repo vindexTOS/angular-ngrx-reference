@@ -4,10 +4,32 @@
     <app-banner-form></app-banner-form>
     <app-banner-creator></app-banner-creator>
   </section>
-  <section class="list-section">
-    <div *ngIf="!showBannerForm" class="show-form" (click)="toggleShow()">
-      Add banner(+)
+  <div class="table-and-filter">
+    <div class="filter">
+      <div (click)="hanndleQueryRequest()" class="fillter-btn">
+        Filter
+      </div>
+      <app-select-field
+        [labels]="selectedIncludedLabels"
+        [refrenceLabels]="refrenceLabels"
+        [label]="'Include'"
+        (labelSelect)="handleLabelSelectInclude($event)"
+        (removeLabel)="handleLabelRemoveInclude($event)"
+      ></app-select-field>
+      <!-- <app-select-field
+        [labels]="selectedIncludedLabels"
+        [refrenceLabels]="refrenceLabels"
+        [label]="'Include'"
+        (labelSelect)="handleLabelSelectInclude($event)"
+        (removeLabel)="handleLabelRemoveInclude($event)"
+      ></app-select-field> -->
     </div>
-    <app-banner-list></app-banner-list>
-  </section>
+    <section class="list-section">
+      <div *ngIf="!showBannerForm" class="show-form" (click)="toggleShow()">
+        Add banner(+)
+      </div>
+
+      <app-banner-list></app-banner-list>
+    </section>
+  </div>
 </main>
