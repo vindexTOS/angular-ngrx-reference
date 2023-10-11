@@ -62,4 +62,17 @@ export class ImageService {
       headers,
     })
   }
+
+  RemoveBlob(blobId: string) {
+    let blobIds = [blobId]
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${environment.apiAuthToken}`,
+    })
+
+    return this.http.post(
+      `${this.baseUrl}blob/remove`,
+      { blobIds },
+      { headers },
+    )
+  }
 }

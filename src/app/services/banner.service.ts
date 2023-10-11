@@ -18,4 +18,12 @@ export class BannerService {
 
     return this.http.post(`${this.baseUrl}banners/find`, query, { headers })
   }
+
+  DeleteBanner(id: string) {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${environment.apiAuthToken}`,
+    })
+
+    return this.http.post(`${this.baseUrl}banners/remove`, { id }, { headers })
+  }
 }

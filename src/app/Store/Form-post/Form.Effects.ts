@@ -39,7 +39,7 @@ export class FormEffect {
           }),
           catchError((error) => {
             this.store.dispatch(loadingEnd())
-            return of(statusError({ error: error.message }))
+            return of(statusError({ error: error.error.message[0] }))
           }),
         )
       }),

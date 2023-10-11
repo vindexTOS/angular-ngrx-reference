@@ -1,6 +1,12 @@
 import { Component } from '@angular/core'
 import { UiServiceTsService } from '../../services/ui.service.ts.service'
 import { FilterService } from 'src/app/services/filter.service'
+import { Store } from '@ngrx/store'
+import {
+  GetStatusError,
+  GetStatusLoading,
+  GetStatusSuccsess,
+} from 'src/app/Store/StatusHanndle/Status.selector'
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -11,10 +17,13 @@ export class DashboardComponent {
   showBannerForm = false
   selectedExcludedLabels: string[] = []
   selectedIncludedLabels: string[] = []
-
+  loading: boolean = false
+  succsess!: string
+  error!: string
   constructor(
     private uiService: UiServiceTsService,
     private filterService: FilterService,
+    private store: Store,
   ) {
     this.sub = this.uiService
       .toggleShow()
@@ -43,5 +52,15 @@ export class DashboardComponent {
 
   ngOnInit(): void {
     this.selectedIncludedLabels = this.filterService.selectedIncludedLabels
+    this.store.select(GetStatusLoading).subscribe((item) => {
+      this.loading = item
+    })
+    this.store.select(GetStatusSuccsess).subscribe((item) => {
+      this.succsess = item
+    })
+
+    this.store.select(GetStatusError).subscribe((item) => {
+      this.error = item
+    })
   }
 }

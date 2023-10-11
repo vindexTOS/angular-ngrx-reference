@@ -4,7 +4,8 @@ import { RefenceService } from 'src/app/services/refence.service'
 import { catchError, map, switchMap } from 'rxjs/operators'
 import { mergeMap, of, tap } from 'rxjs'
 import { ImageService } from 'src/app/services/image.service'
-import { fileUpload, fileUploadError, fileres } from './Blob.action'
+import { deleteblob, fileUpload, fileUploadError, fileres } from './Blob.action'
+import { statusError, statusSuccses } from '../StatusHanndle/Status.action'
 
 @Injectable()
 export class BlobEffects {
@@ -22,7 +23,25 @@ export class BlobEffects {
           }),
           catchError((error) => {
             console.error('Error:', error)
-            return of(fileUploadError(error.message))
+            return of(fileUploadError(error.error.message[0]))
+          }),
+        ),
+      ),
+    ),
+  )
+
+  deleteBlob$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(deleteblob),
+      tap(() => console.log('blob has been deleted')),
+      mergeMap((action) =>
+        this.service.RemoveBlob(action.blobId).pipe(
+          map((res: any) => {
+            return statusSuccses({ succses: 'blob has been deleted' })
+          }),
+          catchError((error) => {
+            console.log(error)
+            return of(statusError({ error: error.error.message[0] }))
           }),
         ),
       ),

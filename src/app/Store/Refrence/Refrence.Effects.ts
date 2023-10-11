@@ -33,8 +33,8 @@ export class RefrenceEffects {
           map((data) => {
             return channelaction({ channelData: data })
           }),
-          catchError((_error) =>
-            of(channelactionerror({ error: _error.message })),
+          catchError((error) =>
+            of(channelactionerror({ error: error.error.message[0] })),
           ),
         )
       }),
@@ -51,8 +51,8 @@ export class RefrenceEffects {
           map((data) => {
             return zoneaction({ zoneData: data })
           }),
-          catchError((_error) =>
-            of(zoneactionerror({ error: _error.message })),
+          catchError((error) =>
+            of(zoneactionerror({ error: error.error.message[0] })),
           ),
         )
       }),
@@ -68,8 +68,8 @@ export class RefrenceEffects {
           map((data) => {
             return labelaction({ labelData: data })
           }),
-          catchError((_error) =>
-            of(labelactionerror({ error: _error.message })),
+          catchError((error) =>
+            of(labelactionerror({ error: error.error.message[0] })),
           ),
         )
       }),
@@ -87,8 +87,8 @@ export class RefrenceEffects {
           map((data) => {
             return languageaction({ languageData: data })
           }),
-          catchError((_error) =>
-            of(languageactionerror({ error: _error.message })),
+          catchError((error) =>
+            of(languageactionerror({ error: error.error.message[0] })),
           ),
         )
       }),

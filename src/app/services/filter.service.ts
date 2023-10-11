@@ -2,6 +2,7 @@ import { Injectable, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
 import { getquery } from '../Store/Banner-data/Banner.action'
 import { GetBannerData } from '../Store/Banner-data/Banner.selector'
+import { environment } from 'src/env'
 const ELEMENT_DATA: any[] = [
   {
     name: 'dwdw',
@@ -208,12 +209,11 @@ export class FilterService implements OnInit {
   //   'modifiedAt',
   // ]
 
-  displayedColumns: string[] = ['name', 'active', 'labels', 'fileId']
+  displayedColumns: string[] = ['delete', 'fileId', 'name', 'active', 'labels']
 
-  includes: string[] = ['name', 'active', 'labels', 'fileId']
+  includes: string[] = ['name', 'active', 'labels', 'fileId', 'id']
   serach = ''
   sortDirection = 'asc'
-
   queryObj: {
     includes?: string[]
     excludes?: any[]
@@ -272,7 +272,6 @@ export class FilterService implements OnInit {
       pageIndex: this.pageIndex,
       pageSize: this.pageSize,
     }
-    console.log(newObj)
     this.store.dispatch(getquery({ key: 'all', value: { ...newObj } }))
   }
 

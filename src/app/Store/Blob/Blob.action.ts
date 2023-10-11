@@ -14,3 +14,7 @@ export const fileres = createAction(
   FILLERS_GET_CODE,
   props<{ code: any; success: string }>(),
 )
+
+export const DELETE_BLOB = '[delete blob]delete'
+
+export const deleteblob = createAction(DELETE_BLOB, props<{ blobId: string }>())

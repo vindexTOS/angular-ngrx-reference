@@ -43,6 +43,7 @@ import {
   GetStatusSuccsess,
 } from 'src/app/Store/StatusHanndle/Status.selector'
 import { statusError } from 'src/app/Store/StatusHanndle/Status.action'
+import { getquery } from 'src/app/Store/Banner-data/Banner.action'
 @Component({
   selector: 'app-banner-form',
   templateUrl: './banner-form.component.html',
@@ -190,6 +191,11 @@ export class BannerFormComponent implements OnInit, OnDestroy {
         fileId: this.uploadedImgSrc,
       }
       this.store.dispatch(postbannertodb(data))
+      setTimeout(() => {
+        this.store.dispatch(
+          getquery({ key: 'all', value: { pageIndex: 0, pageSize: 10 } }),
+        )
+      }, 1100)
     }
   }
   onCheck() {

@@ -91,3 +91,31 @@ mat-icon {
   cursor: pointer;
   transition: background-color 0.2s, color 0.2s;
 }
+
+.search-new-btn-div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.search-input-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.searchBtn {
+  height: 3.3rem;
+  margin-bottom: 1.2rem;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  background-color: #09af9f;
+  color: white;
+  padding-right: 7px;
+  padding-left: 7px;
+  border-top-right-radius: 5px;
+}
+
+.searchBtn:hover {
+  background-color: #08beac;
+}

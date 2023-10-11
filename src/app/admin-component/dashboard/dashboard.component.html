@@ -1,5 +1,8 @@
 <main>
   <!-- <app-loading></app-loading> -->
+  <app-loading *ngIf="loading"></app-loading>
+  <app-error *ngIf="error" [childData]="error"></app-error>
+  <app-succsess *ngIf="succsess" [childData]="succsess"></app-succsess>
   <section *ngIf="showBannerForm">
     <app-banner-form></app-banner-form>
     <app-banner-creator></app-banner-creator>
@@ -25,8 +28,17 @@
       ></app-select-field> -->
     </div>
     <section class="list-section">
-      <div *ngIf="!showBannerForm" class="show-form" (click)="toggleShow()">
-        Add banner(+)
+      <div class="search-new-btn-div">
+        <div *ngIf="!showBannerForm" class="show-form" (click)="toggleShow()">
+          Add banner(+)
+        </div>
+        <div class="search-input-div">
+          <mat-form-field>
+            <mat-label>Search...</mat-label>
+            <input matInput placeholder="Ex. Banner" />
+          </mat-form-field>
+          <button class="searchBtn">Search</button>
+        </div>
       </div>
 
       <app-banner-list></app-banner-list>

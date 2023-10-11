@@ -15,9 +15,7 @@ import { NavbarComponent } from './client-component/navbar/navbar.component'
 import { FooterComponent } from './client-component/footer/footer.component'
 import { DashboardComponent } from './admin-component/dashboard/dashboard.component'
 import { MatIconModule } from '@angular/material/icon'
-import { MainComponent } from './client-component/main/main.component'
-import { SidenavComponent } from './client-component/sidenav/sidenav.component'
-import { HeroComponent } from './client-component/hero/hero.component'
+
 import { BannerFormComponent } from './admin-component/banner-form/banner-form.component'
 import { ReactiveFormsModule } from '@angular/forms'
 import { BannerCreatorComponent } from './admin-component/banner-creator/banner-creator.component'
@@ -33,7 +31,7 @@ import { StatusReducer } from './Store/StatusHanndle/Status.reducer'
 import { ErrorComponent } from './client-component/error/error.component'
 import { SuccsessComponent } from './client-component/succsess/succsess.component'
 import { BannerEffect } from './Store/Banner-data/Banner.effect'
-import { BannerReducer } from './Store/Banner-data/Banner.reducer';
+import { BannerReducer } from './Store/Banner-data/Banner.reducer'
 import { SelectFieldComponent } from './client-component/select-field/select-field.component'
 
 @NgModule({
@@ -42,9 +40,7 @@ import { SelectFieldComponent } from './client-component/select-field/select-fie
     NavbarComponent,
     FooterComponent,
     DashboardComponent,
-    MainComponent,
-    SidenavComponent,
-    HeroComponent,
+
     BannerFormComponent,
     BannerCreatorComponent,
     BannerListComponent,

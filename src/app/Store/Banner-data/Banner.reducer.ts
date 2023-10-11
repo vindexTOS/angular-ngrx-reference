@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store'
 import { BannerQueryState, BannerQueryTypes } from './Banner.State'
-import { getquery, getquerydata } from './Banner.action'
+import { deletebanner, getquery, getquerydata } from './Banner.action'
 
 const _BannerReducer = createReducer(
   BannerQueryState,

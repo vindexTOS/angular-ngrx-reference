@@ -4,7 +4,18 @@
     <th mat-header-cell *matHeaderCellDef>No.</th>
     <td mat-cell *matCellDef="let element; let i = index">{{ i + 1 }}</td>
   </ng-container>
-
+  <ng-container matColumnDef="delete">
+    <th mat-header-cell *matHeaderCellDef>Delete</th>
+    <td mat-cell *matCellDef="let element">
+      <button
+        (click)="deleteBanner(element.id, element.fileId)"
+        class="del-btn"
+        mat-icon-button
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
   <!-- Name Column -->
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>Name</th>
@@ -20,7 +31,10 @@
   <!-- Active Column -->
   <ng-container matColumnDef="active">
     <th mat-header-cell *matHeaderCellDef>Active</th>
-    <td mat-cell *matCellDef="let element">{{ element.active }}</td>
+    <td mat-cell *matCellDef="let element">
+      <span *ngIf="!element.active">🔴</span>
+      <span *ngIf="element.active">🟢</span>
+    </td>
   </ng-container>
 
   <!-- Start Date Column -->
@@ -51,8 +65,10 @@
 
   <!-- File ID Column -->
   <ng-container matColumnDef="fileId">
-    <th mat-header-cell *matHeaderCellDef>File ID</th>
-    <td mat-cell *matCellDef="let element">{{ element.fileId }}</td>
+    <th mat-header-cell *matHeaderCellDef>Photo</th>
+    <td mat-cell *matCellDef="let element">
+      <img class="img" [src]="baseUrl + 'blob/' + element.fileId" alt="Image" />
+    </td>
   </ng-container>
 
   <!-- URL Column -->

@@ -4,13 +4,15 @@ import { RefenceService } from 'src/app/services/refence.service'
 import { catchError, map, switchMap } from 'rxjs/operators'
 import { from, mergeMap, of, tap } from 'rxjs'
 import { BannerService } from 'src/app/services/banner.service'
-import { getquery, getquerydata } from './Banner.action'
+import { deletebanner, getquery, getquerydata } from './Banner.action'
 import { Store } from '@ngrx/store'
 import {
   loadingEnd,
   loadingStart,
   statusError,
+  statusSuccses,
 } from '../StatusHanndle/Status.action'
+import { GetStatusSuccsess } from '../StatusHanndle/Status.selector'
 
 @Injectable()
 export class BannerEffect {
@@ -37,6 +39,34 @@ export class BannerEffect {
           catchError((error) => {
             this.store.dispatch(loadingEnd())
             return of(statusError({ error: error.message }))
+          }),
+        )
+      }),
+    ),
+  )
+
+  deleteBanner$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(deletebanner),
+      tap(() => console.log('banner h ')),
+      mergeMap((action) => {
+        this.store.dispatch(loadingStart())
+        return from(this.service.DeleteBanner(action.id)).pipe(
+          map((res) => {
+            this.store.dispatch(loadingEnd())
+
+            return statusSuccses({ succses: 'banner has been deleted' })
+          }),
+          catchError((error) => {
+            console.log(error.error.message)
+
+            this.store.dispatch(loadingEnd())
+
+            return of(
+              statusError({
+                error: error.error.message[0],
+              }),
+            )
           }),
         )
       }),
