@@ -18,6 +18,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatNativeDateModule } from '@angular/material/core'
 
+import { MatDialogModule } from '@angular/material/dialog'
+
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { NgxFileDropModule } from 'ngx-file-drop'
@@ -28,6 +30,7 @@ import { AsyncPipe, NgFor } from '@angular/common'
 @NgModule({
   exports: [
     MatChipsModule,
+    MatDialogModule,
     MatPaginatorModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,

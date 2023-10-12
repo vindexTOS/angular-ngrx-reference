@@ -2,11 +2,17 @@ import { Component, OnInit } from '@angular/core'
 import { MatPaginatorIntl } from '@angular/material/paginator'
 import { Store } from '@ngrx/store'
 import { Subject } from 'rxjs'
-import { deletebanner, getquery } from 'src/app/Store/Banner-data/Banner.action'
+import {
+  deletebanner,
+  getquery,
+  getsinglebannerId,
+} from 'src/app/Store/Banner-data/Banner.action'
 import { GetBannerData } from 'src/app/Store/Banner-data/Banner.selector'
 import { deleteblob } from 'src/app/Store/Blob/Blob.action'
+import { SingleBannerComponent } from 'src/app/client-component/single-banner/single-banner.component'
 import { BannerService } from 'src/app/services/banner.service'
 import { FilterService } from 'src/app/services/filter.service'
+import { UiServiceTsService } from 'src/app/services/ui.service.ts.service'
 import { environment } from 'src/env'
 
 export interface PeriodicElement {
@@ -24,7 +30,12 @@ export interface PeriodicElement {
 })
 export class BannerListComponent implements OnInit {
   displayedColumns!: string[]
-  constructor(private store: Store, private filterService: FilterService) {}
+  dialog: any
+  constructor(
+    private store: Store,
+    private filterService: FilterService,
+    private uiService: UiServiceTsService,
+  ) {}
   dataSource!: any[]
   baseUrl = environment.apiUrl
 
@@ -37,6 +48,37 @@ export class BannerListComponent implements OnInit {
     pageSize: this.pageSize,
   }
 
+  // openBannerPopup(banner: any): void {
+  //   console.log(banner)
+  //   const dataForDialog = {
+  //     name: 'dwdw',
+  //     zoneId: 'one',
+  //     active: true,
+  //     startDate: '2023-10-14T20:00:00.000Z',
+  //     endDate: '2023-10-26T20:00:00.000Z',
+  //     fileId: 'C:\\fakepathdaylight-forest-glossy-443446 (1).jpg',
+  //     priority: 3,
+  //     channelId: '2',
+  //     language: 'ka',
+  //     url: 'dwwde',
+  //     labels: [],
+  //     createdAt: '2023-10-10T15:41:31.455Z',
+  //     modifiedAt: '2023-10-10T15:41:31.455Z',
+  //     id: '5338132806930821',
+  //   }
+
+  //   const dialogRef = this.dialog.open(SingleBannerComponent, {
+  //     data: dataForDialog,
+  //   })
+
+  //   dialogRef.afterClosed().subscribe(() => {
+  //     console.log('Banner popup closed')
+  //   })
+  // }
+  toggleSingle(id: string) {
+    this.uiService.toggleBannerSingler()
+    this.store.dispatch(getsinglebannerId({ id: id }))
+  }
   getQueryArray(key: string, value: string[]) {}
 
   onPageChange(event: any) {

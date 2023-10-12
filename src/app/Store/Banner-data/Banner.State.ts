@@ -4,6 +4,7 @@ export interface BannerData {
     searchAFter: string[]
     total: number
   }
+  singleData?: any
 }
 
 export interface BannerQueryTypes {
@@ -68,4 +69,5 @@ export const BannerQueryState: any = {
     searchAfter: [],
   },
   data: [],
+  singleData: {},
 }

@@ -4,7 +4,13 @@ import { RefenceService } from 'src/app/services/refence.service'
 import { catchError, map, switchMap } from 'rxjs/operators'
 import { from, mergeMap, of, tap } from 'rxjs'
 import { BannerService } from 'src/app/services/banner.service'
-import { deletebanner, getquery, getquerydata } from './Banner.action'
+import {
+  deletebanner,
+  getquery,
+  getquerydata,
+  getsinglebannerId,
+  getsinglebannerdata,
+} from './Banner.action'
 import { Store } from '@ngrx/store'
 import {
   loadingEnd,
@@ -35,6 +41,29 @@ export class BannerEffect {
             this.store.dispatch(loadingEnd())
 
             return getquerydata({ data: res.data })
+          }),
+          catchError((error) => {
+            this.store.dispatch(loadingEnd())
+            return of(statusError({ error: error.message }))
+          }),
+        )
+      }),
+    ),
+  )
+
+  getSingleBanner$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(getsinglebannerId),
+      tap(() => console.log('get single')),
+      mergeMap((action) => {
+        this.store.dispatch(loadingStart())
+        //  this.store.dispatch(getsinglebannerdata())
+
+        return from(this.service.GetSingleBanner(action.id)).pipe(
+          map((res: any) => {
+            this.store.dispatch(loadingEnd())
+            console.log(res.data)
+            return getsinglebannerdata({ singleData: res.data })
           }),
           catchError((error) => {
             this.store.dispatch(loadingEnd())

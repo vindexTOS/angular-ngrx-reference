@@ -19,6 +19,17 @@ export class BannerService {
     return this.http.post(`${this.baseUrl}banners/find`, query, { headers })
   }
 
+  GetSingleBanner(id: string) {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${environment.apiAuthToken}`,
+    })
+    return this.http.post(
+      `${this.baseUrl}banners/find-one`,
+      { id },
+      { headers },
+    )
+  }
+
   DeleteBanner(id: string) {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${environment.apiAuthToken}`,

@@ -1,0 +1,71 @@
+<div class="container" (click)="toggleSingle()">
+  <section class="no-trigger-zone" (click)="preventToggle($event)">
+    <app-loading *ngIf="loading"></app-loading>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Banner Information</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="no-trigger-zone">
+        <img
+          class="img"
+          [src]="baseUrl + 'blob/' + banner.fileId"
+          alt="Image"
+        />
+
+        <p>
+          <strong>ID:</strong>
+          {{ banner.id }}
+        </p>
+        <p>
+          <strong>Name:</strong>
+          {{ banner.name }}
+        </p>
+        <p>
+          <strong>Zone ID:</strong>
+          {{ banner.zoneId }}
+        </p>
+        <p>
+          <strong>Active:</strong>
+          {{ banner.active ? 'Yes' : 'No' }}
+        </p>
+
+        <p>
+          <strong>Start Date:</strong>
+          {{ banner.startDate }}
+        </p>
+        <p>
+          <strong>End Date:</strong>
+          {{ banner.endDate }}
+        </p>
+        <p>
+          <strong>Priority:</strong>
+          {{ banner.priority }}
+        </p>
+        <p>
+          <strong>Channel ID:</strong>
+          {{ banner.channelId }}
+        </p>
+        <p>
+          <strong>Language:</strong>
+          {{ banner.language }}
+        </p>
+        <p>
+          <strong>URL:</strong>
+          {{ banner.url }}
+        </p>
+        <p>
+          <strong>Labels:</strong>
+          {{ banner.labels.join(', ') }}
+        </p>
+        <p>
+          <strong>Created At:</strong>
+          {{ banner.createdAt }}
+        </p>
+        <p>
+          <strong>Modified At:</strong>
+          {{ banner.modifiedAt }}
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </section>
+</div>

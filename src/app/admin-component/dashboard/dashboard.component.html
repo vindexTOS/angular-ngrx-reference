@@ -1,5 +1,6 @@
 <main>
   <!-- <app-loading></app-loading> -->
+
   <app-loading *ngIf="loading"></app-loading>
   <app-error *ngIf="error" [childData]="error"></app-error>
   <app-succsess *ngIf="succsess" [childData]="succsess"></app-succsess>
@@ -8,6 +9,8 @@
     <app-banner-creator></app-banner-creator>
   </section>
   <div class="table-and-filter">
+    <app-single-banner *ngIf="showBannerSingle"></app-single-banner>
+
     <div class="filter">
       <div (click)="hanndleQueryRequest()" class="fillter-btn">
         Filter
@@ -35,9 +38,9 @@
         <div class="search-input-div">
           <mat-form-field>
             <mat-label>Search...</mat-label>
-            <input matInput placeholder="Ex. Banner" />
+            <input #myInput matInput placeholder="Ex. Banner" />
           </mat-form-field>
-          <button class="searchBtn">Search</button>
+          <button (click)="getSearchInput()" class="searchBtn">Search</button>
         </div>
       </div>
 

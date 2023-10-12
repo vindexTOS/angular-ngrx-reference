@@ -12,5 +12,16 @@ export const getquery = createAction(
 export const GET_QUERY_DATA = '[Get banner query data]query'
 export const getquerydata = createAction(GET_QUERY_DATA, props<{ data: any }>())
 
+export const GET_SINGLE_BANNER_ID = '[get single banner id]single id'
+export const getsinglebannerId = createAction(
+  GET_SINGLE_BANNER_ID,
+  props<{ id: string }>(),
+)
+export const GET_SINGLE_BANNER_DATA = '[get single banner data]single data'
+export const getsinglebannerdata = createAction(
+  GET_SINGLE_BANNER_DATA,
+  props<{ singleData: any }>(),
+)
+
 export const DELTE_BANNER = '[Delete Banner]delete'
 export const deletebanner = createAction(DELTE_BANNER, props<{ id: string }>())

@@ -32,7 +32,8 @@ import { ErrorComponent } from './client-component/error/error.component'
 import { SuccsessComponent } from './client-component/succsess/succsess.component'
 import { BannerEffect } from './Store/Banner-data/Banner.effect'
 import { BannerReducer } from './Store/Banner-data/Banner.reducer'
-import { SelectFieldComponent } from './client-component/select-field/select-field.component'
+import { SelectFieldComponent } from './client-component/select-field/select-field.component';
+import { SingleBannerComponent } from './client-component/single-banner/single-banner.component'
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { SelectFieldComponent } from './client-component/select-field/select-fie
     ErrorComponent,
     SuccsessComponent,
     SelectFieldComponent,
+    SingleBannerComponent,
   ],
   imports: [
     BrowserModule,
