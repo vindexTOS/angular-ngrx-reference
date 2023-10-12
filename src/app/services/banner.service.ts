@@ -10,7 +10,7 @@ export class BannerService {
   baseUrl = environment.apiUrl
 
   constructor(private http: HttpClient, private store: Store) {}
-
+  //  banner post data is in form.service.ts
   GetBannerData(query: any) {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${environment.apiAuthToken}`,
@@ -28,6 +28,13 @@ export class BannerService {
       { id },
       { headers },
     )
+  }
+  UpdateBanner(data: any) {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${environment.apiAuthToken}`,
+    })
+
+    return this.http.post(`${this.baseUrl}banners/save`, data.data, { headers })
   }
 
   DeleteBanner(id: string) {

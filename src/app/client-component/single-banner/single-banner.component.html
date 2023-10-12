@@ -1,71 +1,161 @@
-<div class="container" (click)="toggleSingle()">
-  <section class="no-trigger-zone" (click)="preventToggle($event)">
+<div class="container trigger-zone" (click)="toggleSingle()">
+  <section class="no-trigger-zone section-zone" (click)="preventToggle($event)">
     <app-loading *ngIf="loading"></app-loading>
+
     <mat-card>
       <mat-card-header>
         <mat-card-title>Banner Information</mat-card-title>
       </mat-card-header>
-      <mat-card-content class="no-trigger-zone">
+      <mat-card-content class="card-content-wrapper">
         <img
+          *ngIf="!isEditMode"
           class="img"
           [src]="baseUrl + 'blob/' + banner.fileId"
           alt="Image"
         />
+        <!-- dropbox -->
+
+        <div
+          *ngIf="isEditMode"
+          class="drop-zone"
+          (click)="fileInput.click()"
+          ngxFileDrop
+          (filesChange)="onFileDropped($event)"
+        >
+          <p>Change Banner</p>
+          <input
+            type="file"
+            #fileInput
+            hidden
+            accept="image/*"
+            (change)="onInputChange($event)"
+          />
+          <img
+            *ngIf="!imageSrc"
+            class="img"
+            [src]="baseUrl + 'blob/' + banner.fileId"
+            alt="Image"
+          />
+          <img
+            *ngIf="imageSrc"
+            class="img"
+            [src]="baseUrl + 'blob/' + imageSrc"
+            alt="Image"
+          />
+        </div>
 
         <p>
           <strong>ID:</strong>
           {{ banner.id }}
         </p>
-        <p>
-          <strong>Name:</strong>
-          {{ banner.name }}
-        </p>
-        <p>
-          <strong>Zone ID:</strong>
-          {{ banner.zoneId }}
-        </p>
-        <p>
-          <strong>Active:</strong>
-          {{ banner.active ? 'Yes' : 'No' }}
-        </p>
 
-        <p>
-          <strong>Start Date:</strong>
-          {{ banner.startDate }}
-        </p>
-        <p>
-          <strong>End Date:</strong>
-          {{ banner.endDate }}
-        </p>
-        <p>
-          <strong>Priority:</strong>
-          {{ banner.priority }}
-        </p>
-        <p>
-          <strong>Channel ID:</strong>
-          {{ banner.channelId }}
-        </p>
-        <p>
-          <strong>Language:</strong>
-          {{ banner.language }}
-        </p>
-        <p>
-          <strong>URL:</strong>
-          {{ banner.url }}
-        </p>
-        <p>
-          <strong>Labels:</strong>
-          {{ banner.labels.join(', ') }}
-        </p>
-        <p>
-          <strong>Created At:</strong>
-          {{ banner.createdAt }}
-        </p>
-        <p>
-          <strong>Modified At:</strong>
-          {{ banner.modifiedAt }}
-        </p>
+        <div class="field-wrapper">
+          <!-- fist div  -->
+          <div class="field-div-wrap">
+            <div class="editable-div">
+              <strong>Name:</strong>
+
+              <app-editable-selector-field
+                [value]="banner.name"
+                [placeholder]="'name'"
+                [isEditMode]="isEditMode"
+                [isDataSelector]="'input'"
+              ></app-editable-selector-field>
+            </div>
+            <div class="editable-div">
+              <strong>Zone ID:</strong>
+
+              <app-editable-selector-field
+                [value]="banner.zoneId"
+                [placeholder]="'zoneId'"
+                [isEditMode]="isEditMode"
+                [selectOptions]="refrenceZones"
+                [isDataSelector]="'selector'"
+              ></app-editable-selector-field>
+            </div>
+            <div class="editable-div">
+              <strong>Active:</strong>
+
+              <app-editable-selector-field
+                [value]="banner.active"
+                [placeholder]="'active'"
+                [isEditMode]="isEditMode"
+                [selectOptions]="activeRefrence"
+                [isDataSelector]="'selector'"
+              ></app-editable-selector-field>
+            </div>
+            <div class="editable-div">
+              <strong>Channel ID:</strong>
+
+              <app-editable-selector-field
+                [value]="banner.channelId"
+                [placeholder]="'channelId'"
+                [isEditMode]="isEditMode"
+                [selectOptions]="refrenceChannels"
+                [isDataSelector]="'selector'"
+              ></app-editable-selector-field>
+            </div>
+          </div>
+          <!-- second -->
+          <div class="field-div-wrap">
+            <div class="editable-div">
+              <strong>Start Date:</strong>
+
+              <app-editable-selector-field
+                [value]="banner.startDate"
+                [placeholder]="'startDate'"
+                [isEditMode]="isEditMode"
+                [isDataSelector]="'date'"
+              ></app-editable-selector-field>
+            </div>
+            <div class="editable-div">
+              <strong>End Date:</strong>
+
+              <app-editable-selector-field
+                [value]="banner.endDate"
+                [placeholder]="'endDate'"
+                [isEditMode]="isEditMode"
+                [isDataSelector]="'date'"
+              ></app-editable-selector-field>
+            </div>
+            <div class="editable-div">
+              <strong>Priority:</strong>
+
+              <app-editable-selector-field
+                [value]="banner.priority"
+                [placeholder]="'priority'"
+                [isEditMode]="isEditMode"
+                [isDataSelector]="'input'"
+              ></app-editable-selector-field>
+            </div>
+
+            <div class="editable-div">
+              <strong>Language:</strong>
+
+              <app-editable-selector-field
+                [value]="banner.language"
+                [placeholder]="'language'"
+                [isEditMode]="isEditMode"
+                [selectOptions]="refrenceLanguage"
+                [isDataSelector]="'selector'"
+              ></app-editable-selector-field>
+            </div>
+          </div>
+        </div>
       </mat-card-content>
+      <button
+        *ngIf="!isEditMode"
+        (click)="toggleEditMode()"
+        class="edit-button"
+      >
+        Edit
+      </button>
+      <button *ngIf="isEditMode" (click)="cancelEdit()" class="cancel-button">
+        Cancel
+      </button>
+      <button *ngIf="isEditMode" (click)="saveChanges()" class="save-button">
+        Save
+      </button>
     </mat-card>
   </section>
 </div>

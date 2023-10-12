@@ -10,6 +10,7 @@ import {
   getquerydata,
   getsinglebannerId,
   getsinglebannerdata,
+  updatebanner,
 } from './Banner.action'
 import { Store } from '@ngrx/store'
 import {
@@ -74,6 +75,29 @@ export class BannerEffect {
     ),
   )
 
+  updateBanner$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(updatebanner),
+      tap(() => console.log('updated')),
+      switchMap((action) => {
+        this.store.dispatch(loadingStart())
+        return from(
+          this.service.UpdateBanner({ data: action.updateData }),
+        ).pipe(
+          switchMap((res) => {
+            console.log(res)
+            this.store.dispatch(loadingEnd())
+            return of(statusSuccses({ succses: 'Banner has been updated' }))
+          }),
+          catchError((error) => {
+            console.log(error)
+            this.store.dispatch(loadingEnd())
+            return of(statusError({ error: error.error.message[0] }))
+          }),
+        )
+      }),
+    ),
+  )
   deleteBanner$ = createEffect(() =>
     this.actions$.pipe(
       ofType(deletebanner),

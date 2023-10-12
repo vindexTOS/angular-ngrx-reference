@@ -25,3 +25,9 @@ export const getsinglebannerdata = createAction(
 
 export const DELTE_BANNER = '[Delete Banner]delete'
 export const deletebanner = createAction(DELTE_BANNER, props<{ id: string }>())
+
+export const UPDATE_BANNER = '[Update Banner]update'
+export const updatebanner = createAction(
+  UPDATE_BANNER,
+  props<{ updateData: any }>(),
+)
