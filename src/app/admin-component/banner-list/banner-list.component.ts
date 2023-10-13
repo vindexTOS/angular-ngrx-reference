@@ -46,7 +46,7 @@ export class BannerListComponent implements OnInit {
 
   pageLength?: number
   pageIndex: number = 0
-  pageSize: number = 5
+  pageSize: number = 10
 
   queryObj = {
     pageIndex: this.pageIndex,
@@ -94,7 +94,11 @@ export class BannerListComponent implements OnInit {
     this.store.dispatch(
       getquery({
         key: 'all',
-        value: { pageIndex: event.pageIndex, pageSize: event.pageSize },
+        value: {
+          pageIndex: event.pageIndex,
+          pageSize: event.pageSize,
+          sortBy: 'name.raw',
+        },
       }),
     )
   }
@@ -106,7 +110,7 @@ export class BannerListComponent implements OnInit {
       this.store.dispatch(
         getquery({
           key: 'all',
-          value: { pageIndex: 0, pageSize: 5 },
+          value: { pageIndex: 0, pageSize: 10, sortBy: 'name.raw' },
         }),
       )
 
@@ -119,7 +123,7 @@ export class BannerListComponent implements OnInit {
   ngOnInit(): void {
     this.filterService.useEffect()
     this.displayedColumns = this.filterService.displayedColumns
-    console.log(this.displayedColumns)
+    // console.log(this.displayedColumns)
     this.store.select(GetBannerData).subscribe((item) => {
       // console.log(item)
 

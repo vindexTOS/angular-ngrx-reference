@@ -17,6 +17,7 @@ import { statusSuccses } from 'src/app/Store/StatusHanndle/Status.action'
 })
 export class DashboardComponent {
   @ViewChild('myInput') inputElement!: ElementRef
+
   sub: PushSubscription | any
   showBannerForm = false
   selectedExcludedLables: string[] = []
@@ -26,6 +27,7 @@ export class DashboardComponent {
   error!: string
   dialog: any
   showBannerSingle: boolean = false
+
   constructor(
     private uiService: UiServiceTsService,
     private filterService: FilterService,
@@ -35,7 +37,7 @@ export class DashboardComponent {
       .toggleShow()
       .subscribe((val) => (this.showBannerForm = val))
   }
-
+  sortBy = this.filterService.sortBy
   getSearchInput() {
     const inputValue = this.inputElement.nativeElement.value
     console.log(inputValue)
@@ -74,10 +76,14 @@ export class DashboardComponent {
     // this.selectedIncludedLabels = this.filterService.selectedIncludedLabels
     this.selectedExcludedLables = this.filterService.selectedExcludedLables
   }
-
-  hanndleQueryRequest() {
-    this.filterService.hanndleQueryRequest()
+  onValueChanged(val: string) {
+    console.log(val)
+    this.filterService.onValueChanged(val)
   }
+
+  // hanndleQueryRequest() {
+  //   this.filterService.hanndleQueryRequest()
+  // }
   toggleShow() {
     this.uiService.toggle()
   }
