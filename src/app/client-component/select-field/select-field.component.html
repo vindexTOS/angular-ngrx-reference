@@ -16,7 +16,8 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background-color: aqua;
+        background-color: rgba(134, 134, 134, 0.678);
+        color: white;
         border-radius: 30px;
         padding-left: 1rem;
         padding-right: 1rem;
@@ -28,7 +29,7 @@
           outline: none;
           border: none;
           background: none;
-          color: rgb(92, 92, 92);
+          color: rgb(255, 255, 255);
           z-index: 1000;
         "
       >
@@ -39,12 +40,13 @@
     </div>
   </div>
   <mat-select [formGroup]="exampleForm" placeholder="{{ label }}">
-    <mat-option
+    <!-- <mat-option
       *ngFor="let option of refrenceLabels"
       [value]="option"
       (click)="onLabelSelect(option)"
     >
+     
       {{ option }}
-    </mat-option>
+    </mat-option> -->
   </mat-select>
 </mat-form-field>

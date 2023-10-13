@@ -263,7 +263,7 @@ export class FilterService implements OnInit {
     [key: string]: any
   } = {
     includes: [...this.includes],
-    // excludes: [''],
+    excludes: [...this.excludes],
     search: this.serach,
     // ids: [''],
     // excludeIds: [''],
@@ -290,45 +290,123 @@ export class FilterService implements OnInit {
       this.includes.push(event)
       this.displayedColumns.push(event)
     }
-  }
-
-  handleLabelRemoveInclude(event: any) {
-    console.log(event)
-    this.selectedIncludedLabels = this.selectedIncludedLabels.filter(
-      (val) => val !== event,
+    console.log(this.queryObj)
+    this.store.dispatch(
+      getquery({
+        key: 'all',
+        value: {
+          includes: this.includes,
+          excludes: this.excludes,
+          search: this.serach,
+          sortDirection: 'asc',
+          pageIndex: this.pageIndex,
+          pageSize: this.pageSize,
+        },
+      }),
     )
-    this.displayedColumns = this.displayedColumns.filter((val) => val !== event)
-    // console.log(this.displayedColumns)
-    this.includes = this.selectedIncludedLabels
-    this.displayedColumnsSubject.next(this.displayedColumns)
-    if (!this.selectedExcludedLables.includes(event)) {
-      this.selectedExcludedLables.push(event)
-    }
   }
 
   handleLabelSelectExclude(event: any) {
     if (!this.selectedExcludedLables.includes(event)) {
       this.selectedExcludedLables.push(event)
     }
+    console.log(this.queryObj)
+
+    // this.store.dispatch(
+    //   getquery({
+    //     key: 'all',
+    //     value: {
+    //       includes: this.includes,
+    //       excludes: this.excludes,
+    //       search: this.serach,
+    //       sortDirection: 'asc',
+    //       pageIndex: this.pageIndex,
+    //       pageSize: this.pageSize,
+    //     },
+    //   }),
+    // )
+  }
+  // removing ///////////////////////////////////////////////////////////
+  handleLabelRemoveInclude(event: any) {
+    this.selectedIncludedLabels = this.selectedIncludedLabels.filter(
+      (val) => val !== event,
+    )
+    this.includes = this.includes.filter((val) => val !== event)
+    this.displayedColumns = this.displayedColumns.filter((val) => val !== event)
+
+    if (!this.selectedExcludedLables.includes(event)) {
+      this.selectedExcludedLables.push(event)
+      if (!this.excludes.includes(event)) {
+        this.excludes.push(event)
+        // this.displayedColumns.push(event)
+      }
+    }
+    this.displayedColumnsSubject.next(this.displayedColumns)
+
+    console.log({
+      includes: this.includes,
+      excludes: this.excludes,
+      search: this.serach,
+      sortDirection: 'asc',
+      pageIndex: this.pageIndex,
+      pageSize: this.pageSize,
+    })
+    // console.log(this.displayedColumns)
+
+    this.store.dispatch(
+      getquery({
+        key: 'all',
+        value: {
+          excludes: [...this.excludes],
+          includes: [...this.includes],
+          search: this.serach,
+          sortDirection: 'asc',
+          pageIndex: this.pageIndex,
+          pageSize: this.pageSize,
+        },
+      }),
+    )
   }
 
   handleLabelExcludedRemove(event: any) {
     this.selectedExcludedLables = this.selectedExcludedLables.filter(
       (val) => val !== event,
     )
+
+    this.excludes = this.excludes.filter((val) => val !== event)
     if (!this.selectedIncludedLabels.includes(event)) {
-      // Add the label to the "included" list
       this.selectedIncludedLabels.push(event)
 
-      // Check if the label is not already in the "includes" list before adding it
       if (!this.includes.includes(event)) {
         this.includes.push(event)
+      }
+      if (!this.displayedColumns.includes(event)) {
         this.displayedColumns.push(event)
-
-        // Notify the change in displayedColumns
-        this.displayedColumnsSubject.next(this.displayedColumns)
       }
     }
+    this.displayedColumnsSubject.next(this.displayedColumns)
+    // console.log(this.displayedColumns)
+    console.log({
+      includes: this.includes,
+      excludes: this.excludes,
+      search: this.serach,
+      sortDirection: 'asc',
+      pageIndex: this.pageIndex,
+      pageSize: this.pageSize,
+    })
+    this.store.dispatch(
+      getquery({
+        key: 'all',
+        value: {
+          excludes: [...this.excludes],
+          includes: [...this.includes],
+          search: this.serach,
+          sortDirection: 'asc',
+          pageIndex: this.pageIndex,
+          pageSize: this.pageSize,
+        },
+      }),
+    )
   }
   useEffect(): void {
     this.store.dispatch(getquery({ key: 'all', value: { ...this.queryObj } }))
@@ -336,6 +414,7 @@ export class FilterService implements OnInit {
 
   hanndleQueryRequest() {
     let newObj = {
+      excludes: [...this.excludes],
       includes: [...this.includes],
       search: this.serach,
       sortDirection: 'asc',
