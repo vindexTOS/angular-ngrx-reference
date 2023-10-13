@@ -16,12 +16,20 @@
         Filter
       </div> -->
       <app-editable-selector-field
+        [value]="'asc'"
+        [placeholder]="'sortDirection'"
+        [isEditMode]="true"
+        [selectOptions]="sortDirection"
+        [isDataSelector]="'selector'"
+        (valueChanged)="onValueChangeAcenDece($event)"
+      ></app-editable-selector-field>
+      <app-editable-selector-field
         [value]="'name.raw'"
         [placeholder]="'sortBy'"
         [isEditMode]="true"
         [selectOptions]="sortBy"
         [isDataSelector]="'selector'"
-        (valueChanged)="onValueChanged($event)"
+        (valueChanged)="onValueChangedSortBy($event)"
       ></app-editable-selector-field>
       <app-select-field
         [labels]="selectedIncludedLabels"

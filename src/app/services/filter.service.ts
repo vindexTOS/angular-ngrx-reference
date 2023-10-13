@@ -89,7 +89,10 @@ export class FilterService implements OnInit {
   )
   selectedExcludedLables: string[] = this.excludes
   serach = ''
-  sortDirection = 'asc'
+  sortDirection = [
+    { key: 'asc', name: 'Ascending' },
+    { key: 'desc', name: 'Descending' },
+  ]
 
   queryObj: {
     includes?: string[]
@@ -177,12 +180,12 @@ export class FilterService implements OnInit {
     this.updateQuery()
   }
 
-  updateQuery(sortBy?: string) {
+  updateQuery(sortBy?: string, sortDirection?: string) {
     const query = {
       excludes: [...this.excludes],
       includes: [...this.includes],
       search: this.serach,
-      sortDirection: 'asc',
+      sortDirection: sortDirection,
       pageIndex: this.pageIndex,
       pageSize: this.pageSize,
       sortBy: sortBy || 'name.raw',
@@ -190,8 +193,11 @@ export class FilterService implements OnInit {
     this.store.dispatch(getquery({ key: 'all', value: query }))
   }
 
-  onValueChanged(val: string) {
+  onValueChangedSortBy(val: string) {
     this.updateQuery(val)
+  }
+  onValueChangeAcenDece(val: string) {
+    this.updateQuery('', val)
   }
   useEffect(): void {
     this.store.dispatch(getquery({ key: 'all', value: { ...this.queryObj } }))

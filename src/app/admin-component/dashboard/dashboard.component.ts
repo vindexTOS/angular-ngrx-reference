@@ -38,6 +38,7 @@ export class DashboardComponent {
       .subscribe((val) => (this.showBannerForm = val))
   }
   sortBy = this.filterService.sortBy
+  sortDirection = this.filterService.sortDirection
   getSearchInput() {
     const inputValue = this.inputElement.nativeElement.value
     console.log(inputValue)
@@ -76,11 +77,13 @@ export class DashboardComponent {
     // this.selectedIncludedLabels = this.filterService.selectedIncludedLabels
     this.selectedExcludedLables = this.filterService.selectedExcludedLables
   }
-  onValueChanged(val: string) {
+  onValueChangedSortBy(val: string) {
     console.log(val)
-    this.filterService.onValueChanged(val)
+    this.filterService.onValueChangedSortBy(val)
   }
-
+  onValueChangeAcenDece(val: string) {
+    this.filterService.onValueChangeAcenDece(val)
+  }
   // hanndleQueryRequest() {
   //   this.filterService.hanndleQueryRequest()
   // }
