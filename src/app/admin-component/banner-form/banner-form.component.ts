@@ -42,7 +42,10 @@ import {
   GetStatusLoading,
   GetStatusSuccsess,
 } from 'src/app/Store/StatusHanndle/Status.selector'
-import { statusError } from 'src/app/Store/StatusHanndle/Status.action'
+import {
+  statusError,
+  statusSuccses,
+} from 'src/app/Store/StatusHanndle/Status.action'
 import { getquery } from 'src/app/Store/Banner-data/Banner.action'
 @Component({
   selector: 'app-banner-form',
@@ -195,6 +198,9 @@ export class BannerFormComponent implements OnInit, OnDestroy {
         this.store.dispatch(
           getquery({ key: 'all', value: { pageIndex: 0, pageSize: 10 } }),
         )
+        setTimeout(() => {
+          this.store.dispatch(statusSuccses({ succses: '' }))
+        }, 3000)
       }, 1100)
     }
   }

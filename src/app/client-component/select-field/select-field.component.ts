@@ -24,10 +24,10 @@ export class SelectFieldComponent {
   }
 
   onLabelSelect(event: any) {
-    this.labelSelect.emit(event) // Emit the event when a label is selected
+    this.labelSelect.emit(event)
   }
 
   remove(label: any) {
-    this.removeLabel.emit(label) // Emit the label to be removed
+    this.removeLabel.emit(label)
   }
 }

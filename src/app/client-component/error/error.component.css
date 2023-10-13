@@ -11,6 +11,7 @@
   z-index: 9999; /* Ensure it's on top of other elements */
   width: 200px;
   max-width: 300px;
+  max-height: 500px;
   height: 24px;
   display: flex;
   align-items: center;

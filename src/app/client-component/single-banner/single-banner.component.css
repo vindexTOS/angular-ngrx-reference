@@ -38,6 +38,37 @@ section.section-zone {
   width: 500px;
   min-width: 250px;
   height: 300px;
+  transition: filter 0.3s;
+  cursor: pointer;
+}
+
+.image-container {
+  position: relative;
+  display: inline-block;
+}
+
+.hover-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.7
+  ); /* Background color with some transparency */
+  padding: 10px;
+  border-radius: 5px;
+  display: none; /* Initially, hide the text */
+}
+
+.image-container:hover .img {
+  filter: blur(3px);
+}
+
+.image-container:hover .hover-text {
+  display: block;
 }
 p {
   user-select: all;
@@ -87,4 +118,9 @@ p {
   border: none; /* Remove border */
   border-radius: 5px; /* Rounded corners */
   cursor: pointer;
+}
+
+.data-picker-wrapper {
+  display: flex;
+  flex-direction: column;
 }

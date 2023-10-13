@@ -1,10 +1,15 @@
 import { Component, Inject, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
 import {
+  getquery,
   getsinglebannerId,
   updatebanner,
+  updatelocalobject,
 } from 'src/app/Store/Banner-data/Banner.action'
-import { GetSingleBannerData } from 'src/app/Store/Banner-data/Banner.selector'
+import {
+  GetLocalUpdateObj,
+  GetSingleBannerData,
+} from 'src/app/Store/Banner-data/Banner.selector'
 import { geturlid } from 'src/app/Store/Blob/Blog.selector'
 import {
   channelactionapi,
@@ -19,10 +24,24 @@ import {
   getrefrenceZoneList,
 } from 'src/app/Store/Refrence/Refrence.Selector'
 import { refrenceTypes } from 'src/app/Store/Refrence/Refrence.State'
+import { statusSuccses } from 'src/app/Store/StatusHanndle/Status.action'
 import { FormService } from 'src/app/services/form.service'
 import { UiServiceTsService } from 'src/app/services/ui.service.ts.service'
 import { environment } from 'src/env'
-
+interface EditObjType {
+  name: string
+  zoneId: string
+  active: boolean
+  startDate: string
+  endDate: string
+  fileId: string
+  priority: null | number
+  channelId: string
+  language: string
+  url: string
+  labels: string[]
+  id: string
+}
 @Component({
   selector: 'app-single-banner',
   templateUrl: './single-banner.component.html',
@@ -52,6 +71,7 @@ export class SingleBannerComponent implements OnInit {
     labels: [],
     id: '',
   }
+
   constructor(
     private store: Store,
     private uiService: UiServiceTsService,
@@ -86,11 +106,19 @@ export class SingleBannerComponent implements OnInit {
   }
 
   saveChanges() {
-    console.log(this.editObj)
-    // this.store.dispatch(updatebanner({ updateData: this.editObj }))
-
-    // this.uiService.toggleBannerSingler()
-    // this.store.dispatch(getsinglebannerId({ id: this.editObj.id }))
+    this.store.dispatch(updatebanner({ updateData: this.editObj }))
+    this.uiService.toggleBannerSingler()
+    setTimeout(() => {
+      this.store.dispatch(
+        getquery({
+          key: 'all',
+          value: { pageIndex: 0, pageSize: 10 },
+        }),
+      )
+      setTimeout(() => {
+        this.store.dispatch(statusSuccses({ succses: '' }))
+      }, 3000)
+    }, 1000)
   }
 
   cancelEdit() {
@@ -103,6 +131,11 @@ export class SingleBannerComponent implements OnInit {
   onInputChange(event: Event) {
     this.formService.onInputChange(event)
   }
+
+  onValueChanged(property: keyof EditObjType, newValue: string) {
+    //@ts-ignore
+    this.editObj[property] = newValue
+  }
   ngOnInit(): void {
     this.store.select(GetSingleBannerData).subscribe((item) => {
       this.banner = item
@@ -110,7 +143,7 @@ export class SingleBannerComponent implements OnInit {
       this.editObj = {
         name: item.name,
         zoneId: item.zoneId,
-        active: Boolean(item.action),
+        active: Boolean(item.active),
         startDate: item.startDate,
         endDate: item.endDate,
         fileId: item.fileId,
@@ -122,6 +155,7 @@ export class SingleBannerComponent implements OnInit {
         id: item.id,
       }
     })
+
     this.imageSrc = this.formService.imageSrc
     this.store.select(geturlid).subscribe((item) => {
       this.editObj.fileId = item

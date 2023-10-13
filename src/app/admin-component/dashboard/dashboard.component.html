@@ -22,13 +22,13 @@
         (labelSelect)="handleLabelSelectInclude($event)"
         (removeLabel)="handleLabelRemoveInclude($event)"
       ></app-select-field>
-      <!-- <app-select-field
-        [labels]="selectedIncludedLabels"
+      <app-select-field
+        [labels]="selectedExcludedLables"
         [refrenceLabels]="refrenceLabels"
-        [label]="'Include'"
-        (labelSelect)="handleLabelSelectInclude($event)"
-        (removeLabel)="handleLabelRemoveInclude($event)"
-      ></app-select-field> -->
+        [label]="'Exclude'"
+        (labelSelect)="handleLabelSelectExclude($event)"
+        (removeLabel)="handleLabelExcludedRemove($event)"
+      ></app-select-field>
     </div>
     <section class="list-section">
       <div class="search-new-btn-div">

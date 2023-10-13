@@ -16,12 +16,19 @@ export class EditableSelectorFieldComponent {
 
   onInputChange(event: Event) {
     const inputElement = event.target as HTMLInputElement
-    this.value = inputElement.value
-    this.valueChanged.emit(this.value)
+    const newValue = inputElement.value
+    this.valueChanged.emit(newValue)
   }
 
   onSelectionChange(event: any) {
     this.value = event.value
     this.valueChanged.emit(this.value)
   }
+  emitValueChanged() {
+    this.valueChanged.emit(this.value)
+  }
+
+  // onValueChanged({property, newValue}:{property: string, newValue: string}) {
+  //   this.valueChanged.emit({ property, value: newValue });
+  // }
 }

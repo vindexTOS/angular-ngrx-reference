@@ -30,18 +30,21 @@
             accept="image/*"
             (change)="onInputChange($event)"
           />
-          <img
-            *ngIf="!imageSrc"
-            class="img"
-            [src]="baseUrl + 'blob/' + banner.fileId"
-            alt="Image"
-          />
-          <img
-            *ngIf="imageSrc"
-            class="img"
-            [src]="baseUrl + 'blob/' + imageSrc"
-            alt="Image"
-          />
+          <div class="image-container">
+            <img
+              *ngIf="!imageSrc"
+              class="img"
+              [src]="baseUrl + 'blob/' + banner.fileId"
+              alt="Image"
+            />
+            <img
+              *ngIf="imageSrc"
+              class="img"
+              [src]="baseUrl + 'blob/' + imageSrc"
+              alt="Image"
+            />
+            <div class="hover-text">Upload New Photo</div>
+          </div>
         </div>
 
         <p>
@@ -60,6 +63,7 @@
                 [placeholder]="'name'"
                 [isEditMode]="isEditMode"
                 [isDataSelector]="'input'"
+                (valueChanged)="onValueChanged('name', $event)"
               ></app-editable-selector-field>
             </div>
             <div class="editable-div">
@@ -71,6 +75,7 @@
                 [isEditMode]="isEditMode"
                 [selectOptions]="refrenceZones"
                 [isDataSelector]="'selector'"
+                (valueChanged)="onValueChanged('zoneId', $event)"
               ></app-editable-selector-field>
             </div>
             <div class="editable-div">
@@ -82,6 +87,7 @@
                 [isEditMode]="isEditMode"
                 [selectOptions]="activeRefrence"
                 [isDataSelector]="'selector'"
+                (valueChanged)="onValueChanged('active', $event)"
               ></app-editable-selector-field>
             </div>
             <div class="editable-div">
@@ -93,6 +99,7 @@
                 [isEditMode]="isEditMode"
                 [selectOptions]="refrenceChannels"
                 [isDataSelector]="'selector'"
+                (valueChanged)="onValueChanged('channelId', $event)"
               ></app-editable-selector-field>
             </div>
           </div>
@@ -100,23 +107,29 @@
           <div class="field-div-wrap">
             <div class="editable-div">
               <strong>Start Date:</strong>
-
-              <app-editable-selector-field
-                [value]="banner.startDate"
-                [placeholder]="'startDate'"
-                [isEditMode]="isEditMode"
-                [isDataSelector]="'date'"
-              ></app-editable-selector-field>
+              <div class="data-picker-wrapper">
+                <p *ngIf="isEditMode">{{ banner.startDate }}</p>
+                <app-editable-selector-field
+                  [value]="banner.startDate"
+                  [placeholder]="'startDate'"
+                  [isEditMode]="isEditMode"
+                  [isDataSelector]="'date'"
+                  (valueChanged)="onValueChanged('startDate', $event)"
+                ></app-editable-selector-field>
+              </div>
             </div>
             <div class="editable-div">
               <strong>End Date:</strong>
-
-              <app-editable-selector-field
-                [value]="banner.endDate"
-                [placeholder]="'endDate'"
-                [isEditMode]="isEditMode"
-                [isDataSelector]="'date'"
-              ></app-editable-selector-field>
+              <div class="data-picker-wrapper">
+                <p *ngIf="isEditMode">{{ banner.endDate }}</p>
+                <app-editable-selector-field
+                  [value]="banner.endDate"
+                  [placeholder]="'endDate'"
+                  [isEditMode]="isEditMode"
+                  [isDataSelector]="'date'"
+                  (valueChanged)="onValueChanged('endDate', $event)"
+                ></app-editable-selector-field>
+              </div>
             </div>
             <div class="editable-div">
               <strong>Priority:</strong>
@@ -126,6 +139,7 @@
                 [placeholder]="'priority'"
                 [isEditMode]="isEditMode"
                 [isDataSelector]="'input'"
+                (valueChanged)="onValueChanged('priority', $event)"
               ></app-editable-selector-field>
             </div>
 
@@ -138,6 +152,7 @@
                 [isEditMode]="isEditMode"
                 [selectOptions]="refrenceLanguage"
                 [isDataSelector]="'selector'"
+                (valueChanged)="onValueChanged('language', $event)"
               ></app-editable-selector-field>
             </div>
           </div>

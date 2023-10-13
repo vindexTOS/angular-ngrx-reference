@@ -1,8 +1,9 @@
-import { Injectable, OnInit } from '@angular/core'
+import { ChangeDetectorRef, Injectable, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
 import { getquery } from '../Store/Banner-data/Banner.action'
 import { GetBannerData } from '../Store/Banner-data/Banner.selector'
 import { environment } from 'src/env'
+import { BehaviorSubject } from 'rxjs'
 const ELEMENT_DATA: any[] = [
   {
     name: 'dwdw',
@@ -189,12 +190,14 @@ const includeExcluedArr = [
 })
 export class FilterService implements OnInit {
   constructor(private store: Store) {}
+
   includeExcludeFilter = includeExcluedArr
   dataSource!: any[]
-  selectedIncludedLabels: string[] = []
+
   pageLength?: number
   pageIndex: number = 0
   pageSize: number = 10
+
   // displayedColumns: string[] = [
   //   'name',
   //   'active',
@@ -209,9 +212,39 @@ export class FilterService implements OnInit {
   //   'modifiedAt',
   // ]
 
-  displayedColumns: string[] = ['delete', 'fileId', 'name', 'active', 'labels']
+  displayedColumns: string[] = [
+    'delete',
+    'fileId',
+    'name',
+    'active',
+    'labels',
+    'language',
+    'zoneId',
+  ]
 
-  includes: string[] = ['name', 'active', 'labels', 'fileId', 'id']
+  includes: string[] = [
+    'name',
+    'active',
+    'labels',
+    'fileId',
+    'language',
+    'zoneId',
+    'id',
+  ]
+  excludes: string[] = [
+    'modifiedAt',
+    'createdAt',
+    'channelId',
+    'priority',
+    'endDate',
+    'startDate',
+    'url',
+  ]
+  selectedIncludedLabels: string[] = this.includes.slice(
+    0,
+    this.includes.length - 1,
+  )
+  selectedExcludedLables: string[] = this.excludes
   serach = ''
   sortDirection = 'asc'
   queryObj: {
@@ -242,23 +275,60 @@ export class FilterService implements OnInit {
     pageSize: this.pageSize,
     // searchAfter: [],
   }
-  handleLabelSelectInclude(event: any) {
-    if (!this.selectedIncludedLabels.includes(event)) {
-      this.selectedIncludedLabels.push(event)
-    }
 
-    this.includes.push(event)
-    // console.log(this.includes)
-    if (!this.displayedColumns.includes(event)) {
+  private displayedColumnsSubject = new BehaviorSubject<string[]>(
+    this.displayedColumns,
+  )
+
+  displayedColumns$ = this.displayedColumnsSubject.asObservable()
+  handleLabelSelectInclude(event: any) {
+    if (
+      !this.selectedIncludedLabels.includes(event) &&
+      !this.includes.includes(event)
+    ) {
+      this.selectedIncludedLabels.push(event)
+      this.includes.push(event)
       this.displayedColumns.push(event)
     }
   }
+
   handleLabelRemoveInclude(event: any) {
+    console.log(event)
     this.selectedIncludedLabels = this.selectedIncludedLabels.filter(
       (val) => val !== event,
     )
     this.displayedColumns = this.displayedColumns.filter((val) => val !== event)
+    // console.log(this.displayedColumns)
     this.includes = this.selectedIncludedLabels
+    this.displayedColumnsSubject.next(this.displayedColumns)
+    if (!this.selectedExcludedLables.includes(event)) {
+      this.selectedExcludedLables.push(event)
+    }
+  }
+
+  handleLabelSelectExclude(event: any) {
+    if (!this.selectedExcludedLables.includes(event)) {
+      this.selectedExcludedLables.push(event)
+    }
+  }
+
+  handleLabelExcludedRemove(event: any) {
+    this.selectedExcludedLables = this.selectedExcludedLables.filter(
+      (val) => val !== event,
+    )
+    if (!this.selectedIncludedLabels.includes(event)) {
+      // Add the label to the "included" list
+      this.selectedIncludedLabels.push(event)
+
+      // Check if the label is not already in the "includes" list before adding it
+      if (!this.includes.includes(event)) {
+        this.includes.push(event)
+        this.displayedColumns.push(event)
+
+        // Notify the change in displayedColumns
+        this.displayedColumnsSubject.next(this.displayedColumns)
+      }
+    }
   }
   useEffect(): void {
     this.store.dispatch(getquery({ key: 'all', value: { ...this.queryObj } }))
@@ -273,6 +343,7 @@ export class FilterService implements OnInit {
       pageSize: this.pageSize,
     }
     this.store.dispatch(getquery({ key: 'all', value: { ...newObj } }))
+    this.displayedColumns = this.selectedIncludedLabels
   }
 
   ngOnInit(): void {

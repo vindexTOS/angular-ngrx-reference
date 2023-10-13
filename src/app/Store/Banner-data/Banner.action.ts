@@ -31,3 +31,9 @@ export const updatebanner = createAction(
   UPDATE_BANNER,
   props<{ updateData: any }>(),
 )
+
+export const LOCAL_UPDATE_OBJECT = '[Local Banner Update]local update'
+export const updatelocalobject = createAction(
+  LOCAL_UPDATE_OBJECT,
+  props<{ localObj: any }>(),
+)

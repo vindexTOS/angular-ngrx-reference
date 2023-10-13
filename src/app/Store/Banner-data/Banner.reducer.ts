@@ -5,6 +5,7 @@ import {
   getquery,
   getquerydata,
   getsinglebannerdata,
+  updatelocalobject,
 } from './Banner.action'
 
 const _BannerReducer = createReducer(
@@ -26,6 +27,9 @@ const _BannerReducer = createReducer(
   }),
   on(getsinglebannerdata, (state, action) => {
     return { ...state, singleData: action.singleData }
+  }),
+  on(updatelocalobject, (state, action) => {
+    return { ...state, localObj: action.localObj }
   }),
 )
 

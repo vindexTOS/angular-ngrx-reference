@@ -6,9 +6,10 @@
     <mat-form-field>
       <input
         matInput
-        [value]="value"
         [placeholder]="placeholder"
-        (selectionChange)="onInputChange($event)"
+        (input)="onInputChange($event)"
+        [(ngModel)]="value"
+        (blur)="emitValueChanged()"
       />
     </mat-form-field>
   </ng-container>
@@ -17,7 +18,7 @@
       <div class="z-index-option">
         <mat-select
           class="z-index-option"
-          [value]="value"
+          [(ngModel)]="value"
           (selectionChange)="onSelectionChange($event)"
         >
           <mat-option
@@ -34,9 +35,9 @@
   <ng-container *ngIf="isDataSelector === 'date'">
     <mat-form-field>
       <input
+        (dateInput)="onSelectionChange($event)"
         matInput
         [placeholder]="placeholder"
-        (selectionChange)="onInputChange($event)"
         [matDatepicker]="endDatePicker"
       />
       <mat-datepicker-toggle

@@ -5,6 +5,7 @@ export interface BannerData {
     total: number
   }
   singleData?: any
+  localObj?: any
 }
 
 export interface BannerQueryTypes {
@@ -70,4 +71,5 @@ export const BannerQueryState: any = {
   },
   data: [],
   singleData: {},
+  localObj: {},
 }

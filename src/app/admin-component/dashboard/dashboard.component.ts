@@ -9,6 +9,7 @@ import {
 } from 'src/app/Store/StatusHanndle/Status.selector'
 import { getquery } from 'src/app/Store/Banner-data/Banner.action'
 import { SingleBannerComponent } from 'src/app/client-component/single-banner/single-banner.component'
+import { statusSuccses } from 'src/app/Store/StatusHanndle/Status.action'
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -16,10 +17,9 @@ import { SingleBannerComponent } from 'src/app/client-component/single-banner/si
 })
 export class DashboardComponent {
   @ViewChild('myInput') inputElement!: ElementRef
-
   sub: PushSubscription | any
   showBannerForm = false
-  selectedExcludedLabels: string[] = []
+  selectedExcludedLables: string[] = []
   selectedIncludedLabels: string[] = []
   loading: boolean = false
   succsess!: string
@@ -45,6 +45,9 @@ export class DashboardComponent {
         value: { search: inputValue },
       }),
     )
+    setTimeout(() => {
+      this.store.dispatch(statusSuccses({ succses: '' }))
+    }, 3000)
   }
 
   refrenceLabels = this.filterService.includeExcludeFilter
@@ -54,11 +57,22 @@ export class DashboardComponent {
 
     this.filterService.handleLabelSelectInclude(event)
   }
+
+  handleLabelSelectExclude(event: any) {
+    this.filterService.handleLabelSelectExclude(event)
+  }
   handleLabelRemoveInclude(event: any) {
     console.log(event)
     this.filterService.handleLabelRemoveInclude(event)
 
     this.selectedIncludedLabels = this.filterService.selectedIncludedLabels
+    this.selectedExcludedLables = this.filterService.selectedExcludedLables
+  }
+
+  handleLabelExcludedRemove(event: any) {
+    this.filterService.handleLabelExcludedRemove(event)
+    // this.selectedIncludedLabels = this.filterService.selectedIncludedLabels
+    this.selectedExcludedLables = this.filterService.selectedExcludedLables
   }
 
   hanndleQueryRequest() {
@@ -73,6 +87,8 @@ export class DashboardComponent {
 
   ngOnInit(): void {
     this.selectedIncludedLabels = this.filterService.selectedIncludedLabels
+    this.selectedExcludedLables = this.filterService.selectedExcludedLables
+
     this.store.select(GetStatusLoading).subscribe((item) => {
       this.loading = item
     })

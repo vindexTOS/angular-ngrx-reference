@@ -9,3 +9,6 @@ export const GetBannerData = createSelector(bannerData, (state) => {
 export const GetSingleBannerData = createSelector(bannerData, (state) => {
   return state.singleData
 })
+export const GetLocalUpdateObj = createSelector(bannerData, (state) => {
+  state.localObj
+})

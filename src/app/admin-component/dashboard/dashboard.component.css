@@ -33,7 +33,7 @@ section {
   justify-content: space-around;
 
   border-radius: 5px;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   width: 70%;
 
   box-shadow: 1px 2px 5px 0px rgba(0, 0, 0, 0.75);
@@ -70,6 +70,7 @@ mat-icon {
   -moz-box-shadow: 1px 2px 5px 0px rgba(0, 0, 0, 0.75);
   padding: 50px;
   max-height: 600px;
+  overflow-x: hidden;
   overflow-y: scroll;
 }
 .table-and-filter {

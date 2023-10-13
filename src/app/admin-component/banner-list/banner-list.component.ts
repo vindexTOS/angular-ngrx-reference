@@ -9,6 +9,7 @@ import {
 } from 'src/app/Store/Banner-data/Banner.action'
 import { GetBannerData } from 'src/app/Store/Banner-data/Banner.selector'
 import { deleteblob } from 'src/app/Store/Blob/Blob.action'
+import { statusSuccses } from 'src/app/Store/StatusHanndle/Status.action'
 import { SingleBannerComponent } from 'src/app/client-component/single-banner/single-banner.component'
 import { BannerService } from 'src/app/services/banner.service'
 import { FilterService } from 'src/app/services/filter.service'
@@ -35,7 +36,11 @@ export class BannerListComponent implements OnInit {
     private store: Store,
     private filterService: FilterService,
     private uiService: UiServiceTsService,
-  ) {}
+  ) {
+    this.filterService.displayedColumns$.subscribe((columns) => {
+      this.displayedColumns = columns
+    })
+  }
   dataSource!: any[]
   baseUrl = environment.apiUrl
 
@@ -95,15 +100,26 @@ export class BannerListComponent implements OnInit {
   }
 
   deleteBanner(bannerId: string, blobId: string) {
-    console.log(bannerId)
-    console.log(blobId)
     this.store.dispatch(deletebanner({ id: bannerId }))
     this.store.dispatch(deleteblob({ blobId }))
+    setTimeout(() => {
+      this.store.dispatch(
+        getquery({
+          key: 'all',
+          value: { pageIndex: 0, pageSize: 5 },
+        }),
+      )
+
+      setTimeout(() => {
+        this.store.dispatch(statusSuccses({ succses: '' }))
+      }, 3000)
+    }, 500)
   }
 
   ngOnInit(): void {
     this.filterService.useEffect()
     this.displayedColumns = this.filterService.displayedColumns
+    console.log(this.displayedColumns)
     this.store.select(GetBannerData).subscribe((item) => {
       // console.log(item)
 
