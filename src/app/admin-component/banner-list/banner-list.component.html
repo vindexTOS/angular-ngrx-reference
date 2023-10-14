@@ -8,11 +8,20 @@
     <th mat-header-cell *matHeaderCellDef>Delete</th>
     <td mat-cell *matCellDef="let element">
       <button
+        title="Delete "
         (click)="deleteBanner(element.id, element.fileId)"
         class="del-btn"
         mat-icon-button
       >
         <mat-icon>delete</mat-icon>
+      </button>
+      <button
+        title="Open "
+        class="open-btn"
+        mat-icon-button
+        (click)="toggleSingle(element.id)"
+      >
+        <mat-icon>fullscreen</mat-icon>
       </button>
     </td>
   </ng-container>

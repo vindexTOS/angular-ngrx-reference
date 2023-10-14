@@ -193,11 +193,17 @@ export class BannerFormComponent implements OnInit, OnDestroy {
         labels: this.selectedLabels,
         fileId: this.uploadedImgSrc,
       }
+
       this.store.dispatch(postbannertodb(data))
       setTimeout(() => {
         this.store.dispatch(
           getquery({ key: 'all', value: { pageIndex: 0, pageSize: 10 } }),
         )
+        this.exampleForm.reset()
+        this.formService.imageSrc = ''
+        this.selectedLabels = []
+        this.uploadedImgSrc = ''
+        this.closeForm()
         setTimeout(() => {
           this.store.dispatch(statusSuccses({ succses: '' }))
         }, 3000)

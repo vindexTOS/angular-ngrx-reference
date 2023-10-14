@@ -61,6 +61,7 @@ mat-icon {
   gap: 20px;
 }
 .filter {
+  border-radius: 13px;
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -71,8 +72,8 @@ mat-icon {
   padding: 50px;
   max-height: 900px;
   overflow-x: hidden;
-  overflow-y: scroll;
 }
+
 .table-and-filter {
   display: flex;
 
@@ -80,8 +81,26 @@ mat-icon {
 
   gap: 20px;
 }
+
+@media screen and (max-width: 1700px) {
+  .table-and-filter {
+    flex-direction: column;
+  }
+  .filter {
+    flex-direction: row;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 20px;
+    overflow-y: hidden;
+    justify-content: space-around;
+  }
+  .select-filter-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+}
 .fillter-btn {
-  width: 200px;
+  width: 210px;
   border-radius: 5px;
   height: 55px;
   font-size: 1rem;
@@ -94,6 +113,7 @@ mat-icon {
 
   cursor: pointer;
   transition: background-color 0.2s, color 0.2s;
+  margin-bottom: 9px;
 }
 
 .search-new-btn-div {

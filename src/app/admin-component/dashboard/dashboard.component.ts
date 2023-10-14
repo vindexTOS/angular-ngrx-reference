@@ -27,7 +27,8 @@ export class DashboardComponent {
   error!: string
   dialog: any
   showBannerSingle: boolean = false
-
+  sortByValue = this.filterService.sortByValue
+  sortDirectionValue = this.filterService.sortDirectionValue
   constructor(
     private uiService: UiServiceTsService,
     private filterService: FilterService,
@@ -57,13 +58,9 @@ export class DashboardComponent {
 
   handleLabelSelectInclude(event: any) {
     console.log(event)
-
-    this.filterService.handleLabelSelectInclude(event)
   }
 
-  handleLabelSelectExclude(event: any) {
-    this.filterService.handleLabelSelectExclude(event)
-  }
+  handleLabelSelectExclude(event: any) {}
   handleLabelRemoveInclude(event: any) {
     console.log(event)
     this.filterService.handleLabelRemoveInclude(event)
@@ -93,8 +90,12 @@ export class DashboardComponent {
   toggleSingle() {
     this.uiService.toggleBannerSingler()
   }
-
+  ResetFilter() {
+    this.filterService.ResetFilter()
+  }
   ngOnInit(): void {
+    this.sortByValue = this.filterService.sortByValue
+    this.sortDirectionValue = this.filterService.sortDirectionValue
     this.selectedIncludedLabels = this.filterService.selectedIncludedLabels
     this.selectedExcludedLables = this.filterService.selectedExcludedLables
 

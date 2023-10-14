@@ -84,6 +84,7 @@ export class FilterService implements OnInit {
     'fileId',
     'language',
     'zoneId',
+
     'id',
   ]
 
@@ -152,30 +153,13 @@ export class FilterService implements OnInit {
 
   displayedColumns$ = this.displayedColumnsSubject.asObservable()
 
-  handleLabelSelectInclude(event: any) {
-    if (
-      !this.selectedIncludedLabels.includes(event) &&
-      !this.includes.includes(event)
-    ) {
-      this.selectedIncludedLabels.push(event)
-      this.includes.push(event)
-      this.displayedColumns.push(event)
-    }
-    this.updateQuery()
-  }
-
-  handleLabelSelectExclude(event: any) {
-    if (!this.selectedExcludedLables.includes(event)) {
-      this.selectedExcludedLables.push(event)
-    }
-    this.updateQuery()
-  }
-
   handleLabelRemoveInclude(event: any) {
     this.selectedIncludedLabels = this.selectedIncludedLabels.filter(
       (val) => val !== event,
     )
+
     this.includes = this.includes.filter((val) => val !== event)
+
     this.displayedColumns = this.displayedColumns.filter((val) => val !== event)
 
     if (!this.selectedExcludedLables.includes(event)) {
@@ -185,29 +169,32 @@ export class FilterService implements OnInit {
       }
     }
     this.displayedColumnsSubject.next(this.displayedColumns)
-    this.updateQuery()
     this.saveDataToLocalStorage()
+    this.updateQuery()
   }
 
   handleLabelExcludedRemove(event: any) {
     this.selectedExcludedLables = this.selectedExcludedLables.filter(
       (val) => val !== event,
     )
-
     this.excludes = this.excludes.filter((val) => val !== event)
+    if (!this.displayedColumns.includes(event)) {
+      this.displayedColumns.push(event)
+    }
     if (!this.selectedIncludedLabels.includes(event)) {
       this.selectedIncludedLabels.push(event)
 
       if (!this.includes.includes(event)) {
-        this.includes.push(event)
-      }
-      if (!this.displayedColumns.includes(event)) {
-        this.displayedColumns.push(event)
-        this.displayedColumnsSubject.next(this.displayedColumns)
+        console.log(event)
+        this.includes = this.selectedIncludedLabels
+        console.log(this.includes)
       }
     }
-    this.updateQuery()
+
+    console.log(this.includes)
+    this.displayedColumnsSubject.next(this.displayedColumns)
     this.saveDataToLocalStorage()
+    this.updateQuery()
   }
 
   updateQuery(sortBy?: string, sortDirection?: string) {
@@ -272,6 +259,12 @@ export class FilterService implements OnInit {
   //   this.store.dispatch(getquery({ key: 'all', value: { ...newObj } }))
   //   this.displayedColumns = this.selectedIncludedLabels
   // }
+
+  ResetFilter() {
+    localStorage.removeItem('filterServiceData')
+    window.location.reload()
+  }
+
   ngOnInit(): void {
     this.store.select(GetBannerData).subscribe((item) => {
       this.dataSource = item.entities

@@ -12,25 +12,27 @@
     <app-single-banner *ngIf="showBannerSingle"></app-single-banner>
 
     <div class="filter">
-      <!-- <div (click)="hanndleQueryRequest()" class="fillter-btn">
-        Filter
-      </div> -->
-      <app-editable-selector-field
-        [value]="'asc'"
-        [placeholder]="'sortDirection'"
-        [isEditMode]="true"
-        [selectOptions]="sortDirection"
-        [isDataSelector]="'selector'"
-        (valueChanged)="onValueChangeAcenDece($event)"
-      ></app-editable-selector-field>
-      <app-editable-selector-field
-        [value]="'name.raw'"
-        [placeholder]="'sortBy'"
-        [isEditMode]="true"
-        [selectOptions]="sortBy"
-        [isDataSelector]="'selector'"
-        (valueChanged)="onValueChangedSortBy($event)"
-      ></app-editable-selector-field>
+      <div class="select-filter-wrapper">
+        <div (click)="ResetFilter()" class="fillter-btn">
+          Reset Filter
+        </div>
+        <app-editable-selector-field
+          [value]="sortDirectionValue"
+          [placeholder]="'sortDirection'"
+          [isEditMode]="true"
+          [selectOptions]="sortDirection"
+          [isDataSelector]="'selector'"
+          (valueChanged)="onValueChangeAcenDece($event)"
+        ></app-editable-selector-field>
+        <app-editable-selector-field
+          [value]="sortByValue"
+          [placeholder]="'sortBy'"
+          [isEditMode]="true"
+          [selectOptions]="sortBy"
+          [isDataSelector]="'selector'"
+          (valueChanged)="onValueChangedSortBy($event)"
+        ></app-editable-selector-field>
+      </div>
       <app-select-field
         [labels]="selectedIncludedLabels"
         [refrenceLabels]="refrenceLabels"
