@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core'
-import { MatButtonModule } from '@angular/material/button'
 import { MatCardModule } from '@angular/material/card'
 import { MatInputModule } from '@angular/material/input'
 import { MatSelectModule } from '@angular/material/select'
@@ -25,11 +24,15 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { NgxFileDropModule } from 'ngx-file-drop'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatPaginatorModule } from '@angular/material/paginator'
-
+import { MatButtonModule } from '@angular/material/button'
+import { MatSidenavModule } from '@angular/material/sidenav'
 import { AsyncPipe, NgFor } from '@angular/common'
 @NgModule({
   exports: [
     MatChipsModule,
+    MatSidenavModule,
+
+    MatSidenavModule,
     MatDialogModule,
     MatPaginatorModule,
     MatSnackBarModule,

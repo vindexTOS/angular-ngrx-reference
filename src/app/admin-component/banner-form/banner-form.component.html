@@ -2,6 +2,7 @@
   <h1>Create new banner</h1>
   <mat-icon class="cancel-icon" (click)="closeForm()">close</mat-icon>
 </div>
+
 <app-loading *ngIf="formLoading"></app-loading>
 <app-error *ngIf="error" [childData]="error"></app-error>
 <app-succsess *ngIf="succsess" [childData]="succsess"></app-succsess>
@@ -20,6 +21,12 @@
       hidden
       (change)="onInputChange($event)"
       accept="image/*"
+    />
+    <img
+      *ngIf="imageSrc"
+      class="uploaded-image"
+      [src]="imageSrc"
+      alt="Uploaded Image"
     />
   </div>
 
@@ -165,14 +172,6 @@
       (click)="onSubmit()"
     >
       Submit
-    </button>
-    <button
-      style="width: 200px; height: 50px;"
-      mat-raised-button
-      color="accent"
-      (click)="onCheck()"
-    >
-      Check Banner
     </button>
   </div>
 </form>

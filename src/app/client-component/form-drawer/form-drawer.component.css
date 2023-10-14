@@ -1,0 +1,32 @@
+.main {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 20%;
+  height: 100%;
+  background-color: #efefef83;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  border-radius: 4px;
+
+  box-shadow: 1px 2px 5px 0px#21bda8;
+  -webkit-box-shadow: 1px 2px 5px 0px#21bda8;
+  user-select: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.main-visible {
+  opacity: 1;
+  transform: translateX(0); /* Resets the position to its original state */
+  pointer-events: auto; /* Enables interaction with the visible element */
+}
+.main-hidden {
+  opacity: 0;
+  transform: translateX(
+    100%
+  ); /* Moves the element to the right, out of the screen */
+  pointer-events: none; /* Disables interaction with the hidden element */
+}

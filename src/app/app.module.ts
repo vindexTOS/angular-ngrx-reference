@@ -35,7 +35,8 @@ import { BannerReducer } from './Store/Banner-data/Banner.reducer'
 import { SelectFieldComponent } from './client-component/select-field/select-field.component'
 import { SingleBannerComponent } from './client-component/single-banner/single-banner.component'
 
-import { EditableSelectorFieldComponent } from './client-component/editable-selector-field/editable-selector-field.component'
+import { EditableSelectorFieldComponent } from './client-component/editable-selector-field/editable-selector-field.component';
+import { FormDrawerComponent } from './client-component/form-drawer/form-drawer.component'
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { EditableSelectorFieldComponent } from './client-component/editable-sele
     SingleBannerComponent,
 
     EditableSelectorFieldComponent,
+      FormDrawerComponent,
   ],
   imports: [
     BrowserModule,

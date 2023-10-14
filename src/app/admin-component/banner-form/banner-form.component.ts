@@ -151,6 +151,12 @@ export class BannerFormComponent implements OnInit, OnDestroy {
     this.selectedLabels = this.formService.selectedLabels
 
     // loading
+
+    this.imageSrcSubscription = this.imageService.imageSrc$.subscribe(
+      (newImageSrc: string) => {
+        this.imageSrc = newImageSrc
+      },
+    )
   }
 
   //
