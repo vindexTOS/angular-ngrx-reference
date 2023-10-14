@@ -25,7 +25,19 @@ const includeExcluedArr = [
   providedIn: 'root',
 })
 export class FilterService implements OnInit {
-  constructor(private store: Store) {}
+  constructor(private store: Store) {
+    const savedData = localStorage.getItem('filterServiceData')
+    if (savedData) {
+      const parsedData = JSON.parse(savedData)
+      this.selectedIncludedLabels = parsedData.selectedIncludedLabels
+      this.selectedExcludedLables = parsedData.selectedExcludedLables
+      this.includes = parsedData.includes
+      this.excludes = parsedData.excludes
+      this.sortByValue = parsedData.sortBy
+      this.sortDirectionValue = parsedData.sortDirection
+      this.displayedColumns = parsedData.displayedColumns
+    }
+  }
 
   includeExcludeFilter = includeExcluedArr
   dataSource!: any[]
@@ -33,6 +45,8 @@ export class FilterService implements OnInit {
   pageIndex: number = 0
   pageSize: number = 10
 
+  sortByValue: string = 'name.raw'
+  sortDirectionValue: string = 'asc'
   sortBy = [
     { key: 'id', name: 'Id' },
     { key: 'name.raw', name: 'Name' },
@@ -122,6 +136,20 @@ export class FilterService implements OnInit {
     this.displayedColumns,
   )
 
+  saveDataToLocalStorage() {
+    const dataToSave = {
+      selectedIncludedLabels: this.selectedIncludedLabels,
+      selectedExcludedLables: this.selectedExcludedLables,
+      includes: this.includes,
+      excludes: this.excludes,
+      sortBy: this.sortByValue,
+      sortDirection: this.sortDirectionValue,
+      displayedColumns: this.displayedColumns,
+    }
+
+    localStorage.setItem('filterServiceData', JSON.stringify(dataToSave))
+  }
+
   displayedColumns$ = this.displayedColumnsSubject.asObservable()
 
   handleLabelSelectInclude(event: any) {
@@ -158,6 +186,7 @@ export class FilterService implements OnInit {
     }
     this.displayedColumnsSubject.next(this.displayedColumns)
     this.updateQuery()
+    this.saveDataToLocalStorage()
   }
 
   handleLabelExcludedRemove(event: any) {
@@ -178,6 +207,7 @@ export class FilterService implements OnInit {
       }
     }
     this.updateQuery()
+    this.saveDataToLocalStorage()
   }
 
   updateQuery(sortBy?: string, sortDirection?: string) {
@@ -190,17 +220,45 @@ export class FilterService implements OnInit {
       pageSize: this.pageSize,
       sortBy: sortBy || 'name.raw',
     }
+    console.log(query)
     this.store.dispatch(getquery({ key: 'all', value: query }))
   }
 
   onValueChangedSortBy(val: string) {
+    this.sortByValue = val
     this.updateQuery(val)
+    this.saveDataToLocalStorage()
   }
   onValueChangeAcenDece(val: string) {
+    this.sortDirectionValue = val
     this.updateQuery('', val)
+    this.saveDataToLocalStorage()
   }
   useEffect(): void {
-    this.store.dispatch(getquery({ key: 'all', value: { ...this.queryObj } }))
+    this.saveDataToLocalStorage()
+    const savedData = localStorage.getItem('filterServiceData')
+    let queryObj = {}
+    if (savedData) {
+      const parsedData = JSON.parse(savedData)
+      this.selectedIncludedLabels = parsedData.selectedIncludedLabels
+      this.selectedExcludedLables = parsedData.selectedExcludedLables
+      this.includes = parsedData.includes
+      this.excludes = parsedData.excludes
+      this.sortByValue = parsedData.sortBy
+      this.sortDirectionValue = parsedData.sortDirection
+      this.displayedColumns = parsedData.displayedColumns
+
+      console.log(parsedData)
+      queryObj = {
+        sortBy: parsedData.sortBy,
+        sortDirection: parsedData.sortDirection,
+        excludes: parsedData.excludes,
+        includes: parsedData.includes,
+      }
+    }
+    if (queryObj) {
+      this.store.dispatch(getquery({ key: 'all', value: { ...queryObj } }))
+    }
   }
   // hanndleQueryRequest() {
   //   let newObj = {
