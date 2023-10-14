@@ -43,6 +43,7 @@ export class BannerListComponent implements OnInit {
   }
   dataSource!: any[]
   baseUrl = environment.apiUrl
+  editListItem = ''
 
   pageLength?: number
   pageIndex: number = 0
@@ -101,6 +102,10 @@ export class BannerListComponent implements OnInit {
         },
       }),
     )
+  }
+
+  openListItem(title: string) {
+    this.editListItem = title
   }
 
   deleteBanner(bannerId: string, blobId: string) {

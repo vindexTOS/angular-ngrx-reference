@@ -35,7 +35,14 @@
   <!-- Name Column -->
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef>Name</th>
-    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    <td mat-cell *matCellDef="let element" (click)="openListItem(element.name)">
+      <p *ngIf="editListItem !== element.name">{{ element.name }}</p>
+      <input
+        *ngIf="editListItem === element.name"
+        [value]="element.name"
+        [(ngModel)]="element.name"
+      />
+    </td>
   </ng-container>
 
   <!-- Zone ID Column -->
