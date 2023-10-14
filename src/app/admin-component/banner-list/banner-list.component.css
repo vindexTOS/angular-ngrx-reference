@@ -1,5 +1,5 @@
 table {
-  width: 80vw;
+  width: 70vw;
 }
 
 .img {
@@ -23,4 +23,25 @@ table {
 
 .open-btn {
   color: #09af9f;
+}
+
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.table-responsive table {
+  width: 100%;
+}
+
+@media screen and (max-width: 600px) {
+  .table-responsive {
+    overflow-x: scroll;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .table-responsive {
+    overflow-x: auto;
+  }
 }

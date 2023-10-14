@@ -34,13 +34,18 @@ section {
 
   border-radius: 5px;
   background-color: rgb(255, 255, 255);
-  width: 70%;
+  width: 90%;
 
   box-shadow: 1px 2px 5px 0px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 1px 2px 5px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 1px 2px 5px 0px rgba(0, 0, 0, 0.75);
 }
-
+@media screen and (max-width: 1500px) {
+  section {
+    flex-direction: column;
+    width: 100%;
+  }
+}
 mat-icon {
   position: absolute;
   left: 2rem;
@@ -56,11 +61,12 @@ mat-icon {
 .list-section {
   display: flex;
   flex-direction: column;
-  width: 91%;
+  width: 80vw;
   padding: 20px;
   gap: 20px;
 }
 .filter {
+  width: 200px;
   border-radius: 13px;
   display: flex;
   flex-direction: column;
@@ -87,6 +93,7 @@ mat-icon {
     flex-direction: column;
   }
   .filter {
+    width: 90vw;
     flex-direction: row;
     justify-content: center;
     padding: 10px;
@@ -98,6 +105,9 @@ mat-icon {
     display: flex;
     flex-direction: column;
   }
+  .list-section {
+    width: 90vw;
+  }
 }
 .fillter-btn {
   width: 210px;
@@ -105,7 +115,7 @@ mat-icon {
   height: 55px;
   font-size: 1rem;
   display: flex;
-  background-color: rgb(255, 153, 0);
+  background-color: #09af9f;
   color: rgb(255, 255, 255);
   justify-content: center;
   align-items: center;
