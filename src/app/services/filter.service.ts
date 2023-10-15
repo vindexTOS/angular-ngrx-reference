@@ -75,6 +75,9 @@ export class FilterService implements OnInit {
     'labels',
     'language',
     'zoneId',
+    'modifiedAt',
+    'createdAt',
+    'channelId',
   ]
 
   includes: string[] = [
@@ -84,19 +87,13 @@ export class FilterService implements OnInit {
     'fileId',
     'language',
     'zoneId',
-
-    'id',
-  ]
-
-  excludes: string[] = [
     'modifiedAt',
     'createdAt',
     'channelId',
-    'priority',
-    'endDate',
-    'startDate',
-    'url',
+    'id',
   ]
+
+  excludes: string[] = ['priority', 'endDate', 'startDate', 'url']
 
   selectedIncludedLabels: string[] = this.includes.slice(
     0,
@@ -186,7 +183,7 @@ export class FilterService implements OnInit {
 
       if (!this.includes.includes(event)) {
         console.log(event)
-        this.includes = this.selectedIncludedLabels
+        this.includes = [...this.selectedIncludedLabels, 'id']
         console.log(this.includes)
       }
     }

@@ -9,6 +9,19 @@ import {
 } from 'src/app/Store/Banner-data/Banner.action'
 import { GetBannerData } from 'src/app/Store/Banner-data/Banner.selector'
 import { deleteblob } from 'src/app/Store/Blob/Blob.action'
+import {
+  channelactionapi,
+  labelactionapi,
+  langaugeactionapi,
+  zoneactionapi,
+} from 'src/app/Store/Refrence/Refrence.Action'
+import {
+  getreferenceLabelList,
+  getrefernceLangaugeList,
+  getrefrenceChannelList,
+  getrefrenceZoneList,
+} from 'src/app/Store/Refrence/Refrence.Selector'
+import { refrenceTypes } from 'src/app/Store/Refrence/Refrence.State'
 import { statusSuccses } from 'src/app/Store/StatusHanndle/Status.action'
 import { SingleBannerComponent } from 'src/app/client-component/single-banner/single-banner.component'
 import { BannerService } from 'src/app/services/banner.service'
@@ -44,11 +57,21 @@ export class BannerListComponent implements OnInit {
   dataSource!: any[]
   baseUrl = environment.apiUrl
   editListItem = ''
-
+  listItemValue = ''
   pageLength?: number
   pageIndex: number = 0
   pageSize: number = 10
+  editedRowIndex: number | null = null
+  editRowName: string = ''
 
+  refrenceChannels: refrenceTypes[] = []
+  refrenceZones: refrenceTypes[] = []
+  refrenceLabels: refrenceTypes[] = []
+  refrenceLanguage: refrenceTypes[] = []
+  activeRefrence = [
+    { key: true, name: 'active' },
+    { key: false, name: 'not active' },
+  ]
   queryObj = {
     pageIndex: this.pageIndex,
     pageSize: this.pageSize,
@@ -104,8 +127,19 @@ export class BannerListComponent implements OnInit {
     )
   }
 
-  openListItem(title: string) {
-    this.editListItem = title
+  openListItem(index: number, name: string) {
+    this.editRowName = name
+    this.editedRowIndex = index
+  }
+
+  closeListItem(event: Event) {
+    event.stopPropagation()
+
+    this.editedRowIndex = null
+    this.editRowName = ''
+  }
+  getListItemVal(val: string) {
+    this.listItemValue = val
   }
 
   deleteBanner(bannerId: string, blobId: string) {
@@ -134,6 +168,28 @@ export class BannerListComponent implements OnInit {
 
       this.dataSource = item.entities
       this.pageLength = item.total
+    })
+
+    this.store.dispatch(channelactionapi())
+    this.store.dispatch(zoneactionapi())
+    this.store.dispatch(labelactionapi())
+    this.store.dispatch(langaugeactionapi())
+
+    // channel
+    this.store.select(getrefrenceChannelList).subscribe((item) => {
+      this.refrenceChannels = item
+    })
+    //  zone
+    this.store.select(getrefrenceZoneList).subscribe((item) => {
+      this.refrenceZones = item
+    })
+    //   labels
+    this.store.select(getreferenceLabelList).subscribe((item) => {
+      this.refrenceLabels = item
+    })
+    //   languages
+    this.store.select(getrefernceLangaugeList).subscribe((item) => {
+      this.refrenceLanguage = item
     })
   }
 }

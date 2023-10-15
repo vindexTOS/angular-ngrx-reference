@@ -58,3 +58,10 @@ h1 {
   position: absolute;
   left: 20px;
 }
+
+.two-input-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}

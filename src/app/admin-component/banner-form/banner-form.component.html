@@ -29,85 +29,92 @@
       alt="Uploaded Image"
     />
   </div>
+  <div class="two-input-wrapper">
+    <mat-form-field [ngClass]="'mat-form-field-with-shadow'">
+      <input matInput placeholder="Name" formControlName="name" />
+    </mat-form-field>
+    <mat-form-field [ngClass]="'mat-form-field-with-shadow'">
+      <input matInput placeholder="Web site url" formControlName="url" />
+    </mat-form-field>
+  </div>
+  <div class="two-input-wrapper">
+    <mat-form-field [ngClass]="'mat-form-field-with-shadow'">
+      <mat-select placeholder="Priority" formControlName="priority">
+        <!-- Populate options based on your data -->
+        <mat-option *ngFor="let num of priorityNums" [value]="num">
+          {{ num }}
+        </mat-option>
+        <!-- Add other options here -->
+      </mat-select>
+    </mat-form-field>
 
-  <mat-form-field [ngClass]="'mat-form-field-with-shadow'">
-    <input matInput placeholder="Name" formControlName="name" />
-  </mat-form-field>
-  <mat-form-field [ngClass]="'mat-form-field-with-shadow'">
-    <input matInput placeholder="Web site url" formControlName="url" />
-  </mat-form-field>
-  <mat-form-field [ngClass]="'mat-form-field-with-shadow'">
-    <mat-select placeholder="Priority" formControlName="priority">
-      <!-- Populate options based on your data -->
-      <mat-option *ngFor="let num of priorityNums" [value]="num">
-        {{ num }}
-      </mat-option>
-      <!-- Add other options here -->
-    </mat-select>
-  </mat-form-field>
-
-  <!-- Selector for channelId -->
-  <mat-form-field>
-    <mat-select placeholder="Channel" formControlName="channelId">
-      <!-- Populate options based on your data -->
-      <mat-option
-        *ngFor="let channel of refrenceChannels"
-        [value]="channel.key"
-      >
-        {{ channel?.name }}
-      </mat-option>
-      <!-- Add other options here -->
-    </mat-select>
-  </mat-form-field>
+    <!-- Selector for channelId -->
+    <mat-form-field>
+      <mat-select placeholder="Channel" formControlName="channelId">
+        <!-- Populate options based on your data -->
+        <mat-option
+          *ngFor="let channel of refrenceChannels"
+          [value]="channel.key"
+        >
+          {{ channel?.name }}
+        </mat-option>
+        <!-- Add other options here -->
+      </mat-select>
+    </mat-form-field>
+  </div>
   <!-- Selector for language -->
-  <mat-form-field>
-    <mat-select placeholder="Language" formControlName="language">
-      <!-- Populate options based on your data -->
-      <mat-option *ngFor="let lan of refrenceLanguage" [value]="lan.key">
-        {{ lan?.name }}
-      </mat-option>
-      <!-- Add other options here -->
-    </mat-select>
-  </mat-form-field>
-  <!-- Selector for zoneId -->
-  <mat-form-field>
-    <mat-select placeholder="Zone" formControlName="zoneId">
-      <!-- Populate options based on your data -->
-      <mat-option *ngFor="let zone of refrenceZones" [value]="zone.key">
-        {{ zone?.name }}
-      </mat-option>
-      <!-- Add other options here -->
-    </mat-select>
-  </mat-form-field>
+  <div class="two-input-wrapper">
+    <mat-form-field>
+      <mat-select placeholder="Language" formControlName="language">
+        <!-- Populate options based on your data -->
+        <mat-option *ngFor="let lan of refrenceLanguage" [value]="lan.key">
+          {{ lan?.name }}
+        </mat-option>
+        <!-- Add other options here -->
+      </mat-select>
+    </mat-form-field>
+    <!-- Selector for zoneId -->
+    <mat-form-field>
+      <mat-select placeholder="Zone" formControlName="zoneId">
+        <!-- Populate options based on your data -->
+        <mat-option *ngFor="let zone of refrenceZones" [value]="zone.key">
+          {{ zone?.name }}
+        </mat-option>
+        <!-- Add other options here -->
+      </mat-select>
+    </mat-form-field>
+  </div>
   <!-- Checkbox for isCorporate -->
   <!-- <mat-checkbox formControlName="isCorporate">Is Corporate</mat-checkbox> -->
   <!-- Date pickers using Angular's calendar component -->
-  <mat-form-field>
-    <input
-      matInput
-      [matDatepicker]="startDatePicker"
-      placeholder="Start Date"
-      formControlName="startDate"
-    />
-    <mat-datepicker-toggle
-      matSuffix
-      [for]="startDatePicker"
-    ></mat-datepicker-toggle>
-    <mat-datepicker #startDatePicker></mat-datepicker>
-  </mat-form-field>
-  <mat-form-field>
-    <input
-      matInput
-      [matDatepicker]="endDatePicker"
-      placeholder="End Date"
-      formControlName="endDate"
-    />
-    <mat-datepicker-toggle
-      matSuffix
-      [for]="endDatePicker"
-    ></mat-datepicker-toggle>
-    <mat-datepicker #endDatePicker></mat-datepicker>
-  </mat-form-field>
+  <div class="two-input-wrapper">
+    <mat-form-field>
+      <input
+        matInput
+        [matDatepicker]="startDatePicker"
+        placeholder="Start Date"
+        formControlName="startDate"
+      />
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="startDatePicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #startDatePicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <input
+        matInput
+        [matDatepicker]="endDatePicker"
+        placeholder="End Date"
+        formControlName="endDate"
+      />
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="endDatePicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #endDatePicker></mat-datepicker>
+    </mat-form-field>
+  </div>
   <!-- Checkbox for active -->
   <mat-checkbox formControlName="active">Active</mat-checkbox>
   <!-- Textarea for labels (if you want multiple labels) -->
