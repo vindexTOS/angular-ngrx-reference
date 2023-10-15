@@ -8,9 +8,10 @@ import { FilterService } from 'src/app/services/filter.service'
   styleUrls: ['./select-field.component.css'],
 })
 export class SelectFieldComponent {
-  @Input() labels: string[] = []
+  @Input() labels: any[] = []
   @Input() refrenceLabels: any[] = []
   @Input() label: string = 'Labels'
+  @Input() isFilter: boolean = false
 
   @Output() labelSelect = new EventEmitter<any>()
   @Output() removeLabel = new EventEmitter<any>()

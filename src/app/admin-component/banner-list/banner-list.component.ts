@@ -54,6 +54,7 @@ export class BannerListComponent implements OnInit {
       this.displayedColumns = columns
     })
   }
+
   dataSource!: any[]
   baseUrl = environment.apiUrl
   editListItem = ''
@@ -72,6 +73,11 @@ export class BannerListComponent implements OnInit {
     { key: true, name: 'active' },
     { key: false, name: 'not active' },
   ]
+  priorityNums = Array.from({ length: 21 }, (_, index) => index)
+  selectedIncludedLabels: string[] = []
+
+  labelDefault: any[] = []
+
   queryObj = {
     pageIndex: this.pageIndex,
     pageSize: this.pageSize,
@@ -138,6 +144,7 @@ export class BannerListComponent implements OnInit {
     this.editedRowIndex = null
     this.editRowName = ''
   }
+
   getListItemVal(val: string) {
     this.listItemValue = val
   }
@@ -157,6 +164,26 @@ export class BannerListComponent implements OnInit {
         this.store.dispatch(statusSuccses({ succses: '' }))
       }, 3000)
     }, 500)
+  }
+  labels(event: Event, Array: any, index: number, name: string) {
+    event.stopPropagation()
+    if (this.labelDefault.length <= 0) {
+      this.labelDefault = (Array || []).map((label: string) => ({
+        name: label,
+      }))
+      console.log(this.labelDefault)
+    }
+    this.editRowName = name
+    this.editedRowIndex = index
+  }
+  labelAdd(label: refrenceTypes) {
+    console.log(label)
+    this.labelDefault.push(label)
+  }
+  labelRemove(label: any) {
+    this.labelDefault = this.labelDefault.filter(
+      (val: any) => val.name !== label.name,
+    )
   }
 
   ngOnInit(): void {
