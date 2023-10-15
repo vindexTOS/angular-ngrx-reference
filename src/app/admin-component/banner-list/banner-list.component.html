@@ -38,13 +38,12 @@
     <td
       mat-cell
       *matCellDef="let element; let i = index"
-      (click)="openListItem(i, 'Name')"
+      (click)="openListItem(i, 'Name', element.id)"
     >
-      <p *ngIf="editedRowIndex !== i && editRowName !== 'Name'">
-        {{ element.name }}
-      </p>
+      {{ element.name }}
+
       <div
-        style="display: flex; flex-direction: column;"
+        class="edit-div-wrapper"
         *ngIf="editedRowIndex === i && editRowName === 'Name'"
       >
         <app-editable-selector-field
@@ -54,8 +53,12 @@
           [isDataSelector]="'input'"
           (valueChanged)="getListItemVal($event)"
         ></app-editable-selector-field>
-        <button>Save</button>
-        <button (click)="closeListItem($event)">Close</button>
+        <button class="save-edit-btn" (click)="saveEditedBanner('name')">
+          Save
+        </button>
+        <button class="save-close-btn" (click)="closeListItem($event)">
+          Close
+        </button>
       </div>
     </td>
   </ng-container>
@@ -64,15 +67,15 @@
   <ng-container matColumnDef="zoneId">
     <th mat-header-cell *matHeaderCellDef>Zone ID</th>
     <td
-      (click)="openListItem(i, 'Zone')"
+      (click)="openListItem(i, 'Zone', element.id)"
       mat-cell
       *matCellDef="let element; let i = index"
     >
-      <p *ngIf="editedRowIndex !== i && editRowName !== 'Zone'">
+      <p>
         {{ element?.zoneId }}
       </p>
       <div
-        style="display: flex; flex-direction: column;"
+        class="edit-div-wrapper"
         *ngIf="editedRowIndex === i && editRowName === 'Zone'"
       >
         <app-editable-selector-field
@@ -83,8 +86,12 @@
           [isDataSelector]="'selector'"
           (valueChanged)="getListItemVal($event)"
         ></app-editable-selector-field>
-        <button>Save</button>
-        <button (click)="closeListItem($event)">Close</button>
+        <button class="save-edit-btn" (click)="saveEditedBanner('zoneId')">
+          Save
+        </button>
+        <button class="save-close-btn" (click)="closeListItem($event)">
+          Close
+        </button>
       </div>
     </td>
   </ng-container>
@@ -93,16 +100,16 @@
   <ng-container matColumnDef="active">
     <th mat-header-cell *matHeaderCellDef>Active</th>
     <td
-      (click)="openListItem(i, 'Active')"
+      (click)="openListItem(i, 'Active', element.id)"
       mat-cell
       *matCellDef="let element; let i = index"
     >
-      <p *ngIf="editedRowIndex !== i && editRowName !== 'Active'">
+      <p>
         <span *ngIf="!element.active">🔴</span>
         <span *ngIf="element.active">🟢</span>
       </p>
       <div
-        style="display: flex; flex-direction: column;"
+        class="edit-div-wrapper"
         *ngIf="editedRowIndex === i && editRowName === 'Active'"
       >
         <app-editable-selector-field
@@ -113,8 +120,12 @@
           [isDataSelector]="'selector'"
           (valueChanged)="getListItemVal($event)"
         ></app-editable-selector-field>
-        <button>Save</button>
-        <button (click)="closeListItem($event)">Close</button>
+        <button class="save-edit-btn" (click)="saveEditedBanner('active')">
+          Save
+        </button>
+        <button class="save-close-btn" (click)="closeListItem($event)">
+          Close
+        </button>
       </div>
     </td>
   </ng-container>
@@ -125,14 +136,14 @@
     <td
       mat-cell
       *matCellDef="let element; let i = index"
-      (click)="openListItem(i, 'Start Date')"
+      (click)="openListItem(i, 'Start Date', element.id)"
     >
-      <p *ngIf="editedRowIndex !== i && editRowName !== 'Start Date'">
+      <p>
         {{ element.startDate }}
       </p>
 
       <div
-        style="display: flex; flex-direction: column;"
+        class="edit-div-wrapper"
         *ngIf="editedRowIndex === i && editRowName === 'Start Date'"
       >
         {{ element.startDate }}
@@ -144,8 +155,12 @@
           [isDataSelector]="'date'"
           (valueChanged)="getListItemVal($event)"
         ></app-editable-selector-field>
-        <button>Save</button>
-        <button (click)="closeListItem($event)">Close</button>
+        <button class="save-edit-btn" (click)="saveEditedBanner('startDate')">
+          Save
+        </button>
+        <button class="save-close-btn" (click)="closeListItem($event)">
+          Close
+        </button>
       </div>
     </td>
   </ng-container>
@@ -156,13 +171,13 @@
     <td
       mat-cell
       *matCellDef="let element; let i = index"
-      (click)="openListItem(i, 'End Date')"
+      (click)="openListItem(i, 'End Date', element.id)"
     >
-      <p *ngIf="editedRowIndex !== i && editRowName !== 'End Date'">
+      <p>
         {{ element.endDate }}
       </p>
       <div
-        style="display: flex; flex-direction: column;"
+        class="edit-div-wrapper"
         *ngIf="editedRowIndex === i && editRowName === 'End Date'"
       >
         {{ element.endDate }}
@@ -173,8 +188,12 @@
           [isDataSelector]="'date'"
           (valueChanged)="getListItemVal($event)"
         ></app-editable-selector-field>
-        <button>Save</button>
-        <button (click)="closeListItem($event)">Close</button>
+        <button class="save-edit-btn" (click)="saveEditedBanner('endDate')">
+          Save
+        </button>
+        <button class="save-close-btn" (click)="closeListItem($event)">
+          Close
+        </button>
       </div>
     </td>
   </ng-container>
@@ -185,14 +204,14 @@
     <td
       mat-cell
       *matCellDef="let element; let i = index"
-      (click)="openListItem(i, 'Channel')"
+      (click)="openListItem(i, 'Channel', element.id)"
     >
-      <p *ngIf="editedRowIndex !== i && editRowName !== 'Channel'">
+      <p>
         {{ element.channelId }}
       </p>
 
       <div
-        style="display: flex; flex-direction: column;"
+        class="edit-div-wrapper"
         *ngIf="editedRowIndex === i && editRowName === 'Channel'"
       >
         <app-editable-selector-field
@@ -203,8 +222,12 @@
           [isDataSelector]="'selector'"
           (valueChanged)="getListItemVal($event)"
         ></app-editable-selector-field>
-        <button>Save</button>
-        <button (click)="closeListItem($event)">Close</button>
+        <button class="save-edit-btn" (click)="saveEditedBanner('channelId')">
+          Save
+        </button>
+        <button class="save-close-btn" (click)="closeListItem($event)">
+          Close
+        </button>
       </div>
     </td>
   </ng-container>
@@ -215,13 +238,13 @@
     <td
       mat-cell
       *matCellDef="let element; let i = index"
-      (click)="labels($event, element?.labels, i, 'Labels')"
+      (click)="labels($event, element?.labels, i, 'Labels', element.id)"
     >
-      <p *ngIf="editedRowIndex !== i && editRowName !== 'Channel'">
+      <p>
         {{ element?.labels && element?.labels.join(', ') }}
       </p>
       <div
-        style="display: flex; flex-direction: column; z-index: 10000;"
+        class="edit-div-wrapper"
         *ngIf="editedRowIndex === i && editRowName === 'Labels'"
       >
         <app-select-field
@@ -232,8 +255,12 @@
           (labelSelect)="labelAdd($event)"
           (removeLabel)="labelRemove($event)"
         ></app-select-field>
-        <button>Save</button>
-        <button (click)="closeListItem($event)">Close</button>
+        <button class="save-edit-btn" (click)="saveEditedBanner('labels')">
+          Save
+        </button>
+        <button class="save-close-btn" (click)="closeListItem($event)">
+          Close
+        </button>
       </div>
     </td>
   </ng-container>
@@ -251,9 +278,9 @@
     <th mat-header-cell *matHeaderCellDef>URL</th>
     <td
       *matCellDef="let element; let i = index"
-      (click)="openListItem(i, 'URL')"
+      (click)="openListItem(i, 'URL', element.id)"
     >
-      <p *ngIf="editedRowIndex !== i && editRowName !== 'URL'">
+      <p>
         {{ element.url }}
       </p>
       <div
@@ -267,8 +294,12 @@
           [isDataSelector]="'input'"
           (valueChanged)="getListItemVal($event)"
         ></app-editable-selector-field>
-        <button>Save</button>
-        <button (click)="closeListItem($event)">Close</button>
+        <button class="save-edit-btn" (click)="saveEditedBanner('url')">
+          Save
+        </button>
+        <button class="save-close-btn" (click)="closeListItem($event)">
+          Close
+        </button>
       </div>
     </td>
   </ng-container>
@@ -279,13 +310,13 @@
     <td
       mat-cell
       *matCellDef="let element; let i = index"
-      (click)="openListItem(i, 'Language')"
+      (click)="openListItem(i, 'Language', element.id)"
     >
-      <p *ngIf="editedRowIndex !== i && editRowName !== 'Language'">
+      <p>
         {{ element.language }}
       </p>
       <div
-        style="display: flex; flex-direction: column;"
+        class="edit-div-wrapper"
         *ngIf="editedRowIndex === i && editRowName === 'Language'"
       >
         <app-editable-selector-field
@@ -296,8 +327,12 @@
           [isDataSelector]="'selector'"
           (valueChanged)="getListItemVal($event)"
         ></app-editable-selector-field>
-        <button>Save</button>
-        <button (click)="closeListItem($event)">Close</button>
+        <button class="save-edit-btn" (click)="saveEditedBanner('language')">
+          Save
+        </button>
+        <button class="save-close-btn" (click)="closeListItem($event)">
+          Close
+        </button>
       </div>
     </td>
   </ng-container>
@@ -308,25 +343,29 @@
     <td
       mat-cell
       *matCellDef="let element; let i = index"
-      (click)="openListItem(i, 'Priority')"
+      (click)="openListItem(i, 'Priority', element.id)"
     >
-      <p *ngIf="editedRowIndex !== i && editRowName !== 'Priority'">
-        {{ element.priority }}
-      </p>
+      {{ element.priority }}
+
       <div
-        style="display: flex; flex-direction: column;"
+        class="edit-div-wrapper"
         *ngIf="editedRowIndex === i && editRowName === 'Priority'"
       >
         <app-editable-selector-field
+          [isFilter]="false"
           [value]="element.priority"
-          [placeholder]="'priority'"
+          [placeholder]="element.priority"
           [selectOptions]="priorityNums"
           [isEditMode]="true"
           [isDataSelector]="'selector'"
           (valueChanged)="getListItemVal($event)"
         ></app-editable-selector-field>
-        <button>Save</button>
-        <button (click)="closeListItem($event)">Close</button>
+        <button class="save-edit-btn" (click)="saveEditedBanner('priority')">
+          Save
+        </button>
+        <button class="save-close-btn" (click)="closeListItem($event)">
+          Close
+        </button>
       </div>
     </td>
   </ng-container>

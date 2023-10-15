@@ -7,6 +7,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core'
 })
 export class EditableSelectorFieldComponent {
   @Input() value: string = ''
+  @Input() isFilter: boolean = true
   @Input() placeholder: string = ''
   @Input() isEditMode: boolean = false
   @Input() isDataSelector: string = 'input' // or 'selector'

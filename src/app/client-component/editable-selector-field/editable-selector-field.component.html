@@ -1,6 +1,7 @@
 <ng-container *ngIf="!isEditMode; else editField">
   {{ value }}
 </ng-container>
+
 <ng-template #editField>
   <ng-container *ngIf="isDataSelector === 'input'">
     <mat-form-field>
@@ -17,6 +18,7 @@
     <mat-form-field>
       <div class="z-index-option">
         <mat-select
+          *ngIf="isFilter"
           class="z-index-option"
           [(ngModel)]="value"
           (selectionChange)="onSelectionChange($event)"
@@ -27,6 +29,20 @@
             [value]="option.key"
           >
             {{ option.name }}
+          </mat-option>
+        </mat-select>
+        <mat-select
+          *ngIf="!isFilter"
+          class="z-index-option"
+          [(ngModel)]="value"
+          (selectionChange)="onSelectionChange($event)"
+        >
+          <mat-option
+            class="z-index-option"
+            *ngFor="let option of selectOptions"
+            [value]="option"
+          >
+            {{ option }}
           </mat-option>
         </mat-select>
       </div>

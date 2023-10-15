@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core'
-import { MatPaginatorIntl } from '@angular/material/paginator'
 import { Store } from '@ngrx/store'
-import { Subject } from 'rxjs'
 import {
   deletebanner,
   getquery,
   getsinglebannerId,
+  updatebanner,
 } from 'src/app/Store/Banner-data/Banner.action'
-import { GetBannerData } from 'src/app/Store/Banner-data/Banner.selector'
+import {
+  GetBannerData,
+  GetSingleBannerData,
+} from 'src/app/Store/Banner-data/Banner.selector'
 import { deleteblob } from 'src/app/Store/Blob/Blob.action'
 import {
   channelactionapi,
@@ -23,40 +25,19 @@ import {
 } from 'src/app/Store/Refrence/Refrence.Selector'
 import { refrenceTypes } from 'src/app/Store/Refrence/Refrence.State'
 import { statusSuccses } from 'src/app/Store/StatusHanndle/Status.action'
-import { SingleBannerComponent } from 'src/app/client-component/single-banner/single-banner.component'
-import { BannerService } from 'src/app/services/banner.service'
 import { FilterService } from 'src/app/services/filter.service'
 import { UiServiceTsService } from 'src/app/services/ui.service.ts.service'
 import { environment } from 'src/env'
 
-export interface PeriodicElement {
-  name: string
-  position: number
-  weight: number
-  symbol: string
-}
-
 @Component({
   selector: 'app-banner-list',
   templateUrl: './banner-list.component.html',
-
   styleUrls: ['./banner-list.component.css'],
 })
 export class BannerListComponent implements OnInit {
-  displayedColumns!: string[]
-  dialog: any
-  constructor(
-    private store: Store,
-    private filterService: FilterService,
-    private uiService: UiServiceTsService,
-  ) {
-    this.filterService.displayedColumns$.subscribe((columns) => {
-      this.displayedColumns = columns
-    })
-  }
-
-  dataSource!: any[]
   baseUrl = environment.apiUrl
+  displayedColumns!: string[]
+  dataSource!: any[]
   editListItem = ''
   listItemValue = ''
   pageLength?: number
@@ -64,7 +45,6 @@ export class BannerListComponent implements OnInit {
   pageSize: number = 10
   editedRowIndex: number | null = null
   editRowName: string = ''
-
   refrenceChannels: refrenceTypes[] = []
   refrenceZones: refrenceTypes[] = []
   refrenceLabels: refrenceTypes[] = []
@@ -75,50 +55,54 @@ export class BannerListComponent implements OnInit {
   ]
   priorityNums = Array.from({ length: 21 }, (_, index) => index)
   selectedIncludedLabels: string[] = []
-
   labelDefault: any[] = []
+  editableObject: any = {}
 
-  queryObj = {
-    pageIndex: this.pageIndex,
-    pageSize: this.pageSize,
+  constructor(
+    private store: Store,
+    private filterService: FilterService,
+    private uiService: UiServiceTsService,
+  ) {
+    this.filterService.displayedColumns$.subscribe((columns) => {
+      this.displayedColumns = columns
+    })
   }
 
-  // openBannerPopup(banner: any): void {
-  //   console.log(banner)
-  //   const dataForDialog = {
-  //     name: 'dwdw',
-  //     zoneId: 'one',
-  //     active: true,
-  //     startDate: '2023-10-14T20:00:00.000Z',
-  //     endDate: '2023-10-26T20:00:00.000Z',
-  //     fileId: 'C:\\fakepathdaylight-forest-glossy-443446 (1).jpg',
-  //     priority: 3,
-  //     channelId: '2',
-  //     language: 'ka',
-  //     url: 'dwwde',
-  //     labels: [],
-  //     createdAt: '2023-10-10T15:41:31.455Z',
-  //     modifiedAt: '2023-10-10T15:41:31.455Z',
-  //     id: '5338132806930821',
-  //   }
+  ngOnInit(): void {
+    this.filterService.useEffect()
+    this.displayedColumns = this.filterService.displayedColumns
+    this.store.select(GetSingleBannerData).subscribe((item) => {
+      this.editableObject = item
+    })
 
-  //   const dialogRef = this.dialog.open(SingleBannerComponent, {
-  //     data: dataForDialog,
-  //   })
+    this.store.select(GetBannerData).subscribe((item) => {
+      this.dataSource = item.entities
+      this.pageLength = item.total
+    })
 
-  //   dialogRef.afterClosed().subscribe(() => {
-  //     console.log('Banner popup closed')
-  //   })
-  // }
-  toggleSingle(id: string) {
-    this.uiService.toggleBannerSingler()
-    this.store.dispatch(getsinglebannerId({ id: id }))
+    this.store.dispatch(channelactionapi())
+    this.store.dispatch(zoneactionapi())
+    this.store.dispatch(labelactionapi())
+    this.store.dispatch(langaugeactionapi())
+
+    this.store.select(getrefrenceChannelList).subscribe((item) => {
+      this.refrenceChannels = item
+    })
+
+    this.store.select(getrefrenceZoneList).subscribe((item) => {
+      this.refrenceZones = item
+    })
+
+    this.store.select(getreferenceLabelList).subscribe((item) => {
+      this.refrenceLabels = item
+    })
+
+    this.store.select(getrefernceLangaugeList).subscribe((item) => {
+      this.refrenceLanguage = item
+    })
   }
-  getQueryArray(key: string, value: string[]) {}
 
   onPageChange(event: any) {
-    //  { previousPageIndex: 0, pageIndex: 1, pageSize: 10, length: 200 }
-    // console.log(event)
     this.pageIndex = event.pageIndex
     this.pageSize = event.pageSize
     this.store.dispatch(
@@ -131,22 +115,6 @@ export class BannerListComponent implements OnInit {
         },
       }),
     )
-  }
-
-  openListItem(index: number, name: string) {
-    this.editRowName = name
-    this.editedRowIndex = index
-  }
-
-  closeListItem(event: Event) {
-    event.stopPropagation()
-
-    this.editedRowIndex = null
-    this.editRowName = ''
-  }
-
-  getListItemVal(val: string) {
-    this.listItemValue = val
   }
 
   deleteBanner(bannerId: string, blobId: string) {
@@ -165,58 +133,75 @@ export class BannerListComponent implements OnInit {
       }, 3000)
     }, 500)
   }
-  labels(event: Event, Array: any, index: number, name: string) {
+
+  toggleSingle(id: string) {
+    this.uiService.toggleBannerSingler()
+    this.store.dispatch(getsinglebannerId({ id: id }))
+  }
+
+  openListItem(index: number, name: string, id: string) {
+    console.log(this.priorityNums)
+    this.store.dispatch(getsinglebannerId({ id: id }))
+    this.editRowName = name
+    this.editedRowIndex = index
+  }
+
+  closeListItem(event: Event) {
     event.stopPropagation()
+    this.editedRowIndex = null
+    this.editRowName = ''
+  }
+
+  getListItemVal(val: string) {
+    this.listItemValue = val
+  }
+
+  labels(event: Event, Array: any, index: number, name: string, id: string) {
+    event.stopPropagation()
+    this.store.dispatch(getsinglebannerId({ id: id }))
+
     if (this.labelDefault.length <= 0) {
       this.labelDefault = (Array || []).map((label: string) => ({
         name: label,
       }))
-      console.log(this.labelDefault)
     }
     this.editRowName = name
     this.editedRowIndex = index
   }
+
   labelAdd(label: refrenceTypes) {
     console.log(label)
     this.labelDefault.push(label)
   }
+
   labelRemove(label: any) {
     this.labelDefault = this.labelDefault.filter(
       (val: any) => val.name !== label.name,
     )
   }
 
-  ngOnInit(): void {
-    this.filterService.useEffect()
-    this.displayedColumns = this.filterService.displayedColumns
-    // console.log(this.displayedColumns)
-    this.store.select(GetBannerData).subscribe((item) => {
-      // console.log(item)
+  saveEditedBanner(key: string) {
+    let newObj = { ...this.editableObject }
 
-      this.dataSource = item.entities
-      this.pageLength = item.total
-    })
+    if (key === 'labels') {
+      let labelsArr = this.labelDefault.map((item) => item.name)
+      newObj[key] = labelsArr
+    } else if (this.listItemValue) {
+      newObj[key] = this.listItemValue
+    }
 
-    this.store.dispatch(channelactionapi())
-    this.store.dispatch(zoneactionapi())
-    this.store.dispatch(labelactionapi())
-    this.store.dispatch(langaugeactionapi())
+    delete newObj.createdAt
+    delete newObj.modifiedAt
 
-    // channel
-    this.store.select(getrefrenceChannelList).subscribe((item) => {
-      this.refrenceChannels = item
-    })
-    //  zone
-    this.store.select(getrefrenceZoneList).subscribe((item) => {
-      this.refrenceZones = item
-    })
-    //   labels
-    this.store.select(getreferenceLabelList).subscribe((item) => {
-      this.refrenceLabels = item
-    })
-    //   languages
-    this.store.select(getrefernceLangaugeList).subscribe((item) => {
-      this.refrenceLanguage = item
-    })
+    this.store.dispatch(updatebanner({ updateData: newObj }))
+
+    setTimeout(() => {
+      this.filterService.useEffect()
+      this.editedRowIndex = null
+      this.editRowName = ''
+      setTimeout(() => {
+        this.store.dispatch(statusSuccses({ succses: '' }))
+      }, 3000)
+    }, 500)
   }
 }
