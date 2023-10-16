@@ -8,7 +8,7 @@ import {
   GetStatusSuccsess,
 } from 'src/app/Store/StatusHanndle/Status.selector'
 import { getquery } from 'src/app/Store/Banner-data/Banner.action'
-import { SingleBannerComponent } from 'src/app/client-component/single-banner/single-banner.component'
+import { SingleBannerComponent } from 'src/app/helper-component/single-banner/single-banner.component'
 import { statusSuccses } from 'src/app/Store/StatusHanndle/Status.action'
 @Component({
   selector: 'app-dashboard',

@@ -11,32 +11,32 @@ import { HttpClientModule } from '@angular/common/http'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { EffectsModule } from '@ngrx/effects'
 import { StoreRouterConnectingModule } from '@ngrx/router-store'
-import { NavbarComponent } from './client-component/navbar/navbar.component'
-import { FooterComponent } from './client-component/footer/footer.component'
-import { DashboardComponent } from './admin-component/dashboard/dashboard.component'
+import { NavbarComponent } from './helper-component/navbar/navbar.component'
+import { FooterComponent } from './helper-component/footer/footer.component'
+import { DashboardComponent } from './main-component/dashboard/dashboard.component'
 import { MatIconModule } from '@angular/material/icon'
 
-import { BannerFormComponent } from './admin-component/banner-form/banner-form.component'
+import { BannerFormComponent } from './main-component/banner-form/banner-form.component'
 import { ReactiveFormsModule } from '@angular/forms'
-import { BannerCreatorComponent } from './admin-component/banner-creator/banner-creator.component'
+import { BannerCreatorComponent } from './main-component/banner-creator/banner-creator.component'
 import { FormReducer } from './Store/Form-post/Form.Reducer'
 import { RefrenceReducer } from './Store/Refrence/Refrence.Reducer'
 import { RefrenceEffects } from './Store/Refrence/Refrence.Effects'
-import { BannerListComponent } from './admin-component/banner-list/banner-list.component'
+import { BannerListComponent } from './main-component/banner-list/banner-list.component'
 import { BlobEffects } from './Store/Blob/Blob.effect'
 import { BlobReducer } from './Store/Blob/Blob.reducer'
 import { FormEffect } from './Store/Form-post/Form.Effects'
-import { LoadingComponent } from './client-component/loading/loading.component'
+import { LoadingComponent } from './helper-component/loading/loading.component'
 import { StatusReducer } from './Store/StatusHanndle/Status.reducer'
-import { ErrorComponent } from './client-component/error/error.component'
-import { SuccsessComponent } from './client-component/succsess/succsess.component'
+import { ErrorComponent } from './helper-component/error/error.component'
+import { SuccsessComponent } from './helper-component/succsess/succsess.component'
 import { BannerEffect } from './Store/Banner-data/Banner.effect'
 import { BannerReducer } from './Store/Banner-data/Banner.reducer'
-import { SelectFieldComponent } from './client-component/select-field/select-field.component'
-import { SingleBannerComponent } from './client-component/single-banner/single-banner.component'
+import { SelectFieldComponent } from './helper-component/select-field/select-field.component'
+import { SingleBannerComponent } from './helper-component/single-banner/single-banner.component'
 
-import { EditableSelectorFieldComponent } from './client-component/editable-selector-field/editable-selector-field.component';
-import { FormDrawerComponent } from './client-component/form-drawer/form-drawer.component'
+import { EditableSelectorFieldComponent } from './helper-component/editable-selector-field/editable-selector-field.component'
+import { FormDrawerComponent } from './helper-component/form-drawer/form-drawer.component'
 
 @NgModule({
   declarations: [
@@ -55,7 +55,7 @@ import { FormDrawerComponent } from './client-component/form-drawer/form-drawer.
     SingleBannerComponent,
 
     EditableSelectorFieldComponent,
-      FormDrawerComponent,
+    FormDrawerComponent,
   ],
   imports: [
     BrowserModule,
