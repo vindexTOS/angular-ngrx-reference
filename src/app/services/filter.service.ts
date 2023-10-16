@@ -36,8 +36,7 @@ export class FilterService implements OnInit {
       this.sortByValue = parsedData.sortBy
       this.sortDirectionValue = parsedData.sortDirection
       this.displayedColumns = parsedData.displayedColumns
-      this.pageIndex = parsedData.pageIndex
-      this.pageSize = parsedData.pageSize
+     
     }
   }
 
@@ -145,8 +144,7 @@ export class FilterService implements OnInit {
       sortBy: this.sortByValue,
       sortDirection: this.sortDirectionValue,
       displayedColumns: this.displayedColumns,
-      pageIndex: this.pageIndex,
-      pageSize: this.pageSize,
+    
     }
 
     localStorage.setItem('filterServiceData', JSON.stringify(dataToSave))
