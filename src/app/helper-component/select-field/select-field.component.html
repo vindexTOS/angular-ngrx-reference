@@ -83,14 +83,16 @@
     </div>
   </div>
   <mat-select [formGroup]="exampleForm" placeholder="{{ label }}">
-    <div *ngIf="isFilter">
-      <mat-option
-        *ngFor="let option of refrenceLabels"
-        [value]="option"
-        (click)="onLabelSelect(option)"
-      >
-        {{ option }}
-      </mat-option>
+    <div *ngIf="isDropDown">
+      <div *ngIf="isFilter">
+        <mat-option
+          *ngFor="let option of refrenceLabels"
+          [value]="option"
+          (click)="onLabelSelect(option)"
+        >
+          {{ option }}
+        </mat-option>
+      </div>
     </div>
     <div *ngIf="!isFilter">
       <mat-option

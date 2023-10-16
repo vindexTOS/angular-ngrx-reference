@@ -12,6 +12,7 @@ export class SelectFieldComponent {
   @Input() refrenceLabels: any[] = []
   @Input() label: string = 'Labels'
   @Input() isFilter: boolean = false
+  @Input() isDropDown: boolean = false
 
   @Output() labelSelect = new EventEmitter<any>()
   @Output() removeLabel = new EventEmitter<any>()

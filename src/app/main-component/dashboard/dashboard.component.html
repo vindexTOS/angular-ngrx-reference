@@ -33,6 +33,7 @@
         ></app-editable-selector-field>
       </div>
       <app-select-field
+        [isDropDown]="false"
         [isFilter]="true"
         [labels]="selectedIncludedLabels"
         [refrenceLabels]="refrenceLabels"
@@ -41,6 +42,7 @@
         (removeLabel)="handleLabelRemoveInclude($event)"
       ></app-select-field>
       <app-select-field
+        [isDropDown]="false"
         [isFilter]="true"
         [labels]="selectedExcludedLables"
         [refrenceLabels]="refrenceLabels"
