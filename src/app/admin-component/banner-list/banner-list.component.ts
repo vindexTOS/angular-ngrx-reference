@@ -66,9 +66,27 @@ export class BannerListComponent implements OnInit {
     this.filterService.displayedColumns$.subscribe((columns) => {
       this.displayedColumns = columns
     })
+
+    const savedData = localStorage.getItem('pagination')
+    if (savedData) {
+      const parsedData = JSON.parse(savedData)
+
+      this.pageIndex = parsedData.pageIndex
+      this.pageSize = parsedData.pageSize
+    }
   }
 
+  saveDataToLocalStorage() {
+    const dataToSave = {
+      pageIndex: this.pageIndex,
+      pageSize: this.pageSize,
+    }
+
+    localStorage.setItem('pagination', JSON.stringify(dataToSave))
+  }
   ngOnInit(): void {
+    this.filterService.pageIndex = this.pageIndex
+    this.filterService.pageSize = this.pageSize
     this.filterService.useEffect()
     this.displayedColumns = this.filterService.displayedColumns
     this.store.select(GetSingleBannerData).subscribe((item) => {
@@ -115,6 +133,7 @@ export class BannerListComponent implements OnInit {
         },
       }),
     )
+    this.saveDataToLocalStorage()
   }
 
   deleteBanner(bannerId: string, blobId: string) {
