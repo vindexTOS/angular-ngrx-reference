@@ -36,7 +36,6 @@ export class FilterService implements OnInit {
       this.sortByValue = parsedData.sortBy
       this.sortDirectionValue = parsedData.sortDirection
       this.displayedColumns = parsedData.displayedColumns
-     
     }
   }
 
@@ -76,9 +75,6 @@ export class FilterService implements OnInit {
     'labels',
     'language',
     'zoneId',
-    'modifiedAt',
-    'createdAt',
-    'channelId',
   ]
 
   includes: string[] = [
@@ -88,13 +84,19 @@ export class FilterService implements OnInit {
     'fileId',
     'language',
     'zoneId',
-    'modifiedAt',
-    'createdAt',
-    'channelId',
+
     'id',
   ]
 
-  excludes: string[] = ['priority', 'endDate', 'startDate', 'url']
+  excludes: string[] = [
+    'modifiedAt',
+    'createdAt',
+    'channelId',
+    'priority',
+    'endDate',
+    'startDate',
+    'url',
+  ]
 
   selectedIncludedLabels: string[] = this.includes.slice(
     0,
@@ -144,7 +146,6 @@ export class FilterService implements OnInit {
       sortBy: this.sortByValue,
       sortDirection: this.sortDirectionValue,
       displayedColumns: this.displayedColumns,
-    
     }
 
     localStorage.setItem('filterServiceData', JSON.stringify(dataToSave))
@@ -185,7 +186,7 @@ export class FilterService implements OnInit {
 
       if (!this.includes.includes(event)) {
         console.log(event)
-        this.includes = [...this.selectedIncludedLabels, 'id']
+        this.includes = this.selectedIncludedLabels
         console.log(this.includes)
       }
     }
@@ -196,16 +197,15 @@ export class FilterService implements OnInit {
     this.updateQuery()
   }
 
-  updateQuery(sortBy?: string, sortDirection?: string, event?: any) {
+  updateQuery(sortBy?: string, sortDirection?: string) {
     const query = {
       excludes: [...this.excludes],
       includes: [...this.includes],
       search: this.serach,
       sortDirection: sortDirection,
-
+      pageIndex: this.pageIndex,
+      pageSize: this.pageSize,
       sortBy: sortBy || 'name.raw',
-      pageIndex: event.pageIndex,
-      pageSize: event.pageSize,
     }
     console.log(query)
     this.store.dispatch(getquery({ key: 'all', value: query }))
@@ -221,8 +221,8 @@ export class FilterService implements OnInit {
     this.updateQuery('', val)
     this.saveDataToLocalStorage()
   }
-
   useEffect(): void {
+    this.saveDataToLocalStorage()
     const savedData = localStorage.getItem('filterServiceData')
     let queryObj = {}
     if (savedData) {
@@ -234,22 +234,31 @@ export class FilterService implements OnInit {
       this.sortByValue = parsedData.sortBy
       this.sortDirectionValue = parsedData.sortDirection
       this.displayedColumns = parsedData.displayedColumns
-      this.pageIndex = parsedData.pageIndex
-      this.pageSize = parsedData.pageSize
+
+      console.log(parsedData)
       queryObj = {
         sortBy: parsedData.sortBy,
         sortDirection: parsedData.sortDirection,
         excludes: parsedData.excludes,
         includes: parsedData.includes,
-        pageIndex: this.pageIndex,
-        pageSize: this.pageSize,
       }
     }
     if (queryObj) {
       this.store.dispatch(getquery({ key: 'all', value: { ...queryObj } }))
     }
-    this.saveDataToLocalStorage()
   }
+  // hanndleQueryRequest() {
+  //   let newObj = {
+  //     excludes: [...this.excludes],
+  //     includes: [...this.includes],
+  //     search: this.serach,
+  //     sortDirection: 'asc',
+  //     pageIndex: this.pageIndex,
+  //     pageSize: this.pageSize,
+  //   }
+  //   this.store.dispatch(getquery({ key: 'all', value: { ...newObj } }))
+  //   this.displayedColumns = this.selectedIncludedLabels
+  // }
 
   ResetFilter() {
     localStorage.removeItem('filterServiceData')
