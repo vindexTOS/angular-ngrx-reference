@@ -1,68 +1,45 @@
-# Optio Banners Management System
+ 
 
-Optio Banners Management System is an Angular application designed to help banks and their clients manage a crucial dialog in the banking sector. It provides a user-friendly interface for creating and managing banners for different digital platforms, including mobile and internet banking.
+**Optio Banner Management System**
 
-📅 Stage: Optio Internship / October 2023
+This project was my first experience with Angular, and it involved the development of a banner management system for the banking sector and related industries. The system was designed to streamline communication between banks and their clients through mobile and internet banking platforms.
 
-## Features
+## Technologies Used
 
-- Create and manage banners for different communication channels in the banking sector.
-- Angular application using Angular Material for a modern and user-friendly UI.
-- Utilizes NgrX for state management to efficiently manage application data.
+- **Angular**: This project was implemented using Angular, marking my first venture into this front-end framework.
+- **Ngrx**: For state management, I utilized Ngrx to effectively manage the application's state.
+- **Angular Material**: I employed Angular Material for UI components, making the user interface visually appealing and user-friendly.
+
+## Challenge
+
+The banking sector often faces unique challenges, including the need for efficient communication and the management of various functions within a single platform. This project aimed to address these challenges by creating a dynamic banner management module. This module serves as a valuable tool for marketing teams within banks, enabling them to create, manage, and distribute banners seamlessly across various digital platforms.
 
 ## Technical Overview
 
-The system is divided into logical zones, including Header, Right Sidebar, Footer, Main Hero Slider, and more, to allow for the dynamic creation and management of banners. Each banner includes the following key fields:
+To facilitate banner management and distribution, the user interface was divided into logical sections such as Header, Right Sidebar, Footer, Main Hero Slider, and others. When adding banners, one of these sections had to be specified for placement.
 
-- **id:** A unique identifier for the banner.
-- **name:** The title of the banner.
-- **channelId:** The communication channel for the banner.
-- **language:** The language in which the banner is displayed.
-- **zoneId:** The logical zone where the banner is shown.
-- **priority:** An index used for sorting banners.
-- **fileId:** The identifier of the uploaded banner image.
-- **url:** The link that users will be directed to when they click on the banner.
-- **startDate:** The date when the banner becomes active.
-- **endDate:** The date when the banner should no longer be displayed.
-- **active:** A boolean indicating whether the banner is currently active.
-- **labels:** An array of labels to categorize the banner.
+The essential fields for banner creation, including Title, Channel, Language, Zone, Priority, File ID, URL, Start Date, End Date, and Active (allowing quick toggling of banner display), are clearly defined.
 
-## Getting Started
+## Banner Listing Page
 
-To view a list of banners and edit them, you can access the Optio Banners API. The API provides CRUD operations, allowing you to find banners, view details, and make updates. To access the application's banner list, you can create a separate page that displays the data retrieved from the API, enabling users to filter and search for specific banners.
-
-## Banner List Page
-
-Create a page to display a list of banners using data from the Optio Banners API. This page should provide information about each banner, including the image, title, status, zone, start and end dates, and labels. You can implement features such as paging and sorting to make it easy for users to navigate through the banner list. Additionally, include a search feature to filter the list based on specific criteria.
+I created a listing page to display the banners using data retrieved from the Optio Banners API. This page allows users to view banner information, including the image, title, status, zone, start and end dates, and labels. Users can also apply filtering and sorting to the banner list and search for specific banners using text.
 
 ## Banner Editing Form
 
-For adding and editing banners, you can use a form that appears in a drawer or modal window when a user clicks on a banner in the list. This form should allow users to:
+For adding and editing banners, I designed a form that appears as a drawer on the right side of the screen. This form allows users to quickly make changes to a banner's details. It also supports image uploads, title entry, zone selection, status assignment, date selection, and label tagging. Image uploads are processed using the Optio Blobs API.
 
-- Upload an image
-- Set the title
-- Choose the display zone
-- Assign labels
-- Set start and end dates
-- And more
+The form includes dropdowns for selecting zones and labels, with possible values loaded from the Optio Reference Data API.
 
-Images can be uploaded using Optio's Blobs API, and zones and labels can be retrieved via Optio's Reference Data API.
+## Optio Banners API
 
-## API Documentation
+This project interacts with the Optio Banners API using CRUD operations, which are as follows:
 
-For more detailed information about using the Banners API, please refer to the [API documentation](#). It provides methods for searching, viewing, creating, and updating banner data.
+- **Find**: To search for multiple banner records.
+- **Find-One**: To retrieve a single banner record.
+- **Save**: To create or update a banner record.
+- **Delete**: To remove a banner record.
 
-## License
+The API endpoints are clearly documented for reference and usage.
 
-This project is licensed under the [MIT License](LICENSE).
-
-Feel free to contribute or report issues on [GitHub](https://github.com/yourusername/optio-banners).
-
-You should replace the placeholders (#, ##, and [...]) with your actual content and links to your API documentation. This is a basic template, and you can enhance it with more details, instructions, and any other information relevant to your project. Don't forget to update the license link as well.
-
-Please make sure to replace [...] with actual links and information. Additionally, remember to update the LICENSE link to the correct license file in your repository.
-
-
-
-
+This project allowed me to gain hands-on experience with Angular, Ngrx, and Angular Material while addressing a real-world challenge faced by the banking sector. It was a valuable learning opportunity that honed my skills in front-end development.
 
