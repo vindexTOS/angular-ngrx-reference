@@ -38,7 +38,6 @@
         [labels]="selectedIncludedLabels"
         [refrenceLabels]="refrenceLabels"
         [label]="'Include'"
-        (labelSelect)="handleLabelSelectInclude($event)"
         (removeLabel)="handleLabelRemoveInclude($event)"
       ></app-select-field>
       <app-select-field
@@ -47,7 +46,6 @@
         [labels]="selectedExcludedLables"
         [refrenceLabels]="refrenceLabels"
         [label]="'Exclude'"
-        (labelSelect)="handleLabelSelectExclude($event)"
         (removeLabel)="handleLabelExcludedRemove($event)"
       ></app-select-field>
     </div>

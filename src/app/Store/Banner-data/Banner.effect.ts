@@ -32,13 +32,13 @@ export class BannerEffect {
   getBannerFiles$ = createEffect(() =>
     this.actions$.pipe(
       ofType(getquery),
-      tap(() => console.log('DATA RECEIVED')),
+      // tap(() => console.log('DATA RECEIVED')),
       mergeMap((action) => {
         this.store.dispatch(loadingStart())
-        console.log(action)
+        // console.log(action)
         return from(this.service.GetBannerData(action.value)).pipe(
           map((res: any) => {
-            console.log(res)
+            // console.log(res)
             this.store.dispatch(loadingEnd())
 
             return getquerydata({ data: res.data })
@@ -55,7 +55,7 @@ export class BannerEffect {
   getSingleBanner$ = createEffect(() =>
     this.actions$.pipe(
       ofType(getsinglebannerId),
-      tap(() => console.log('get single')),
+      // tap(() => console.log('get single')),
       mergeMap((action) => {
         this.store.dispatch(loadingStart())
         //  this.store.dispatch(getsinglebannerdata())
@@ -63,7 +63,7 @@ export class BannerEffect {
         return from(this.service.GetSingleBanner(action.id)).pipe(
           map((res: any) => {
             this.store.dispatch(loadingEnd())
-            console.log(res.data)
+            // console.log(res.data)
             return getsinglebannerdata({ singleData: res.data })
           }),
           catchError((error) => {
@@ -78,14 +78,14 @@ export class BannerEffect {
   updateBanner$ = createEffect(() =>
     this.actions$.pipe(
       ofType(updatebanner),
-      tap(() => console.log('updated')),
+      // tap(() => console.log('updated')),
       switchMap((action) => {
         this.store.dispatch(loadingStart())
         return from(
           this.service.UpdateBanner({ data: action.updateData }),
         ).pipe(
           switchMap((res) => {
-            console.log(res)
+            // console.log(res)
             this.store.dispatch(loadingEnd())
             return of(statusSuccses({ succses: 'Banner has been updated' }))
           }),
@@ -101,7 +101,7 @@ export class BannerEffect {
   deleteBanner$ = createEffect(() =>
     this.actions$.pipe(
       ofType(deletebanner),
-      tap(() => console.log('banner h ')),
+      // tap(() => console.log('banner h ')),
       mergeMap((action) => {
         this.store.dispatch(loadingStart())
         return from(this.service.DeleteBanner(action.id)).pipe(

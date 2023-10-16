@@ -30,9 +30,9 @@ export class FormEffect {
         this.store.dispatch(loadingStart())
 
         return this.service.postBanner(actionDataWithoutType).pipe(
-          tap(() => console.log('FORM TRIGGERED')),
+          // tap(() => console.log('FORM TRIGGERED')),
           map((res: any) => {
-            console.log(res)
+            // console.log(res)
 
             this.store.dispatch(loadingEnd())
             return statusSuccses({ succses: 'Banner posted' })

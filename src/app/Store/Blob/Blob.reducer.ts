@@ -9,7 +9,7 @@ const _BlobReducer = createReducer(
     return { ...state, blob: action.file }
   }),
   on(fileres, (state, action) => {
-    console.log(state, action)
+    // console.log(state, action)
     return { ...state, imgId: action.code }
   }),
   on(fileUploadError, (state, action) => {

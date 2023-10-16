@@ -1,7 +1,7 @@
 <mat-table
   mat-table
   [dataSource]="dataSource"
-  class="mat-elevation-z8 table-responsive"
+  class="mat-elevation-z8 table-responsive center-contents"
   fxFlex
 >
   <!-- Position Column -->
@@ -38,7 +38,7 @@
     <td
       mat-cell
       *matCellDef="let element; let i = index"
-      (click)="openListItem(i, 'Name', element.id)"
+      (dblclick)="openListItem(i, 'Name', element.id)"
     >
       {{ element.name }}
 
@@ -67,7 +67,7 @@
   <ng-container matColumnDef="zoneId">
     <th mat-header-cell *matHeaderCellDef>Zone ID</th>
     <td
-      (click)="openListItem(i, 'Zone', element.id)"
+      (dblclick)="openListItem(i, 'Zone', element.id)"
       mat-cell
       *matCellDef="let element; let i = index"
     >
@@ -100,7 +100,7 @@
   <ng-container matColumnDef="active">
     <th mat-header-cell *matHeaderCellDef>Active</th>
     <td
-      (click)="openListItem(i, 'Active', element.id)"
+      (dblclick)="openListItem(i, 'Active', element.id)"
       mat-cell
       *matCellDef="let element; let i = index"
     >
@@ -136,7 +136,7 @@
     <td
       mat-cell
       *matCellDef="let element; let i = index"
-      (click)="openListItem(i, 'Start Date', element.id)"
+      (dblclick)="openListItem(i, 'Start Date', element.id)"
     >
       <p>
         {{ element.startDate }}
@@ -171,7 +171,7 @@
     <td
       mat-cell
       *matCellDef="let element; let i = index"
-      (click)="openListItem(i, 'End Date', element.id)"
+      (dblclick)="openListItem(i, 'End Date', element.id)"
     >
       <p>
         {{ element.endDate }}
@@ -204,7 +204,7 @@
     <td
       mat-cell
       *matCellDef="let element; let i = index"
-      (click)="openListItem(i, 'Channel', element.id)"
+      (dblclick)="openListItem(i, 'Channel', element.id)"
     >
       <p>
         {{ element.channelId }}
@@ -238,7 +238,7 @@
     <td
       mat-cell
       *matCellDef="let element; let i = index"
-      (click)="labels($event, element?.labels, i, 'Labels', element.id)"
+      (dblclick)="labels($event, element?.labels, i, 'Labels', element.id)"
     >
       <p>
         {{ element?.labels && element?.labels.join(', ') }}
@@ -278,7 +278,7 @@
     <th mat-header-cell *matHeaderCellDef>URL</th>
     <td
       *matCellDef="let element; let i = index"
-      (click)="openListItem(i, 'URL', element.id)"
+      (dblclick)="openListItem(i, 'URL', element.id)"
     >
       <p>
         {{ element.url }}
@@ -310,7 +310,7 @@
     <td
       mat-cell
       *matCellDef="let element; let i = index"
-      (click)="openListItem(i, 'Language', element.id)"
+      (dblclick)="openListItem(i, 'Language', element.id)"
     >
       <p>
         {{ element.language }}
@@ -343,7 +343,7 @@
     <td
       mat-cell
       *matCellDef="let element; let i = index"
-      (click)="openListItem(i, 'Priority', element.id)"
+      (dblclick)="openListItem(i, 'Priority', element.id)"
     >
       {{ element.priority }}
 

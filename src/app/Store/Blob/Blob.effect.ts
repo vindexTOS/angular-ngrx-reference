@@ -14,7 +14,7 @@ export class BlobEffects {
   uploadFiles$ = createEffect(() =>
     this.actions$.pipe(
       ofType(fileUpload),
-      tap(() => console.log('blob upload ')),
+      // tap(() => console.log('blob upload ')),
       mergeMap((action) =>
         this.service.PostBlob(action.file).pipe(
           map((res: any) => {
@@ -33,7 +33,7 @@ export class BlobEffects {
   deleteBlob$ = createEffect(() =>
     this.actions$.pipe(
       ofType(deleteblob),
-      tap(() => console.log('blob has been deleted')),
+      // tap(() => console.log('blob has been deleted')),
       mergeMap((action) =>
         this.service.RemoveBlob(action.blobId).pipe(
           map((res: any) => {

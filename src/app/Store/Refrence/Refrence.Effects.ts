@@ -27,7 +27,7 @@ export class RefrenceEffects {
   channelRefrence$ = createEffect(() =>
     this.actions$.pipe(
       ofType(channelactionapi),
-      tap(() => console.log('triggered')),
+      // tap(() => console.log('triggered')),
       switchMap((act) => {
         return this.service.FindAll(1600).pipe(
           map((data) => {
@@ -45,7 +45,7 @@ export class RefrenceEffects {
   zoneRefrence$ = createEffect(() =>
     this.actions$.pipe(
       ofType(zoneactionapi),
-      tap(() => console.log('triggered')),
+      // tap(() => console.log('triggered')),
       switchMap((act) => {
         return this.service.FindAll(1700).pipe(
           map((data) => {
@@ -62,7 +62,7 @@ export class RefrenceEffects {
   loadRefrences$ = createEffect(() =>
     this.actions$.pipe(
       ofType(labelactionapi),
-      tap(() => console.log('Effect triggered')),
+      // tap(() => console.log('Effect triggered')),
       switchMap((action) => {
         return this.service.FindAll(1900).pipe(
           map((data) => {
@@ -81,7 +81,7 @@ export class RefrenceEffects {
   langaugeRefrence$ = createEffect(() =>
     this.actions$.pipe(
       ofType(langaugeactionapi),
-      tap(() => console.log('triggered')),
+      // tap(() => console.log('triggered')),
       switchMap((action) => {
         return this.service.FindAll(2900).pipe(
           map((data) => {

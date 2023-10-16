@@ -189,13 +189,10 @@ export class FilterService implements OnInit {
       this.selectedIncludedLabels.push(event)
 
       if (!this.includes.includes(event)) {
-        console.log(event)
-        this.includes = this.selectedIncludedLabels
-        console.log(this.includes)
+        this.includes = [...this.selectedIncludedLabels, 'id']
       }
     }
 
-    console.log(this.includes)
     this.displayedColumnsSubject.next(this.displayedColumns)
     this.saveDataToLocalStorage()
     this.updateQuery()
@@ -240,7 +237,7 @@ export class FilterService implements OnInit {
       this.displayedColumns = parsedData.displayedColumns
       this.pageIndex = parsedData.pageIndex
       this.pageSize = parsedData.pageSize
-      console.log(parsedData)
+
       queryObj = {
         sortBy: parsedData.sortBy,
         sortDirection: parsedData.sortDirection,

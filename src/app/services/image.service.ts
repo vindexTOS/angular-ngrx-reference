@@ -40,7 +40,7 @@ export class ImageService {
   }
 
   private uploadFile(file: File): void {
-    console.log('File uploaded:', file)
+    // console.log('File uploaded:', file)
     this.store.dispatch(fileUpload({ file: file }))
 
     const reader = new FileReader()

@@ -26,7 +26,7 @@ const _RefrenceReducer = createReducer(
   //  zone
 
   on(zoneaction, (state, action) => {
-    console.log(action)
+    // console.log(action)
     return { ...state, zones: action.zoneData.data.entities }
   }),
   on(zoneactionerror, (state, action) => {
@@ -35,7 +35,7 @@ const _RefrenceReducer = createReducer(
 
   //  label
   on(labelaction, (state, action) => {
-    console.log(action)
+    // console.log(action)
     return {
       ...state,
       labels: action.labelData.data.entities,

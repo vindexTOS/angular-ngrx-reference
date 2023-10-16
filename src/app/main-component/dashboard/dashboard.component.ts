@@ -42,7 +42,7 @@ export class DashboardComponent {
   sortDirection = this.filterService.sortDirection
   getSearchInput() {
     const inputValue = this.inputElement.nativeElement.value
-    console.log(inputValue)
+    // console.log(inputValue)
     this.store.dispatch(
       getquery({
         key: 'all',
@@ -57,12 +57,11 @@ export class DashboardComponent {
   refrenceLabels = this.filterService.includeExcludeFilter
 
   handleLabelSelectInclude(event: any) {
-    console.log(event)
+    // console.log(event)
   }
 
-  handleLabelSelectExclude(event: any) {}
   handleLabelRemoveInclude(event: any) {
-    console.log(event)
+    // console.log(event)
     this.filterService.handleLabelRemoveInclude(event)
 
     this.selectedIncludedLabels = this.filterService.selectedIncludedLabels
@@ -75,7 +74,6 @@ export class DashboardComponent {
     this.selectedExcludedLables = this.filterService.selectedExcludedLables
   }
   onValueChangedSortBy(val: string) {
-    console.log(val)
     this.filterService.onValueChangedSortBy(val)
   }
   onValueChangeAcenDece(val: string) {

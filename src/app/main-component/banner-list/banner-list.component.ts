@@ -160,7 +160,6 @@ export class BannerListComponent implements OnInit {
   }
 
   openListItem(index: number, name: string, id: string) {
-    console.log(this.priorityNums)
     this.store.dispatch(getsinglebannerId({ id: id }))
     this.editRowName = name
     this.editedRowIndex = index

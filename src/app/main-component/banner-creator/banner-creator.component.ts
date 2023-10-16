@@ -31,7 +31,7 @@ export class BannerCreatorComponent implements OnInit, OnDestroy {
     // })
     this.store.select(getformData).subscribe((item) => {
       this.formData = item
-      console.log(this.formData)
+      // console.log(this.formData)
     })
 
     // Subscribe to changes in the imageSrc from ImageService

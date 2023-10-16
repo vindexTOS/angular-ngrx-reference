@@ -180,10 +180,6 @@ export class BannerFormComponent implements OnInit, OnDestroy {
     this.formService.onInputChange(event)
   }
 
-  test() {
-    console.log(this.imageSrc)
-  }
-
   closeForm() {
     this.uiService.toggle()
   }
@@ -215,9 +211,5 @@ export class BannerFormComponent implements OnInit, OnDestroy {
         }, 3000)
       }, 1100)
     }
-  }
-  onCheck() {
-    // this.store.dispatch(postbannertodb({ formData: this.exampleForm.value }))
-    console.log(this.uploadedImgSrc)
   }
 }
