@@ -12,13 +12,17 @@ This project was my first experience with Angular, and it involved the developme
 
 ## Challenge
 
-The banking sector often faces unique challenges, including the need for efficient communication and the management of various functions within a single platform. This project aimed to address these challenges by creating a dynamic banner management module. This module serves as a valuable tool for marketing teams within banks, enabling them to create, manage, and distribute banners seamlessly across various digital platforms.
+ Learning the intricacies of Angular's coding patterns was a new and exciting journey for me. Fortunately, my prior knowledge of technologies like Nest.js and PHP's Blade template system provided me with a solid foundation, making it easier to grasp Angular's structure and concepts quickly.
 
+In particular, my familiarity with the Redux pattern, which Ngrx is based on, proved to be a valuable asset. It allowed me to navigate the state management in Angular with ease, further accelerating my learning curve.
+
+This amalgamation of past experiences and new learning opportunities not only expedited my adaptation to Angular but also allowed me to contribute effectively to the project, leveraging a well-rounded skill set.
 ## Technical Overview
+This project comprises three core components: filters, tables, and a drawer form. Additionally, there's a single-page form that provides a comprehensive view of all relevant information for a specific document.
 
-To facilitate banner management and distribution, the user interface was divided into logical sections such as Header, Right Sidebar, Footer, Main Hero Slider, and others. When adding banners, one of these sections had to be specified for placement.
+One notable feature is the persistence of the filters, which remains intact even after refreshing the page. The filters consist of four distinct categories, complemented by a search bar for precise data retrieval. Furthermore, a pagination feature has been integrated into the project to facilitate seamless navigation through the displayed information.
 
-The essential fields for banner creation, including Title, Channel, Language, Zone, Priority, File ID, URL, Start Date, End Date, and Active (allowing quick toggling of banner display), are clearly defined.
+This comprehensive setup ensures a user-friendly and efficient experience, allowing users to interact with and manage the data effectively.
 
 ## Banner Listing Page
 
@@ -26,7 +30,7 @@ I created a listing page to display the banners using data retrieved from the Op
 
 ## Banner Editing Form
 
-For adding and editing banners, I designed a form that appears as a drawer on the right side of the screen. This form allows users to quickly make changes to a banner's details. It also supports image uploads, title entry, zone selection, status assignment, date selection, and label tagging. Image uploads are processed using the Optio Blobs API.
+For adding and editing banners, you can change single table value by clicking on it or you can open up the project and change multiple values at once
 
 The form includes dropdowns for selecting zones and labels, with possible values loaded from the Optio Reference Data API.
 
@@ -39,7 +43,6 @@ This project interacts with the Optio Banners API using CRUD operations, which a
 - **Save**: To create or update a banner record.
 - **Delete**: To remove a banner record.
 
-The API endpoints are clearly documented for reference and usage.
-
+ 
 This project allowed me to gain hands-on experience with Angular, Ngrx, and Angular Material while addressing a real-world challenge faced by the banking sector. It was a valuable learning opportunity that honed my skills in front-end development.
 
