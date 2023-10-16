@@ -54,8 +54,18 @@
 
         <div class="field-wrapper">
           <!-- fist div  -->
-          <div class="field-div-wrap">
-            <div class="editable-div">
+          <div
+            [ngClass]="{
+              'field-div-wrap': isEditMode,
+              'field-div-wrap-display': !isEditMode
+            }"
+          >
+            <div
+              [ngClass]="{
+                'editable-div': isEditMode,
+                'editable-div-display': !isEditMode
+              }"
+            >
               <strong>Name:</strong>
 
               <app-editable-selector-field
@@ -66,7 +76,12 @@
                 (valueChanged)="onValueChanged('name', $event)"
               ></app-editable-selector-field>
             </div>
-            <div class="editable-div">
+            <div
+              [ngClass]="{
+                'editable-div': isEditMode,
+                'editable-div-display': !isEditMode
+              }"
+            >
               <strong>Zone ID:</strong>
 
               <app-editable-selector-field
@@ -78,7 +93,12 @@
                 (valueChanged)="onValueChanged('zoneId', $event)"
               ></app-editable-selector-field>
             </div>
-            <div class="editable-div">
+            <div
+              [ngClass]="{
+                'editable-div': isEditMode,
+                'editable-div-display': !isEditMode
+              }"
+            >
               <strong>Active:</strong>
 
               <app-editable-selector-field
@@ -90,7 +110,12 @@
                 (valueChanged)="onValueChanged('active', $event)"
               ></app-editable-selector-field>
             </div>
-            <div class="editable-div">
+            <div
+              [ngClass]="{
+                'editable-div': isEditMode,
+                'editable-div-display': !isEditMode
+              }"
+            >
               <strong>Channel ID:</strong>
 
               <app-editable-selector-field
@@ -104,11 +129,23 @@
             </div>
           </div>
           <!-- second -->
-          <div class="field-div-wrap">
-            <div class="editable-div">
-              <strong>Start Date:</strong>
+          <div
+            [ngClass]="{
+              'field-div-wrap': isEditMode,
+              'field-div-wrap-display': !isEditMode
+            }"
+          >
+            <div
+              [ngClass]="{
+                'editable-div': isEditMode,
+                'editable-div-display': !isEditMode
+              }"
+            >
+              <strong>
+                Start Date:
+                <p *ngIf="isEditMode">{{ banner.startDate.slice(0, 10) }}</p>
+              </strong>
               <div class="data-picker-wrapper">
-                <p *ngIf="isEditMode">{{ banner.startDate }}</p>
                 <app-editable-selector-field
                   [value]="banner.startDate"
                   [placeholder]="'startDate'"
@@ -118,10 +155,17 @@
                 ></app-editable-selector-field>
               </div>
             </div>
-            <div class="editable-div">
-              <strong>End Date:</strong>
+            <div
+              [ngClass]="{
+                'editable-div': isEditMode,
+                'editable-div-display': !isEditMode
+              }"
+            >
+              <strong>
+                End Date:
+                <p *ngIf="isEditMode">{{ banner.endDate.slice(0, 10) }}</p>
+              </strong>
               <div class="data-picker-wrapper">
-                <p *ngIf="isEditMode">{{ banner.endDate }}</p>
                 <app-editable-selector-field
                   [value]="banner.endDate"
                   [placeholder]="'endDate'"
@@ -131,8 +175,16 @@
                 ></app-editable-selector-field>
               </div>
             </div>
-            <div class="editable-div">
-              <strong>Priority:</strong>
+            <div
+              [ngClass]="{
+                'editable-div': isEditMode,
+                'editable-div-display': !isEditMode
+              }"
+            >
+              <strong>
+                Priority:
+                <p *ngIf="isEditMode">{{ banner.priority }}</p>
+              </strong>
 
               <app-editable-selector-field
                 [value]="banner.priority"
@@ -143,8 +195,16 @@
               ></app-editable-selector-field>
             </div>
 
-            <div class="editable-div">
-              <strong>Language:</strong>
+            <div
+              [ngClass]="{
+                'editable-div': isEditMode,
+                'editable-div-display': !isEditMode
+              }"
+            >
+              <strong>
+                Language:
+                <p *ngIf="isEditMode">{{ banner.language }}</p>
+              </strong>
 
               <app-editable-selector-field
                 [value]="banner.language"
@@ -165,12 +225,14 @@
       >
         Edit
       </button>
-      <button *ngIf="isEditMode" (click)="cancelEdit()" class="cancel-button">
-        Cancel
-      </button>
-      <button *ngIf="isEditMode" (click)="saveChanges()" class="save-button">
-        Save
-      </button>
+      <div *ngIf="isEditMode" class="btn-wrapper">
+        <button *ngIf="isEditMode" (click)="saveChanges()" class="save-button">
+          Save
+        </button>
+        <button *ngIf="isEditMode" (click)="cancelEdit()" class="cancel-button">
+          Cancel
+        </button>
+      </div>
     </mat-card>
   </section>
 </div>

@@ -66,6 +66,7 @@
           <button (click)="getSearchInput()" class="searchBtn">Search</button>
         </div>
       </div>
+      <app-loading-skeleton *ngIf="loading"></app-loading-skeleton>
 
       <app-banner-list></app-banner-list>
     </section>

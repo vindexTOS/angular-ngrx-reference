@@ -40,7 +40,7 @@
       *matCellDef="let element; let i = index"
       (dblclick)="openListItem(i, 'Name', element.id)"
     >
-      {{ element.name }}
+      <p title="double click to open">{{ element.name }}</p>
 
       <div
         class="edit-div-wrapper"
@@ -53,12 +53,14 @@
           [isDataSelector]="'input'"
           (valueChanged)="getListItemVal($event)"
         ></app-editable-selector-field>
-        <button class="save-edit-btn" (click)="saveEditedBanner('name')">
-          Save
-        </button>
-        <button class="save-close-btn" (click)="closeListItem($event)">
-          Close
-        </button>
+        <div class="btn-wrapper">
+          <button class="save-edit-btn" (click)="saveEditedBanner('name')">
+            <mat-icon>save</mat-icon>
+          </button>
+          <button class="save-close-btn" (click)="closeListItem($event)">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </div>
       </div>
     </td>
   </ng-container>
@@ -71,7 +73,7 @@
       mat-cell
       *matCellDef="let element; let i = index"
     >
-      <p>
+      <p title="double click to open">
         {{ element?.zoneId }}
       </p>
       <div
@@ -86,12 +88,15 @@
           [isDataSelector]="'selector'"
           (valueChanged)="getListItemVal($event)"
         ></app-editable-selector-field>
-        <button class="save-edit-btn" (click)="saveEditedBanner('zoneId')">
-          Save
-        </button>
-        <button class="save-close-btn" (click)="closeListItem($event)">
-          Close
-        </button>
+
+        <div class="btn-wrapper">
+          <button class="save-edit-btn" (click)="saveEditedBanner('zoneId')">
+            <mat-icon>save</mat-icon>
+          </button>
+          <button class="save-close-btn" (click)="closeListItem($event)">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </div>
       </div>
     </td>
   </ng-container>
@@ -105,8 +110,8 @@
       *matCellDef="let element; let i = index"
     >
       <p>
-        <span *ngIf="!element.active">🔴</span>
-        <span *ngIf="element.active">🟢</span>
+        <span title="double click to open" *ngIf="!element.active">🔴</span>
+        <span title="double click to open" *ngIf="element.active">🟢</span>
       </p>
       <div
         class="edit-div-wrapper"
@@ -120,12 +125,14 @@
           [isDataSelector]="'selector'"
           (valueChanged)="getListItemVal($event)"
         ></app-editable-selector-field>
-        <button class="save-edit-btn" (click)="saveEditedBanner('active')">
-          Save
-        </button>
-        <button class="save-close-btn" (click)="closeListItem($event)">
-          Close
-        </button>
+        <div class="btn-wrapper">
+          <button class="save-edit-btn" (click)="saveEditedBanner('active')">
+            <mat-icon>save</mat-icon>
+          </button>
+          <button class="save-close-btn" (click)="closeListItem($event)">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </div>
       </div>
     </td>
   </ng-container>
@@ -138,7 +145,7 @@
       *matCellDef="let element; let i = index"
       (dblclick)="openListItem(i, 'Start Date', element.id)"
     >
-      <p>
+      <p title="double click to open">
         {{ element.startDate }}
       </p>
 
@@ -155,12 +162,14 @@
           [isDataSelector]="'date'"
           (valueChanged)="getListItemVal($event)"
         ></app-editable-selector-field>
-        <button class="save-edit-btn" (click)="saveEditedBanner('startDate')">
-          Save
-        </button>
-        <button class="save-close-btn" (click)="closeListItem($event)">
-          Close
-        </button>
+        <div class="btn-wrapper">
+          <button class="save-edit-btn" (click)="saveEditedBanner('startDate')">
+            <mat-icon>save</mat-icon>
+          </button>
+          <button class="save-close-btn" (click)="closeListItem($event)">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </div>
       </div>
     </td>
   </ng-container>
@@ -173,7 +182,7 @@
       *matCellDef="let element; let i = index"
       (dblclick)="openListItem(i, 'End Date', element.id)"
     >
-      <p>
+      <p title="double click to open">
         {{ element.endDate }}
       </p>
       <div
@@ -188,12 +197,14 @@
           [isDataSelector]="'date'"
           (valueChanged)="getListItemVal($event)"
         ></app-editable-selector-field>
-        <button class="save-edit-btn" (click)="saveEditedBanner('endDate')">
-          Save
-        </button>
-        <button class="save-close-btn" (click)="closeListItem($event)">
-          Close
-        </button>
+        <div class="btn-wrapper">
+          <button class="save-edit-btn" (click)="saveEditedBanner('endDate')">
+            <mat-icon>save</mat-icon>
+          </button>
+          <button class="save-close-btn" (click)="closeListItem($event)">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </div>
       </div>
     </td>
   </ng-container>
@@ -206,7 +217,7 @@
       *matCellDef="let element; let i = index"
       (dblclick)="openListItem(i, 'Channel', element.id)"
     >
-      <p>
+      <p title="double click to open">
         {{ element.channelId }}
       </p>
 
@@ -222,12 +233,14 @@
           [isDataSelector]="'selector'"
           (valueChanged)="getListItemVal($event)"
         ></app-editable-selector-field>
-        <button class="save-edit-btn" (click)="saveEditedBanner('channelId')">
-          Save
-        </button>
-        <button class="save-close-btn" (click)="closeListItem($event)">
-          Close
-        </button>
+        <div class="btn-wrapper">
+          <button class="save-edit-btn" (click)="saveEditedBanner('channelId')">
+            <mat-icon>save</mat-icon>
+          </button>
+          <button class="save-close-btn" (click)="closeListItem($event)">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </div>
       </div>
     </td>
   </ng-container>
@@ -240,7 +253,7 @@
       *matCellDef="let element; let i = index"
       (dblclick)="labels($event, element?.labels, i, 'Labels', element.id)"
     >
-      <p>
+      <p title="double click to open">
         {{ element?.labels && element?.labels.join(', ') }}
       </p>
       <div
@@ -255,12 +268,14 @@
           (labelSelect)="labelAdd($event)"
           (removeLabel)="labelRemove($event)"
         ></app-select-field>
-        <button class="save-edit-btn" (click)="saveEditedBanner('labels')">
-          Save
-        </button>
-        <button class="save-close-btn" (click)="closeListItem($event)">
-          Close
-        </button>
+        <div class="btn-wrapper">
+          <button class="save-edit-btn" (click)="saveEditedBanner('labels')">
+            <mat-icon>save</mat-icon>
+          </button>
+          <button class="save-close-btn" (click)="closeListItem($event)">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </div>
       </div>
     </td>
   </ng-container>
@@ -280,7 +295,7 @@
       *matCellDef="let element; let i = index"
       (dblclick)="openListItem(i, 'URL', element.id)"
     >
-      <p>
+      <p title="double click to open">
         {{ element.url }}
       </p>
       <div
@@ -294,12 +309,14 @@
           [isDataSelector]="'input'"
           (valueChanged)="getListItemVal($event)"
         ></app-editable-selector-field>
-        <button class="save-edit-btn" (click)="saveEditedBanner('url')">
-          Save
-        </button>
-        <button class="save-close-btn" (click)="closeListItem($event)">
-          Close
-        </button>
+        <div class="btn-wrapper">
+          <button class="save-edit-btn" (click)="saveEditedBanner('url')">
+            <mat-icon>save</mat-icon>
+          </button>
+          <button class="save-close-btn" (click)="closeListItem($event)">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </div>
       </div>
     </td>
   </ng-container>
@@ -312,7 +329,7 @@
       *matCellDef="let element; let i = index"
       (dblclick)="openListItem(i, 'Language', element.id)"
     >
-      <p>
+      <p title="double click to open">
         {{ element.language }}
       </p>
       <div
@@ -327,12 +344,14 @@
           [isDataSelector]="'selector'"
           (valueChanged)="getListItemVal($event)"
         ></app-editable-selector-field>
-        <button class="save-edit-btn" (click)="saveEditedBanner('language')">
-          Save
-        </button>
-        <button class="save-close-btn" (click)="closeListItem($event)">
-          Close
-        </button>
+        <div class="btn-wrapper">
+          <button class="save-edit-btn" (click)="saveEditedBanner('language')">
+            <mat-icon>save</mat-icon>
+          </button>
+          <button class="save-close-btn" (click)="closeListItem($event)">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </div>
       </div>
     </td>
   </ng-container>
@@ -344,8 +363,9 @@
       mat-cell
       *matCellDef="let element; let i = index"
       (dblclick)="openListItem(i, 'Priority', element.id)"
+      title="double click to open"
     >
-      {{ element.priority }}
+      <p title="click twice">{{ element.priority }}</p>
 
       <div
         class="edit-div-wrapper"
@@ -360,12 +380,14 @@
           [isDataSelector]="'selector'"
           (valueChanged)="getListItemVal($event)"
         ></app-editable-selector-field>
-        <button class="save-edit-btn" (click)="saveEditedBanner('priority')">
-          Save
-        </button>
-        <button class="save-close-btn" (click)="closeListItem($event)">
-          Close
-        </button>
+        <div class="btn-wrapper">
+          <button class="save-edit-btn" (click)="saveEditedBanner('priority')">
+            <mat-icon>save</mat-icon>
+          </button>
+          <button class="save-close-btn" (click)="closeListItem($event)">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </div>
       </div>
     </td>
   </ng-container>

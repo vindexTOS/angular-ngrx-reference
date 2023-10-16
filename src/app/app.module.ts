@@ -36,7 +36,8 @@ import { SelectFieldComponent } from './helper-component/select-field/select-fie
 import { SingleBannerComponent } from './helper-component/single-banner/single-banner.component'
 
 import { EditableSelectorFieldComponent } from './helper-component/editable-selector-field/editable-selector-field.component'
-import { FormDrawerComponent } from './helper-component/form-drawer/form-drawer.component'
+import { FormDrawerComponent } from './helper-component/form-drawer/form-drawer.component';
+import { LoadingSkeletonComponent } from './helper-component/loading-skeleton/loading-skeleton.component'
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { FormDrawerComponent } from './helper-component/form-drawer/form-drawer.
 
     EditableSelectorFieldComponent,
     FormDrawerComponent,
+    LoadingSkeletonComponent,
   ],
   imports: [
     BrowserModule,
