@@ -85,8 +85,8 @@ export class BannerListComponent implements OnInit {
     localStorage.setItem('pagination', JSON.stringify(dataToSave))
   }
   ngOnInit(): void {
-    this.filterService.pageIndex = this.pageIndex
-    this.filterService.pageSize = this.pageSize
+    this.pageIndex = this.filterService.pageIndex
+    this.pageSize = this.filterService.pageSize
     this.filterService.useEffect()
     this.displayedColumns = this.filterService.displayedColumns
     this.store.select(GetSingleBannerData).subscribe((item) => {
@@ -121,15 +121,16 @@ export class BannerListComponent implements OnInit {
   }
 
   onPageChange(event: any) {
+    this.filterService.onPageChange(event)
     this.pageIndex = event.pageIndex
     this.pageSize = event.pageSize
+
     this.store.dispatch(
       getquery({
         key: 'all',
         value: {
-          pageIndex: event.pageIndex,
-          pageSize: event.pageSize,
-          sortBy: 'name.raw',
+          pageIndex: this.pageIndex,
+          pageSize: this.pageSize,
         },
       }),
     )

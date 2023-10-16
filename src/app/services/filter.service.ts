@@ -36,6 +36,8 @@ export class FilterService implements OnInit {
       this.sortByValue = parsedData.sortBy
       this.sortDirectionValue = parsedData.sortDirection
       this.displayedColumns = parsedData.displayedColumns
+      this.pageIndex = parsedData.pageIndex
+      this.pageSize = parsedData.pageSize
     }
   }
 
@@ -146,6 +148,8 @@ export class FilterService implements OnInit {
       sortBy: this.sortByValue,
       sortDirection: this.sortDirectionValue,
       displayedColumns: this.displayedColumns,
+      pageIndex: this.pageIndex,
+      pageSize: this.pageSize,
     }
 
     localStorage.setItem('filterServiceData', JSON.stringify(dataToSave))
@@ -234,13 +238,16 @@ export class FilterService implements OnInit {
       this.sortByValue = parsedData.sortBy
       this.sortDirectionValue = parsedData.sortDirection
       this.displayedColumns = parsedData.displayedColumns
-
+      this.pageIndex = parsedData.pageIndex
+      this.pageSize = parsedData.pageSize
       console.log(parsedData)
       queryObj = {
         sortBy: parsedData.sortBy,
         sortDirection: parsedData.sortDirection,
         excludes: parsedData.excludes,
         includes: parsedData.includes,
+        pageIndex: parsedData.pageIndex,
+        pageSize: parsedData.pageSize,
       }
     }
     if (queryObj) {
@@ -259,7 +266,11 @@ export class FilterService implements OnInit {
   //   this.store.dispatch(getquery({ key: 'all', value: { ...newObj } }))
   //   this.displayedColumns = this.selectedIncludedLabels
   // }
-
+  onPageChange(event: any) {
+    this.pageIndex = event.pageIndex
+    this.pageSize = event.pageSize
+    this.saveDataToLocalStorage()
+  }
   ResetFilter() {
     localStorage.removeItem('filterServiceData')
     window.location.reload()
