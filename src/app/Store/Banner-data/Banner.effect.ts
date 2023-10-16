@@ -57,17 +57,17 @@ export class BannerEffect {
       ofType(getsinglebannerId),
       // tap(() => console.log('get single')),
       mergeMap((action) => {
-        this.store.dispatch(loadingStart())
+        // this.store.dispatch(loadingStart())
         //  this.store.dispatch(getsinglebannerdata())
 
         return from(this.service.GetSingleBanner(action.id)).pipe(
           map((res: any) => {
-            this.store.dispatch(loadingEnd())
+            // this.store.dispatch(loadingEnd())
             // console.log(res.data)
             return getsinglebannerdata({ singleData: res.data })
           }),
           catchError((error) => {
-            this.store.dispatch(loadingEnd())
+            // this.store.dispatch(loadingEnd())
             return of(statusError({ error: error.message }))
           }),
         )
