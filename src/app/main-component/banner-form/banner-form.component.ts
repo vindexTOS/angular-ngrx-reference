@@ -158,7 +158,17 @@ export class BannerFormComponent implements OnInit, OnDestroy {
       },
     )
   }
+  onDragOver(event: any) {
+    event.preventDefault()
+  }
 
+  onDragLeave(event: any) {
+    event.preventDefault()
+  }
+
+  onDrop(event: DragEvent) {
+    this.formService.onFileDropped(event)
+  }
   //
   onLabelSelect(event: any) {
     this.formService.onLabelSelect(event)
@@ -172,11 +182,12 @@ export class BannerFormComponent implements OnInit, OnDestroy {
     this.sub.unsubscribe()
   }
 
-  onFileDropped(event: Event) {
+  onFileDropped(event: DragEvent) {
     this.formService.onFileDropped(event)
   }
 
   onInputChange(event: Event) {
+    console.log(event)
     this.formService.onInputChange(event)
   }
 

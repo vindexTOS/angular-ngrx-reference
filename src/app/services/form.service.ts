@@ -47,7 +47,7 @@ export class FormService {
     this.imageSrcSubscription.unsubscribe()
   }
 
-  onFileDropped(event: Event) {
+  onFileDropped(event: DragEvent) {
     this.imageService.onFileDropped(event)
   }
 

@@ -20,7 +20,7 @@
           class="drop-zone"
           (click)="fileInput.click()"
           ngxFileDrop
-          (filesChange)="onFileDropped($event)"
+          (drop)="onFileDropped($event)"
         >
           <p>Change Banner</p>
           <input

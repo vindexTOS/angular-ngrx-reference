@@ -4,6 +4,8 @@ export const fileUpload = createAction(
   '[file upload]file upload',
   props<{ file: Blob }>(),
 )
+
+export const fileReset = createAction('[file reset]file reset')
 export const fileUploadError = createAction(
   '[file upload error]error',
   props<{ error: string }>(),

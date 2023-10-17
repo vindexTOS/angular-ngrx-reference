@@ -10,6 +10,7 @@ import {
   GetLocalUpdateObj,
   GetSingleBannerData,
 } from 'src/app/Store/Banner-data/Banner.selector'
+import { fileres } from 'src/app/Store/Blob/Blob.action'
 import { geturlid } from 'src/app/Store/Blob/Blog.selector'
 import {
   channelactionapi,
@@ -50,6 +51,7 @@ interface EditObjType {
 export class SingleBannerComponent implements OnInit {
   banner: any = {}
   imageSrc: string = ''
+  imageSrcHtml: string = ''
   sub: PushSubscription | any
   showBannerSingle!: boolean
   loading!: boolean
@@ -115,16 +117,19 @@ export class SingleBannerComponent implements OnInit {
           value: { pageIndex: 0, pageSize: 10 },
         }),
       )
+
       setTimeout(() => {
         this.store.dispatch(statusSuccses({ succses: '' }))
       }, 3000)
     }, 1000)
+    this.imageSrc = ''
+    this.store.dispatch(fileres({ code: '', success: '' }))
   }
 
   cancelEdit() {
     this.isEditMode = false
   }
-  onFileDropped(event: Event) {
+  onFileDropped(event: DragEvent) {
     this.formService.onFileDropped(event)
   }
 
@@ -156,10 +161,12 @@ export class SingleBannerComponent implements OnInit {
       }
     })
 
-    this.imageSrc = this.formService.imageSrc
+    // this.imageSrcHtml = this.formService.imageSrc
+    // console.log(this.formService.imageSrc)
     this.store.select(geturlid).subscribe((item) => {
       this.editObj.fileId = item
       this.imageSrc = item
+      console.log(item)
     })
 
     this.sub = this.uiService

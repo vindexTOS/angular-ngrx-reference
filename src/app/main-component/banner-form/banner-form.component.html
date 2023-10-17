@@ -8,14 +8,17 @@
 <app-succsess *ngIf="succsess" [childData]="succsess"></app-succsess>
 <form [formGroup]="exampleForm">
   <!-- Basic input fields -->
-  <div
+  <label
     class="drop-zone"
-    (click)="fileInput.click()"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave($event)"
+    (drop)="onDrop($event)"
     ngxFileDrop
-    (filesChange)="onFileDropped($event)"
+    for="file-input"
   >
     <p>Drag and drop your banner here</p>
     <input
+      id="file-input"
       type="file"
       #fileInput
       hidden
@@ -28,7 +31,7 @@
       [src]="imageSrc"
       alt="Uploaded Image"
     />
-  </div>
+  </label>
   <div class="two-input-wrapper">
     <mat-form-field [ngClass]="'mat-form-field-with-shadow'">
       <input matInput placeholder="Name" formControlName="name" />

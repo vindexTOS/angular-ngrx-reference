@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { ElementRef, Injectable, ViewChild } from '@angular/core'
 import { BehaviorSubject, Observable } from 'rxjs'
 import { environment } from 'src/env'
-import { fileUpload } from '../Store/Blob/Blob.action'
+import { fileReset, fileUpload } from '../Store/Blob/Blob.action'
 import { Store } from '@ngrx/store'
 
 @Injectable({
@@ -18,13 +18,13 @@ export class ImageService {
   @ViewChild('uploadedImage') uploadedImage!: ElementRef
   allowedExtensions = ['jpg', 'jpeg', 'png']
 
-  onFileDropped(files: any): void {
-    for (const droppedFile of files) {
-      if (droppedFile.fileEntry.isFile) {
-        const fileEntry = droppedFile.fileEntry as FileSystemFileEntry
-        const file = droppedFile.file as File
-
-        this.uploadFile(file)
+  onFileDropped(event: DragEvent): void {
+    event.preventDefault()
+    if (event.dataTransfer) {
+      const files = event?.dataTransfer.files
+      if (files && files.length > 0) {
+        const selectedFile = files[0]
+        this.uploadFile(selectedFile)
       }
     }
   }
@@ -32,7 +32,6 @@ export class ImageService {
   onInputChange(event: Event): void {
     const inputElement = event.target as HTMLInputElement
     const files = inputElement.files
-
     if (files && files.length > 0) {
       const selectedFile = files[0]
       this.uploadFile(selectedFile)
@@ -40,7 +39,6 @@ export class ImageService {
   }
 
   private uploadFile(file: File): void {
-    // console.log('File uploaded:', file)
     this.store.dispatch(fileUpload({ file: file }))
 
     const reader = new FileReader()
@@ -48,8 +46,11 @@ export class ImageService {
       const result = reader.result as string
       this._imageSrcSubject.next(result)
       this.uploadedImage.nativeElement.style.display = 'block'
+
+      this._imageSrcSubject.next('')
     }
     reader.readAsDataURL(file)
+    this.store.dispatch(fileReset())
   }
 
   PostBlob(blob: Blob) {
