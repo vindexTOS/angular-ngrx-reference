@@ -37,8 +37,9 @@ h1 {
 .cancel-icon {
   position: absolute;
   font-size: 2rem;
-  color: rgb(255, 53, 53);
-  border: 1px solid red;
+  background-color: #09af9f;
+  color: white;
+  border: 5px solid #09af9f;
   align-items: center;
   display: flex;
   justify-content: center;
@@ -46,8 +47,11 @@ h1 {
   left: 10px;
   top: 1rem;
   cursor: pointer;
+  transition: background-color 0.3s;
 }
-
+.cancel-icon:hover {
+  background-color: #0d8b7f;
+}
 .form-header {
   position: relative;
   display: flex;
