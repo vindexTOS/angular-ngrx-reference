@@ -9,8 +9,8 @@ This project was my first experience with Angular, and it involved the developme
 [Watch the demo video](https://www.youtube.com/watch?v=_yWUd1k1Ef4)
  
 
-![Alt Text]( [https://firebasestorage.googleapis.com/v0/b/img-upload-7d368.appspot.com/o/Reddit%20Clone.jpg?alt=media&token=8783248c-25f1-45ed-9aff-9d33790dd4fa](https://firebasestorage.googleapis.com/v0/b/img-upload-7d368.appspot.com/o/banner%20gg.JPG?alt=media&token=4946f51b-2efa-4eaf-920e-7d320dc64726)
-)
+![image](https://firebasestorage.googleapis.com/v0/b/img-upload-7d368.appspot.com/o/banner%20gg.JPG?alt=media&token=4946f51b-2efa-4eaf-920e-7d320dc64726)
+
 ## Technologies Used
 
 - **Angular**: This project was implemented using Angular, marking my first venture into this front-end framework.
