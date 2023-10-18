@@ -4,6 +4,13 @@
 
 This project was my first experience with Angular, and it involved the development of a banner management system for the banking sector and related industries. The system was designed to streamline communication between banks and their clients through mobile and internet banking platforms.
 
+
+
+[Watch the demo video](https://www.youtube.com/watch?v=_yWUd1k1Ef4)
+ 
+
+![image](https://firebasestorage.googleapis.com/v0/b/img-upload-7d368.appspot.com/o/banner%20gg.JPG?alt=media&token=4946f51b-2efa-4eaf-920e-7d320dc64726)
+
 ## Technologies Used
 
 - **Angular**: This project was implemented using Angular, marking my first venture into this front-end framework.
