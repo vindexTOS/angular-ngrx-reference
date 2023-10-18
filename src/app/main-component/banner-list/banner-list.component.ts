@@ -137,23 +137,6 @@ export class BannerListComponent implements OnInit {
     this.saveDataToLocalStorage()
   }
 
-  deleteBanner(bannerId: string, blobId: string) {
-    this.store.dispatch(deletebanner({ id: bannerId }))
-    this.store.dispatch(deleteblob({ blobId }))
-    setTimeout(() => {
-      this.store.dispatch(
-        getquery({
-          key: 'all',
-          value: { pageIndex: 0, pageSize: 10, sortBy: 'name.raw' },
-        }),
-      )
-
-      setTimeout(() => {
-        this.store.dispatch(statusSuccses({ succses: '' }))
-      }, 3000)
-    }, 500)
-  }
-
   toggleSingle(id: string) {
     this.uiService.toggleBannerSingler()
     this.store.dispatch(getsinglebannerId({ id: id }))
@@ -172,6 +155,7 @@ export class BannerListComponent implements OnInit {
   }
 
   getListItemVal(val: string) {
+    console.log(val)
     this.listItemValue = val
   }
 
@@ -220,7 +204,24 @@ export class BannerListComponent implements OnInit {
       this.editRowName = ''
       setTimeout(() => {
         this.store.dispatch(statusSuccses({ succses: '' }))
-      }, 3000)
+      }, 2000)
+    }, 500)
+  }
+
+  deleteBanner(bannerId: string, blobId: string) {
+    this.store.dispatch(deletebanner({ id: bannerId }))
+    this.store.dispatch(deleteblob({ blobId }))
+    setTimeout(() => {
+      this.store.dispatch(
+        getquery({
+          key: 'all',
+          value: { pageIndex: 0, pageSize: 10, sortBy: 'name.raw' },
+        }),
+      )
+
+      setTimeout(() => {
+        this.store.dispatch(statusSuccses({ succses: '' }))
+      }, 2000)
     }, 500)
   }
 }

@@ -11,14 +11,12 @@ import { HttpClientModule } from '@angular/common/http'
 import { StoreDevtoolsModule } from '@ngrx/store-devtools'
 import { EffectsModule } from '@ngrx/effects'
 import { StoreRouterConnectingModule } from '@ngrx/router-store'
-import { NavbarComponent } from './helper-component/navbar/navbar.component'
-import { FooterComponent } from './helper-component/footer/footer.component'
+
 import { DashboardComponent } from './main-component/dashboard/dashboard.component'
 import { MatIconModule } from '@angular/material/icon'
 
 import { BannerFormComponent } from './main-component/banner-form/banner-form.component'
 import { ReactiveFormsModule } from '@angular/forms'
-import { BannerCreatorComponent } from './main-component/banner-creator/banner-creator.component'
 import { FormReducer } from './Store/Form-post/Form.Reducer'
 import { RefrenceReducer } from './Store/Refrence/Refrence.Reducer'
 import { RefrenceEffects } from './Store/Refrence/Refrence.Effects'
@@ -36,18 +34,17 @@ import { SelectFieldComponent } from './helper-component/select-field/select-fie
 import { SingleBannerComponent } from './helper-component/single-banner/single-banner.component'
 
 import { EditableSelectorFieldComponent } from './helper-component/editable-selector-field/editable-selector-field.component'
-import { FormDrawerComponent } from './helper-component/form-drawer/form-drawer.component';
+import { FormDrawerComponent } from './helper-component/form-drawer/form-drawer.component'
 import { LoadingSkeletonComponent } from './helper-component/loading-skeleton/loading-skeleton.component'
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
-    FooterComponent,
+
     DashboardComponent,
 
     BannerFormComponent,
-    BannerCreatorComponent,
+
     BannerListComponent,
     LoadingComponent,
     ErrorComponent,

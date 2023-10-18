@@ -16,10 +16,10 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy()
   })
 
-  it(`should have as title 'banner-manager'`, () => {
+  it(`should have as title 'banner manager'`, () => {
     const fixture = TestBed.createComponent(AppComponent)
     const app = fixture.componentInstance
-    expect(app.title).toEqual('banner-manager')
+    expect(app.title).toEqual('banner manager')
   })
 
   it('should render title', () => {
@@ -27,7 +27,7 @@ describe('AppComponent', () => {
     fixture.detectChanges()
     const compiled = fixture.nativeElement as HTMLElement
     expect(compiled.querySelector('.content span')?.textContent).toContain(
-      'banner-manager app is running!',
+      'banner manager app is running!',
     )
   })
 })

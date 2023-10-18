@@ -1,6 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core'
 import { Store } from '@ngrx/store'
 import {
+  BannerData,
+  BannerDataObj,
+} from 'src/app/Store/Banner-data/Banner.State'
+import {
   getquery,
   getsinglebannerId,
   updatebanner,
@@ -49,7 +53,7 @@ interface EditObjType {
   styleUrls: ['./single-banner.component.css'],
 })
 export class SingleBannerComponent implements OnInit {
-  banner: any = {}
+  banner: BannerDataObj | any = {}
   imageSrc: string = ''
   imageSrcHtml: string = ''
   sub: PushSubscription | any

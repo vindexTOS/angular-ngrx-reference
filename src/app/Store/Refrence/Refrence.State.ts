@@ -11,9 +11,9 @@ export interface refrenceZones {}
 
 export interface RefrenceTypes {
   channels: refrenceTypes[]
-  zones: any
-  labels: any
-  languages: any
+  zones: refrenceTypes[]
+  labels: refrenceTypes[]
+  languages: refrenceTypes[]
   error: string
 }
 
