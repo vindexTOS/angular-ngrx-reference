@@ -2,7 +2,7 @@
 
 **Optio Banner Management System**
 
-This project was my first experience with Angular, and it involved the development of a banner management system for the banking sector and related industries. The system was designed to streamline communication between banks and their clients through mobile and internet banking platforms.
+This project was my first experience with Angular, and it involved the development of a banner management system for the banking sector and related industries. The system was designed to streamline communication and marketing between banks and their clients through mobile and internet banking platforms.
 
 
 
