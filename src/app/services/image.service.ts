@@ -9,7 +9,7 @@ import { Store } from '@ngrx/store'
   providedIn: 'root',
 })
 export class ImageService {
-  private _imageSrcSubject = new BehaviorSubject<string>('')
+  public _imageSrcSubject = new BehaviorSubject<string>('')
   imageSrc$: Observable<string> = this._imageSrcSubject.asObservable()
 
   constructor(private http: HttpClient, private store: Store) {}
@@ -38,7 +38,7 @@ export class ImageService {
     }
   }
 
-  private uploadFile(file: File): void {
+  public uploadFile(file: File): void {
     this.store.dispatch(fileUpload({ file: file }))
 
     const reader = new FileReader()

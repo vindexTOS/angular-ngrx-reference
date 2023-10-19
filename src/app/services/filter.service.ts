@@ -4,7 +4,7 @@ import { getquery } from '../Store/Banner-data/Banner.action'
 import { GetBannerData } from '../Store/Banner-data/Banner.selector'
 import { environment } from 'src/env'
 import { BehaviorSubject } from 'rxjs'
-
+//  this should came from reference data
 const includeExcluedArr = [
   'name',
   'zoneId',
@@ -68,7 +68,7 @@ export class FilterService implements OnInit {
     { key: 'modifiedBy', name: 'Modified By' },
     { key: 'labels', name: 'Labels' },
   ]
-
+  // take this from refrence data and sort it
   displayedColumns: string[] = [
     'delete',
     'fileId',
@@ -165,7 +165,6 @@ export class FilterService implements OnInit {
     this.includes = this.includes.filter((val) => val !== event)
 
     this.displayedColumns = this.displayedColumns.filter((val) => val !== event)
-
     if (!this.selectedExcludedLables.includes(event)) {
       this.selectedExcludedLables.push(event)
       if (!this.excludes.includes(event)) {
@@ -186,11 +185,11 @@ export class FilterService implements OnInit {
       this.displayedColumns.push(event)
     }
     if (!this.selectedIncludedLabels.includes(event)) {
+      console.log(this.selectedIncludedLabels)
       this.selectedIncludedLabels.push(event)
-
-      if (!this.includes.includes(event)) {
-        this.includes = [...this.selectedIncludedLabels, 'id']
-      }
+    }
+    if (!this.includes.includes(event)) {
+      this.includes = [...this.selectedIncludedLabels, 'id']
     }
 
     this.displayedColumnsSubject.next(this.displayedColumns)

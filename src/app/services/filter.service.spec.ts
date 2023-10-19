@@ -8,13 +8,15 @@ import {
   Store,
   StoreModule,
 } from '@ngrx/store'
+import { AppModule } from '../app.module'
 
 describe('FilterService', () => {
   let service: FilterService
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [StoreModule.forRoot({})],
+      imports: [AppModule],
+
       providers: [
         FilterService,
         Store,
