@@ -60,10 +60,6 @@ export class DashboardComponent {
 
   refrenceLabels = this.filterService.includeExcludeFilter
 
-  handleLabelSelectInclude(event: any) {
-    // console.log(event)
-  }
-
   handleLabelRemoveInclude(event: any) {
     // console.log(event)
     this.filterService.handleLabelRemoveInclude(event)
@@ -74,7 +70,7 @@ export class DashboardComponent {
 
   handleLabelExcludedRemove(event: any) {
     this.filterService.handleLabelExcludedRemove(event)
-    // this.selectedIncludedLabels = this.filterService.selectedIncludedLabels
+    this.selectedIncludedLabels = this.filterService.selectedIncludedLabels
     this.selectedExcludedLables = this.filterService.selectedExcludedLables
   }
   onValueChangedSortBy(val: string) {
