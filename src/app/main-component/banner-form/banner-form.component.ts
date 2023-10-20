@@ -187,7 +187,7 @@ export class BannerFormComponent implements OnInit, OnDestroy {
   }
 
   onInputChange(event: Event) {
-    console.log(event)
+    // console.log(event)
     this.formService.onInputChange(event)
   }
 

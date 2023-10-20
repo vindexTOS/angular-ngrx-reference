@@ -250,18 +250,7 @@ export class FilterService implements OnInit {
       this.store.dispatch(getquery({ key: 'all', value: { ...queryObj } }))
     }
   }
-  // hanndleQueryRequest() {
-  //   let newObj = {
-  //     excludes: [...this.excludes],
-  //     includes: [...this.includes],
-  //     search: this.serach,
-  //     sortDirection: 'asc',
-  //     pageIndex: this.pageIndex,
-  //     pageSize: this.pageSize,
-  //   }
-  //   this.store.dispatch(getquery({ key: 'all', value: { ...newObj } }))
-  //   this.displayedColumns = this.selectedIncludedLabels
-  // }
+
   onPageChange(event: any) {
     this.pageIndex = event.pageIndex
     this.pageSize = event.pageSize

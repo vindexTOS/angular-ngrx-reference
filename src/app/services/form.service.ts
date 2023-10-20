@@ -58,11 +58,6 @@ export class FormService {
   onLabelSelect(event: any) {
     this.selectedLabels.push(event.value)
   }
-  // onSubmit(event: any) {
-  //   event.preventDefault()
-  //   // Handle form submission here
-  //   console.log(this.exampleForm.value)
-  // }
 
   postBanner(data: FormType) {
     const headers = new HttpHeaders({

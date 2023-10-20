@@ -185,11 +185,13 @@ export class BannerListComponent implements OnInit {
 
   saveEditedBanner(key: string) {
     let newObj = { ...this.editableObject }
-
+    console.log(key, this.listItemValue)
     if (key === 'labels') {
       let labelsArr = this.labelDefault.map((item) => item.name)
       newObj[key] = labelsArr
-    } else if (this.listItemValue) {
+    } else if (this.listItemValue || String(this.listItemValue) === 'false') {
+      console.log(newObj[key], this.listItemValue)
+
       newObj[key] = this.listItemValue
     }
 

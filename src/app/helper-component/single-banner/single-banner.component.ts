@@ -95,7 +95,7 @@ export class SingleBannerComponent implements OnInit {
   toggleSingle() {
     this.uiService.toggleBannerSingler()
   }
-
+  // preventing click off effect to happen inside of single document
   preventToggle(event: MouseEvent): void {
     if (event.target instanceof HTMLElement) {
       const targetElement = event.target as HTMLElement
@@ -146,6 +146,7 @@ export class SingleBannerComponent implements OnInit {
     this.editObj[property] = newValue
   }
   ngOnInit(): void {
+    // getting single banner data from the API and pouplating local state with it
     this.store.select(GetSingleBannerData).subscribe((item) => {
       this.banner = item
 
@@ -165,14 +166,12 @@ export class SingleBannerComponent implements OnInit {
       }
     })
 
-    // this.imageSrcHtml = this.formService.imageSrc
-    // console.log(this.formService.imageSrc)
     this.store.select(geturlid).subscribe((item) => {
       this.editObj.fileId = item
       this.imageSrc = item
-      console.log(item)
+      // console.log(item)
     })
-
+    //  getting refrence data from the API
     this.sub = this.uiService
 
       .toggleSingle()

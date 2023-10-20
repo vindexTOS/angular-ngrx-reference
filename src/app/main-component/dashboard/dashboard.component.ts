@@ -1,19 +1,15 @@
 import { Component, ElementRef, NgModule, ViewChild } from '@angular/core'
 import { UiServiceTsService } from '../../services/ui.service.ts.service'
 import { FilterService } from 'src/app/services/filter.service'
-import { Store, StoreModule } from '@ngrx/store'
+import { Store } from '@ngrx/store'
 import {
   GetStatusError,
   GetStatusLoading,
   GetStatusSuccsess,
 } from 'src/app/Store/StatusHanndle/Status.selector'
 import { getquery } from 'src/app/Store/Banner-data/Banner.action'
-import { SingleBannerComponent } from 'src/app/helper-component/single-banner/single-banner.component'
 import { statusSuccses } from 'src/app/Store/StatusHanndle/Status.action'
-import { EditableSelectorFieldComponent } from 'src/app/helper-component/editable-selector-field/editable-selector-field.component'
-import { SelectFieldComponent } from 'src/app/helper-component/select-field/select-field.component'
-import { BrowserModule } from '@angular/platform-browser'
-import { HttpClientModule } from '@angular/common/http'
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -79,9 +75,7 @@ export class DashboardComponent {
   onValueChangeAcenDece(val: string) {
     this.filterService.onValueChangeAcenDece(val)
   }
-  // hanndleQueryRequest() {
-  //   this.filterService.hanndleQueryRequest()
-  // }
+
   toggleShow() {
     this.uiService.toggle()
   }
