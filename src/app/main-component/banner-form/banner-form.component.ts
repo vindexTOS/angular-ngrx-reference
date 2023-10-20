@@ -8,7 +8,7 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core'
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms'
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { MatChipInputEvent } from '@angular/material/chips'
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete'
 import { Subject, Subscription } from 'rxjs'
@@ -84,15 +84,15 @@ export class BannerFormComponent implements OnInit, OnDestroy {
     private cdRef: ChangeDetectorRef,
   ) {
     this.exampleForm = this.formBuilder.group({
-      name: this.formBuilder.control(''),
-      channelId: this.formBuilder.control(''),
-      language: this.formBuilder.control(''),
-      zoneId: this.formBuilder.control(''),
-      priority: this.formBuilder.control(''),
-      isCorporate: this.formBuilder.control(''),
-      url: this.formBuilder.control(''),
-      startDate: this.formBuilder.control(''),
-      endDate: this.formBuilder.control(''),
+      name: this.formBuilder.control('', Validators.required),
+      channelId: this.formBuilder.control('', Validators.required),
+      language: this.formBuilder.control('', Validators.required),
+      zoneId: this.formBuilder.control('', Validators.required),
+      priority: this.formBuilder.control('', Validators.required),
+      // isCorporate: this.formBuilder.control('', Validators.required),
+      url: this.formBuilder.control('', Validators.required),
+      startDate: this.formBuilder.control('', Validators.required),
+      endDate: this.formBuilder.control('', Validators.required),
       active: this.formBuilder.control(false),
     })
 
@@ -112,9 +112,7 @@ export class BannerFormComponent implements OnInit, OnDestroy {
 
     this.store.select(GetStatusError).subscribe((error) => {
       this.error = error
-      setTimeout(() => {
-        this.error = ''
-      }, 12000)
+      console.log(error)
     })
     this.store.select(GetStatusSuccsess).subscribe((succsess) => {
       this.succsess = succsess
@@ -172,6 +170,7 @@ export class BannerFormComponent implements OnInit, OnDestroy {
   //
   onLabelSelect(event: any) {
     this.formService.onLabelSelect(event)
+    this.selectedLabels = this.formService.selectedLabels
   }
 
   remove(label: string) {
@@ -195,12 +194,34 @@ export class BannerFormComponent implements OnInit, OnDestroy {
     this.uiService.toggle()
   }
 
+  errorMessages(key: string) {
+    return `${key} is required`
+  }
+
   onSubmit() {
+    let hasError = false
+
     if (!this.uploadedImgSrc) {
       this.store.dispatch(statusError({ error: 'You need to upload banner' }))
-    } else if (!this.exampleForm.value.name) {
-      this.store.dispatch(statusError({ error: 'Name is required' }))
-    } else {
+      setTimeout(() => {
+        this.store.dispatch(statusError({ error: '' }))
+      }, 1500)
+      hasError = true
+    }
+
+    for (const controlName in this.exampleForm.controls) {
+      const control = this.exampleForm.get(controlName)
+
+      if (control?.invalid) {
+        const errorMessage = this.errorMessages(controlName)
+        this.store.dispatch(statusError({ error: ` ${errorMessage}` }))
+        // console.log(`csdf`)
+        hasError = true
+        break
+      }
+    }
+
+    if (!hasError) {
       const data = {
         ...this.exampleForm.value,
         labels: this.selectedLabels,
@@ -208,19 +229,18 @@ export class BannerFormComponent implements OnInit, OnDestroy {
       }
 
       this.store.dispatch(postbannertodb(data))
+      this.store.dispatch(
+        getquery({ key: 'all', value: { pageIndex: 0, pageSize: 10 } }),
+      )
+      this.exampleForm.reset()
+      this.formService.reset()
+      this.selectedLabels = []
+      this.uploadedImgSrc = ''
+      this.imageSrc = ''
+      this.closeForm()
       setTimeout(() => {
-        this.store.dispatch(
-          getquery({ key: 'all', value: { pageIndex: 0, pageSize: 10 } }),
-        )
-        this.exampleForm.reset()
-        this.formService.imageSrc = ''
-        this.selectedLabels = []
-        this.uploadedImgSrc = ''
-        this.closeForm()
-        setTimeout(() => {
-          this.store.dispatch(statusSuccses({ succses: '' }))
-        }, 3000)
-      }, 1100)
+        this.store.dispatch(statusSuccses({ succses: '' }))
+      }, 3000)
     }
   }
 }

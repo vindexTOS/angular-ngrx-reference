@@ -57,8 +57,14 @@ export class FormService {
 
   onLabelSelect(event: any) {
     this.selectedLabels.push(event.value)
+    console.log(this.selectedLabels)
   }
+  // reseting value after from has been submited etc
+  reset() {
+    this.selectedLabels = []
 
+    this.imageSrc = ''
+  }
   postBanner(data: FormType) {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${environment.apiAuthToken}`,
